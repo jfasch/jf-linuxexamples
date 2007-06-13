@@ -1,0 +1,15 @@
+# -*- python -*-
+
+h_install = ['jf', 'unix_tools']
+h = [
+    'timespec.h',
+    ]
+
+cc = [
+    'timespec.cc',
+    ]
+
+LIBRARY(
+    basename='jf-unix-common',
+    members=[H(filename=fn, install=h_install) for fn in h] + [CXX(filename=fn) for fn in cc])
+        

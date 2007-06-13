@@ -1,0 +1,23 @@
+# -*- python -*-
+
+REQUIRE_SYMBOL('jf.externals.pthread', REQUIRED)
+
+h_install = ['jf', 'unix_tools']
+h = [
+    'condition.h',
+    'mutex.h',
+    'queue.h',
+    'thread_starter.h',
+    'thread_specific.h',
+    ]
+
+cc = [
+    'condition.cc',
+    'mutex.cc',
+    'thread_starter.cc',
+    ]
+
+LIBRARY(
+    basename='jf-unix-pthread',
+    members=[H(filename=fn, install=h_install) for fn in h] + [CXX(filename=fn) for fn in cc])
+        

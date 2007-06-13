@@ -1,0 +1,4 @@
+# -*- python -*-
+
+DIRECTORY(['common'])
+DIRECTORY(['pthread'])
