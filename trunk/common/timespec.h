@@ -35,7 +35,7 @@ public:
     bool operator<=(const TimeSpec& t) const { return !operator>(t); }
     bool operator>=(const TimeSpec& t) const { return !operator<(t); }
 
-    /** Current point in time */
+    /** Current point in time (as given by gettimeofday(2)) */
     static TimeSpec now();
 
     enum { one_second = 1000000000 /*nanoseconds*/ };

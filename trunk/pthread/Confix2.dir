@@ -2,22 +2,20 @@
 
 REQUIRE_SYMBOL('jf.externals.pthread', REQUIRED)
 
-h_install = ['jf', 'unix_tools']
 h = [
     'condition.h',
+    'joinable_thread.h',
     'mutex.h',
     'queue.h',
-    'thread_starter.h',
     'thread_specific.h',
     ]
 
 cc = [
     'condition.cc',
+    'joinable_thread.cc',
     'mutex.cc',
-    'thread_starter.cc',
     ]
 
-LIBRARY(
-    basename='jf-unix-pthread',
-    members=[H(filename=fn, install=h_install) for fn in h] + [CXX(filename=fn) for fn in cc])
+LIBRARY(members=[H(filename=f, install=['jf', 'unix_tools']) for f in h] + [CXX(filename=f) for f in cc])
         
+DIRECTORY(['tests'])

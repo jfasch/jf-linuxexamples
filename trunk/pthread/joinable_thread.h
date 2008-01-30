@@ -1,7 +1,7 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-#ifndef jf_unix_tools_thread_starter_h
-#define jf_unix_tools_thread_starter_h
+#ifndef HAVE_JF_UNIX_TOOLS_JOINABLE_THREAD_H
+#define HAVE_JF_UNIX_TOOLS_JOINABLE_THREAD_H
 
 #include <pthread.h>
 
@@ -10,20 +10,20 @@ namespace unix_tools {
 
 /**
 
-A ThreadStarter object is used to start a thread, and to synchronize with its
-termination. From the user's point of view, the ThreadStarter object itself
-runs in only one context - namely the user's (the user is the one who
-starts the thread).
+A JoinableThreadStarter object is used to start a thread, and to
+synchronize with its termination. From the user's point of view, the
+JoinableThreadStarter object itself runs in only one context - namely
+the user's (the user is the one who starts the thread).
 
 A Worker object is responsible for the real hard work; this is done in
 the thread's context. So, generally, the user doesn't have to worry
 about what runs in which context. He can customize the thread's
-behavior by simply implementing an interface and passing it to a
-thread manager object. The user's object will run in the new thread,
-ond nowhere else.
+behavior by simply implementing an interface, Worker, and passing it
+to a thread starter object. The user's object will run in the new
+thread, ond nowhere else.
 
 */
-class ThreadStarter {
+class JoinableThreadStarter {
 public:
     enum Priority {
       PRIO_LOWEST,
@@ -49,28 +49,32 @@ public:
     class Args {
     public:
         Args() : worker_(NULL), priority_(PRIO_DEFAULT), policy_(POLICY_DEFAULT) {}
-        Worker* GetWorker() const { return worker_; }
-        Args& SetWorker(Worker* w) { worker_=w; return *this; }
-        Priority GetPriority() const { return priority_; }
-        Policy GetPolicy() const { return policy_; }
-        Args& SetPriority(Priority p) { priority_=p; return *this; }
-        Args& SetPolicy(Policy p) { policy_=p; return *this; }
+
+        Worker* worker() const { return worker_; }
+        Args& worker(Worker* w) { worker_=w; return *this; }
+
+        Priority priority() const { return priority_; }
+        Args& priority(Priority p) { priority_=p; return *this; }
+
+        Policy policy() const { return policy_; }
+        Args& policy(Policy p) { policy_=p; return *this; }
+
     private:
         Worker* worker_;
         Priority priority_;
-        Policy policy_;        
+        Policy policy_;
     };
 
 public:
     /** Take ownership of the worker (delete it in the dtor). Do
-     * nothing else but wait until you are started. */
-    ThreadStarter(Worker*);
+        nothing else but wait until you are started. */
+    JoinableThreadStarter(Worker*);
     /** Enhanced version of the constructor, accepting "named"
-     * parameters. */
-    ThreadStarter(const Args&);
+        parameters. */
+    JoinableThreadStarter(const Args&);
     /** Synchronizes with the thread's termination. I.e., blocks until
         the thread has terminated. */
-    ~ThreadStarter();
+    ~JoinableThreadStarter();
 
     /** Start the thread. */
     bool start();

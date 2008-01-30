@@ -5,8 +5,10 @@ PACKAGE_VERSION('0.0.1')
 
 from libconfix.core.hierarchy.explicit_setup import ExplicitDirectorySetup
 from libconfix.plugins.c.setups.explicit_setup import ExplicitCSetup
+#from libconfix.plugins.c.library_dependencies import LibraryDependenciesFinderSetup
 
 SETUPS([
     ExplicitDirectorySetup(),
-    ExplicitCSetup(use_libtool=False),
+    ExplicitCSetup(use_libtool=True),
+#    LibraryDependenciesFinderSetup()
     ])

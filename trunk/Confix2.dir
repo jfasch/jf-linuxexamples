@@ -2,3 +2,4 @@
 
 DIRECTORY(['common'])
 DIRECTORY(['pthread'])
+DIRECTORY(['tests'])

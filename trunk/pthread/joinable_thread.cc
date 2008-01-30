@@ -1,44 +1,43 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-#include "thread_starter.h"
+#include "joinable_thread.h"
 
 #include <cstring>
 #include <cassert>
 #include <iostream>
 
-using namespace std;
-
 namespace jf {
 namespace unix_tools {
 
-ThreadStarter::ThreadStarter(Worker* w)
-: joined_(false) {
-    args_.SetWorker(w);
+JoinableThreadStarter::JoinableThreadStarter(Worker* w)
+: joined_(false)
+{
+    args_.worker(w);
     ::memset(&thread_, 0, sizeof(thread_));
 }
 
-ThreadStarter::ThreadStarter(const Args& a)
+JoinableThreadStarter::JoinableThreadStarter(const Args& a)
 : args_(a) {}
 
-ThreadStarter::~ThreadStarter() {
+JoinableThreadStarter::~JoinableThreadStarter() {
     if (!joined_)
         join();
-    delete args_.GetWorker();
+    delete args_.worker();
 }
 
-bool ThreadStarter::start() {
+bool JoinableThreadStarter::start() {
     pthread_attr_t attr;
     pthread_attr_t* pattr;
     int err;
 
-    if (args_.GetPriority() == PRIO_DEFAULT && args_.GetPolicy() == POLICY_DEFAULT)
+    if (args_.priority() == PRIO_DEFAULT && args_.policy() == POLICY_DEFAULT)
         pattr = NULL;
     else {
         pattr = &attr;
         err = ::pthread_attr_init(&attr);
         assert(!err);
         
-        switch (args_.GetPolicy()) {
+        switch (args_.policy()) {
             case POLICY_DEFAULT: {
                 // inherit scheduling policy of the creating thread
                 err = ::pthread_attr_setinheritsched(&attr, PTHREAD_INHERIT_SCHED);
@@ -53,17 +52,17 @@ bool ThreadStarter::start() {
                 break;
             }
             case POLICY_RR: {
-                assert(0); // to be implemented
+                assert(!"SCHED_RR to be implemented");
                 break;
             };
         }
 
-        switch (args_.GetPriority()) {
+        switch (args_.priority()) {
             case PRIO_LOWEST:
             case PRIO_LOWER:
             case PRIO_DEFAULT:
             case PRIO_HIGHER: {
-                assert(0); // to be implemented: determine min/max
+                assert(!"To be implemented: determine min/max, using sched_get_priority_{min,max}");
                 break;
             }
             case PRIO_HIGHEST: {
@@ -80,23 +79,23 @@ bool ThreadStarter::start() {
     if (err) {
         // hmm. need error handling badly. confix-style exceptions
         // probably?
-        cerr << strerror(err) << endl;
+        std::cerr << ::strerror(err) << std::endl;
         return false;
     }
 
     return true;
 }
 
-void ThreadStarter::join() {
+void JoinableThreadStarter::join() {
     joined_ = true;
     int err = ::pthread_join(thread_, NULL);
     assert(!err);
 }
 
-void* ThreadStarter::start_(void* obj) {
-    ThreadStarter* t = static_cast<ThreadStarter*>(obj);
+void* JoinableThreadStarter::start_(void* obj) {
+    JoinableThreadStarter* t = static_cast<JoinableThreadStarter*>(obj);
 
-    (*t->args_.GetWorker())();
+    (*t->args_.worker())();
     return NULL;
 }
 
