@@ -17,8 +17,8 @@ public:
 public:
     ThreadSpecific(DTOR = 0);
     ~ThreadSpecific();
-    void Set(T*);
-    T* Get();
+    void set(T*);
+    T* get();
 private:
     pthread_key_t key_;
 } ;
