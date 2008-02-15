@@ -17,12 +17,13 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUX_JOINABLE_THREAD_H
-#define HAVE_JF_LINUX_JOINABLE_THREAD_H
+#ifndef HAVE_JFLINUX_PTHREAD_JOINABLE_THREAD_H
+#define HAVE_JFLINUX_PTHREAD_JOINABLE_THREAD_H
 
 #include <pthread.h>
 
 namespace jflinux {
+namespace pthread {
 
 /**
 
@@ -106,6 +107,7 @@ private:
     Args args_;
 };
 
+}
 }
 
 #endif

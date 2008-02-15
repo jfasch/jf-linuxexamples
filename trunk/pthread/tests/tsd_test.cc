@@ -19,16 +19,16 @@
 
 #include "tsd_test.h"
 
-#include <jflinux/thread_specific.h>
-#include <jflinux/joinable_thread.h>
+#include <jflinux/pthread/thread_specific.h>
+#include <jflinux/pthread/joinable_thread.h>
 
 namespace {
 
-jflinux::ThreadSpecific<int> the_semi_global_thing;
+jflinux::pthread::ThreadSpecific<int> the_semi_global_thing;
 
 }
 
-class Worker : public jflinux::JoinableThreadStarter::Worker
+class Worker : public jflinux::pthread::JoinableThreadStarter::Worker
 {
 public:
     virtual void run()
@@ -38,6 +38,7 @@ public:
 };
 
 namespace jflinux {
+namespace pthread {
 namespace tests {
 
 void ThreadSpecificDataTest::run()
@@ -45,5 +46,6 @@ void ThreadSpecificDataTest::run()
     JFUNIT_FAIL();
 }
 
+}
 }
 }

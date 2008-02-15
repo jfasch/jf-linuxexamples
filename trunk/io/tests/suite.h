@@ -1,4 +1,4 @@
-// -*- C++ -*-
+// -*- mode: C++; c-basic-offset: 4 -*-
 
 // Copyright (C) 2008 Joerg Faschingbauer
 
@@ -17,18 +17,23 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "stacktrace_suite.h"
+#ifndef HAVE_JFLINUX_TESTS_IO_SUITE_H
+#define HAVE_JFLINUX_TESTS_IO_SUITE_H
 
-#include "stackframe_test.h"
+#include <jf/unittest/test_suite.h>
 
 namespace jflinux {
+namespace io {
 namespace tests {
 
-StackTraceSuite::StackTraceSuite()
-: jf::unittest::TestSuite("jflinux::tests::StackTraceSuite")
+class Suite : public jf::unittest::TestSuite
 {
-    add_test(new StackFrameTest);
-}
+public:
+    Suite();
+};
 
 }
 }
+}
+
+#endif

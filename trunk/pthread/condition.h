@@ -17,8 +17,8 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_CONDITION_H
-#define HAVE_JFLINUX_CONDITION_H
+#ifndef HAVE_JFLINUX_PTHREAD_CONDITION_H
+#define HAVE_JFLINUX_PTHREAD_CONDITION_H
 
 #include "mutex.h"
 
@@ -27,6 +27,7 @@
 #include <pthread.h>
 
 namespace jflinux {
+namespace pthread {
 
 class Condition {
 public:
@@ -46,6 +47,7 @@ private:
     Condition& operator=(const Condition&);
 };
 
+}
 }
 
 #endif

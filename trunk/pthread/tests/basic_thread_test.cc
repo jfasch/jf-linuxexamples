@@ -19,11 +19,11 @@
 
 #include "basic_thread_test.h"
 
-#include <jflinux/joinable_thread.h>
+#include <jflinux/pthread/joinable_thread.h>
 
 namespace {
 
-class TestWorker : public jflinux::JoinableThreadStarter::Worker {
+class TestWorker : public jflinux::pthread::JoinableThreadStarter::Worker {
 public:
     TestWorker() : was_running_(false) {}
     bool was_running() const { return was_running_; }
@@ -39,6 +39,7 @@ private:
 }
 
 namespace jflinux {
+namespace pthread {
 namespace tests {
 
 void BasicThreadTest::run()
@@ -50,5 +51,6 @@ void BasicThreadTest::run()
     JFUNIT_ASSERT(worker->was_running());
 }
 
+}
 }
 }

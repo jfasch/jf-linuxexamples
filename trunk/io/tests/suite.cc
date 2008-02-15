@@ -17,21 +17,20 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_TESTS_IO_SUITE_H
-#define HAVE_JFLINUX_TESTS_IO_SUITE_H
+#include "suite.h"
 
-#include <jf/unittest/test_suite.h>
+#include "io_test.h"
 
 namespace jflinux {
+namespace io {
 namespace tests {
 
-class IOSuite : public jf::unittest::TestSuite
+Suite::Suite()
+: jf::unittest::TestSuite("jflinux::io::tests::Suite")
 {
-public:
-    IOSuite();
-};
+    add_test(new IOTest);
+}
 
 }
 }
-
-#endif
+}

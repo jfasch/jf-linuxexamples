@@ -1,10 +1,10 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-#include <jflinux/joinable_thread.h>
+#include <jflinux/pthread/joinable_thread.h>
 
 #include <unistd.h>
 
-using namespace jflinux;
+using namespace jflinux::pthread;
 
 namespace {
 

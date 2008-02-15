@@ -17,12 +17,13 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUX_MUTEX_H
-#define HAVE_JF_LINUX_MUTEX_H
+#ifndef HAVE_JFLINUX_PTHREAD_MUTEX_H
+#define HAVE_JFLINUX_PTHREAD_MUTEX_H
 
 #include <pthread.h>
 
 namespace jflinux {
+namespace pthread {
 
 class Mutex {
 public:
@@ -51,6 +52,7 @@ private:
     Mutex& operator=(const Mutex&);
 };
 
+}
 }
 
 #endif

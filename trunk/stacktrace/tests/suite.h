@@ -17,20 +17,22 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_TESTS_STACKTRACE_SUITE_H
-#define HAVE_JFLINUX_TESTS_STACKTRACE_SUITE_H
+#ifndef HAVE_JFLINUX_STACKTRACE_TESTS_SUITE_H
+#define HAVE_JFLINUX_STACKTRACE_TESTS_SUITE_H
 
 #include <jf/unittest/test_suite.h>
 
 namespace jflinux {
+namespace stacktrace {
 namespace tests {
 
-class StackTraceSuite : public jf::unittest::TestSuite
+class Suite : public jf::unittest::TestSuite
 {
 public:
-    StackTraceSuite();
+    Suite();
 };
 
+}
 }
 }
 

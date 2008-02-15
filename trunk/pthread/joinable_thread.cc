@@ -24,6 +24,7 @@
 #include <iostream>
 
 namespace jflinux {
+namespace pthread {
 
 JoinableThreadStarter::JoinableThreadStarter(Worker* w)
 : joined_(false)
@@ -115,4 +116,5 @@ void* JoinableThreadStarter::start_(void* obj) {
     return NULL;
 }
 
+}
 }

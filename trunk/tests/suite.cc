@@ -2,18 +2,22 @@
 
 #include "suite.h"
 
-#include <jflinux/tests/pthread_suite.h>
-#include <jflinux/tests/stacktrace_suite.h>
+#include <jflinux/pthread/tests/suite.h>
+#include <jflinux/io/tests/suite.h>
+#include <jflinux/stacktrace/tests/suite.h>
 
 namespace jflinux {
+namespace stacktrace {
 namespace tests {
 
 Suite::Suite()
 : jf::unittest::TestSuite("jflinux::Suite")
 {
-    add_test(new PthreadSuite);
-    add_test(new StackTraceSuite);
+    add_test(new jflinux::pthread::tests::Suite);
+    add_test(new jflinux::io::tests::Suite);
+    add_test(new jflinux::stacktrace::tests::Suite);
 }
 
+}
 }
 }

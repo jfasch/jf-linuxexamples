@@ -22,6 +22,7 @@
 #include <cassert>
 
 namespace jflinux {
+namespace pthread {
 
 Mutex::Mutex() {
     int err = ::pthread_mutex_init(&mutex_, NULL);
@@ -44,4 +45,4 @@ void Mutex::unlock() {
 }
 
 }
-
+}

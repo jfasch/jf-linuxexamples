@@ -25,6 +25,6 @@ cc = [
     'stackframe.cc',
     ]
 
-LIBRARY(members=[H(filename=f, install=['jflinux']) for f in h] + [CXX(filename=f) for f in cc])
+LIBRARY(members=[H(filename=f, install=['jflinux', 'stacktrace']) for f in h] + [CXX(filename=f) for f in cc])
         
 DIRECTORY(['tests'])

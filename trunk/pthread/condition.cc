@@ -23,6 +23,7 @@
 #include <cerrno>
 
 namespace jflinux {
+namespace pthread {
 
 Condition::Condition(Mutex& m)
 : mutex_(m) {
@@ -55,4 +56,5 @@ void Condition::signal() {
     assert(!err);
 }
 
+}
 }

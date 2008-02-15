@@ -30,12 +30,9 @@ SocketPair::SocketPair()
     int socket[2];
     int rv = ::socketpair(AF_UNIX, SOCK_STREAM, 0, socket);
     if (rv < 0)
-    {
-        // wish I had exceptions
-        return;
-    }
-    m_left.SetFD(socket[0]);
-    m_right.SetFD(socket[1]);
+        throw IO::Exception(errno);
+    left_.set_fd(socket[0]);
+    right_.set_fd(socket[1]);
 }
     
 }

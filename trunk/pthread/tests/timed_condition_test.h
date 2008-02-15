@@ -17,21 +17,23 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_TESTS_TIMED_CONDITION_TEST_H
-#define HAVE_JFLINUX_TESTS_TIMED_CONDITION_TEST_H
+#ifndef HAVE_JFLINUX_PTHREAD_TESTS_TIMED_CONDITION_TEST_H
+#define HAVE_JFLINUX_PTHREAD_TESTS_TIMED_CONDITION_TEST_H
 
 #include <jf/unittest/test_case.h>
 
 namespace jflinux {
+namespace pthread {
 namespace tests {
 
 class TimedConditionTest : public jf::unittest::TestCase
 {
 public:
-    TimedConditionTest() : jf::unittest::TestCase("jflinux::tests::TimedConditionTest") {}
+    TimedConditionTest() : jf::unittest::TestCase("jflinux::pthread::tests::TimedConditionTest") {}
     virtual void run();
 };
 
+}
 }
 }
 

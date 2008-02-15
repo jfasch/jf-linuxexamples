@@ -18,17 +18,17 @@
 # USA
 
 h = [
-    'pthread_suite.h',
+    'suite.h',
     'basic_thread_test.h',
     'timed_condition_test.h',
     'tsd_test.h',
     ]
 
 cc = [
-    'pthread_suite.cc',
+    'suite.cc',
     'basic_thread_test.cc',
     'timed_condition_test.cc',
     'tsd_test.cc',
     ]
 
-LIBRARY(members=[H(filename=f, install=['jflinux', 'tests']) for f in h] + [CXX(filename=f) for f in cc])
+LIBRARY(members=[H(filename=f, install=['jflinux', 'pthread', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

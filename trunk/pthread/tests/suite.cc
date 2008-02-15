@@ -17,22 +17,24 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "pthread_suite.h"
+#include "suite.h"
 
 #include "basic_thread_test.h"
 #include "timed_condition_test.h"
 #include "tsd_test.h"
 
 namespace jflinux {
+namespace pthread {
 namespace tests {
 
-PthreadSuite::PthreadSuite()
-: jf::unittest::TestSuite("jflinux::tests::PthreadSuite")
+Suite::Suite()
+: jf::unittest::TestSuite("jflinux::pthread::tests::Suite")
 {
     add_test(new BasicThreadTest);
     add_test(new TimedConditionTest);
     add_test(new ThreadSpecificDataTest);
 }
 
+}
 }
 }

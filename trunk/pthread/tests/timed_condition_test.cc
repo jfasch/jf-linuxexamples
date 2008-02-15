@@ -19,16 +19,17 @@
 
 #include "timed_condition_test.h"
 
-#include <jflinux/mutex.h>
-#include <jflinux/condition.h>
+#include <jflinux/pthread/mutex.h>
+#include <jflinux/pthread/condition.h>
 
 namespace jflinux {
+namespace pthread {
 namespace tests {
 
 void TimedConditionTest::run()
 {
-    jflinux::Mutex m;
-    jflinux::Condition c(m);
+    jflinux::pthread::Mutex m;
+    jflinux::pthread::Condition c(m);
 
     jflinux::TimeSpec now(jflinux::TimeSpec::now());
     jflinux::TimeSpec until(now + jflinux::TimeSpec(0, jflinux::TimeSpec::one_second/4));
@@ -39,5 +40,6 @@ void TimedConditionTest::run()
     JFUNIT_ASSERT(jflinux::TimeSpec::now().secs() - now.secs() >= 0.25);
 }
 
+}
 }
 }

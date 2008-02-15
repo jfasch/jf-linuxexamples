@@ -1,4 +1,4 @@
-// -*- mode: C++; c-basic-offset: 4 -*-
+// -*- C++ -*-
 
 // Copyright (C) 2008 Joerg Faschingbauer
 
@@ -17,21 +17,20 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_TESTS_PTHREAD_SUITE_H
-#define HAVE_JFLINUX_TESTS_PTHREAD_SUITE_H
+#include "suite.h"
 
-#include <jf/unittest/test_suite.h>
+#include "stackframe_test.h"
 
 namespace jflinux {
+namespace stacktrace {
 namespace tests {
 
-class PthreadSuite : public jf::unittest::TestSuite
+Suite::Suite()
+: jf::unittest::TestSuite("jflinux::stacktrace::tests::Suite")
 {
-public:
-    PthreadSuite();
-};
+    add_test(new StackFrameTest);
+}
 
 }
 }
-
-#endif
+}
