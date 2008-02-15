@@ -1,0 +1,10 @@
+# -*- python -*-
+
+EXECUTABLE(
+    center=CXX('dynamic_prio.cc'),
+    exename='dynamic_prio')
+
+EXECUTABLE(
+    center=CXX('sched_fifo.cc'),
+    exename='sched_fifo')
+

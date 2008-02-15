@@ -17,38 +17,27 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "basic_thread_test.h"
+#ifndef HAVE_JF_LINUX_IO_SOCKETPAIR_H
+#define HAVE_JF_LINUX_IO_SOCKETPAIR_H
 
-#include <jflinux/joinable_thread.h>
-
-namespace {
-
-class TestWorker : public jflinux::JoinableThreadStarter::Worker {
-public:
-    TestWorker() : was_running_(false) {}
-    bool was_running() const { return was_running_; }
-
-    virtual void run() {
-        was_running_ = true;
-    }
-
-private:
-    bool was_running_;
-};
-
-}
+#include "io.h"
 
 namespace jflinux {
-namespace tests {
+namespace io {
 
-void BasicThreadTest::run()
+class SocketPair
 {
-    TestWorker* worker = new TestWorker;
-    JoinableThreadStarter t(worker);
-    t.start();
-    t.join();
-    JFUNIT_ASSERT(worker->was_running());
+public:
+    SocketPair();
+    IO& left() { return left_; }
+    IO& right() { return right_; }
+
+private:
+    IO left_;
+    IO right_;
+};
+    
+}
 }
 
-}
-}
+#endif

@@ -1,12 +1,28 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-#ifndef HAVE_JF_UNIX_TOOLS_JOINABLE_THREAD_H
-#define HAVE_JF_UNIX_TOOLS_JOINABLE_THREAD_H
+// Copyright (C) 2008 Joerg Faschingbauer
+
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public License
+// as published by the Free Software Foundation; either version 2.1 of
+// the License, or (at your option) any later version.
+
+// This library is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+// USA
+
+#ifndef HAVE_JF_LINUX_JOINABLE_THREAD_H
+#define HAVE_JF_LINUX_JOINABLE_THREAD_H
 
 #include <pthread.h>
 
-namespace jf {
-namespace unix_tools {
+namespace jflinux {
 
 /**
 
@@ -43,7 +59,7 @@ public:
     public:
         virtual ~Worker() {}
         /** Yeah, doit baby! */
-        virtual void operator()() = 0;
+        virtual void run() = 0;
     };
 
     class Args {
@@ -90,7 +106,6 @@ private:
     Args args_;
 };
 
-}
 }
 
 #endif

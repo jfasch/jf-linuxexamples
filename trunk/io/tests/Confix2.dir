@@ -17,9 +17,14 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
-DIRECTORY(['common'])
-DIRECTORY(['pthread'])
-DIRECTORY(['io'])
-DIRECTORY(['stacktrace'])
-DIRECTORY(['tests'])
-DIRECTORY(['demo'])
+h = [
+    'io_suite.h',
+    'io_test.h',
+    ]
+
+cc = [
+    'io_suite.cc',
+    'io_test.cc',
+    ]
+
+LIBRARY(members=[H(filename=f, install=['jflinux', 'io', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

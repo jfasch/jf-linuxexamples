@@ -17,38 +17,8 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "basic_thread_test.h"
-
-#include <jflinux/joinable_thread.h>
-
-namespace {
-
-class TestWorker : public jflinux::JoinableThreadStarter::Worker {
-public:
-    TestWorker() : was_running_(false) {}
-    bool was_running() const { return was_running_; }
-
-    virtual void run() {
-        was_running_ = true;
-    }
-
-private:
-    bool was_running_;
-};
-
-}
+#include "stackframe.h"
 
 namespace jflinux {
-namespace tests {
 
-void BasicThreadTest::run()
-{
-    TestWorker* worker = new TestWorker;
-    JoinableThreadStarter t(worker);
-    t.start();
-    t.join();
-    JFUNIT_ASSERT(worker->was_running());
-}
-
-}
 }

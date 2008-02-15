@@ -17,9 +17,14 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
-DIRECTORY(['common'])
-DIRECTORY(['pthread'])
-DIRECTORY(['io'])
-DIRECTORY(['stacktrace'])
+h = [
+    'stackframe.h',
+    ]
+
+cc = [
+    'stackframe.cc',
+    ]
+
+LIBRARY(members=[H(filename=f, install=['jflinux']) for f in h] + [CXX(filename=f) for f in cc])
+        
 DIRECTORY(['tests'])
-DIRECTORY(['demo'])

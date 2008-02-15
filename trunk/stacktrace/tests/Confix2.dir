@@ -1,0 +1,11 @@
+# -*- python -*-
+
+h = [
+    'stacktrace_suite.h',
+    ]
+
+cc = [
+    'stacktrace_suite.cc',
+    ]
+
+LIBRARY(members=[H(filename=f, install=['jflinux', 'tests']) for f in h] + [CXX(filename=f) for f in cc])
