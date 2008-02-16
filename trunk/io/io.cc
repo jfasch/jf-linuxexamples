@@ -4,10 +4,13 @@
 
 #include <errno.h>
 
-using namespace std;
-
 namespace jflinux {
 namespace io {
+
+const char* IO::Exception::what() const throw()
+{
+    return strerror(error_);
+}
 
 IO::IO(int fd)
 : shared_fd_(new FileDescriptor(fd)) {}

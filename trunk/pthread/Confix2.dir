@@ -21,6 +21,7 @@ REQUIRE_SYMBOL('jf.externals.pthread', REQUIRED)
 
 h = [
     'condition.h',
+    'future.h',
     'joinable_thread.h',
     'mutex.h',
     'queue.h',

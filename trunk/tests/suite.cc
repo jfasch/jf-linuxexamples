@@ -7,7 +7,6 @@
 #include <jflinux/stacktrace/tests/suite.h>
 
 namespace jflinux {
-namespace stacktrace {
 namespace tests {
 
 Suite::Suite()
@@ -18,6 +17,5 @@ Suite::Suite()
     add_test(new jflinux::stacktrace::tests::Suite);
 }
 
-}
 }
 }

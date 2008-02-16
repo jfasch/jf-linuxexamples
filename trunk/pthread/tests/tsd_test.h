@@ -29,7 +29,7 @@ namespace tests {
 class ThreadSpecificDataTest : public jf::unittest::TestCase
 {
 public:
-    ThreadSpecificDataTest() : jf::unittest::TestCase("jf::pthread::tests::ThreadSpecificDataTest") {}
+    ThreadSpecificDataTest() : jf::unittest::TestCase("jflinux::pthread::tests::ThreadSpecificDataTest") {}
     virtual void run();
 };
 

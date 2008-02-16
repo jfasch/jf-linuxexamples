@@ -21,9 +21,7 @@ PACKAGE_NAME('jf-linux-tools')
 PACKAGE_VERSION('0.0.1')
 
 from libconfix.setups.explicit_setup import ExplicitSetup
-#from libconfix.plugins.c.library_dependencies import LibraryDependenciesFinderSetup
 
 SETUPS([
-    ExplicitSetup(use_libtool=True),
-#    LibraryDependenciesFinderSetup()
+    ExplicitSetup(use_libtool=False),
     ])

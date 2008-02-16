@@ -24,12 +24,14 @@
 
 #include <jflinux/timespec.h>
 
+#include <boost/utility.hpp>
 #include <pthread.h>
 
 namespace jflinux {
 namespace pthread {
 
-class Condition {
+class Condition : public boost::noncopyable
+{
 public:
     Condition(Mutex& m);
     ~Condition();
@@ -41,10 +43,6 @@ public:
 private:
     pthread_cond_t cond_;
     Mutex& mutex_;
-
-private:
-    Condition(const Condition&);
-    Condition& operator=(const Condition&);
 };
 
 }

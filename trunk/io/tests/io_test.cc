@@ -5,6 +5,9 @@
 #include <jflinux/io/io.h>
 #include <jflinux/io/socketpair.h>
 
+#include <iostream>
+using namespace std;
+
 namespace jflinux {
 namespace io {
 namespace tests {
@@ -17,7 +20,7 @@ void IOTest::run()
     // copy with refcount semantics.
     {
         IO io1;
-        JFUNIT_ASSERT(io1.fd() == -1);
+        JFUNIT_ASSERT_THROWS(IO::Exception, io1.fd());
         IO io2(666);
         JFUNIT_ASSERT(io2.fd() == 666);
         IO io3 = io2;
@@ -25,7 +28,7 @@ void IOTest::run()
         IO io4(io2);
         JFUNIT_ASSERT(io4.fd() == 666);
         io2 = IO();
-        JFUNIT_ASSERT(io2.fd() == -1);
+        JFUNIT_ASSERT_THROWS(IO::Exception, io2.fd());
         JFUNIT_ASSERT(io3.fd() == io4.fd() && io4.fd() == 666);
         io2 = io4;
         JFUNIT_ASSERT(io2.fd() == 666);

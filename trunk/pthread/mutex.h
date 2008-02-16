@@ -20,14 +20,17 @@
 #ifndef HAVE_JFLINUX_PTHREAD_MUTEX_H
 #define HAVE_JFLINUX_PTHREAD_MUTEX_H
 
+#include <boost/utility.hpp>
 #include <pthread.h>
 
 namespace jflinux {
 namespace pthread {
 
-class Mutex {
+class Mutex : public boost::noncopyable
+{
 public:
-    class Guard {
+    class Guard
+    {
     public:
         Guard(Mutex& m) : mutex_(m) { mutex_.lock(); }
         ~Guard() { mutex_.unlock(); }
@@ -46,10 +49,6 @@ public:
 private:
     pthread_mutex_t mutex_;
     friend class Condition;
-
-private:
-    Mutex(const Mutex&);
-    Mutex& operator=(const Mutex&);
 };
 
 }

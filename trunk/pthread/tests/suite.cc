@@ -21,7 +21,7 @@
 
 #include "basic_thread_test.h"
 #include "timed_condition_test.h"
-#include "tsd_test.h"
+#include "tsd_suite.h"
 
 namespace jflinux {
 namespace pthread {
@@ -32,7 +32,7 @@ Suite::Suite()
 {
     add_test(new BasicThreadTest);
     add_test(new TimedConditionTest);
-    add_test(new ThreadSpecificDataTest);
+    add_test(new ThreadSpecificDataSuite);
 }
 
 }

@@ -31,6 +31,7 @@ jflinux::pthread::ThreadSpecific<int> the_semi_global_thing;
 class Worker : public jflinux::pthread::JoinableThreadStarter::Worker
 {
 public:
+    Worker(const IO& channel) : channel_(channel) {}
     virtual void run()
     {
         
