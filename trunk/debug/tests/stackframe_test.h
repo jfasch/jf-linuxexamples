@@ -17,20 +17,24 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "suite.h"
+#ifndef HAVE_JFLINUX_DEBUG_TESTS_STACKFRAME_TEST_H
+#define HAVE_JFLINUX_DEBUG_TESTS_STACKFRAME_TEST_H
 
-#include "stackframe_test.h"
+#include <jf/unittest/test_case.h>
 
 namespace jflinux {
-namespace stacktrace {
+namespace debug {
 namespace tests {
 
-Suite::Suite()
-: jf::unittest::TestSuite("jflinux::stacktrace::tests::Suite")
+class StackFrameTest : public jf::unittest::TestCase
 {
-    add_test(new StackFrameTest);
-}
+public:
+    StackFrameTest() : jf::unittest::TestCase("jflinux::debug::tests::StackFrameTest") {}
+    virtual void run() { JFUNIT_FAIL(); }
+};
 
 }
 }
 }
+
+#endif

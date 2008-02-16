@@ -27,7 +27,7 @@
 
 namespace {
 
-using namespace jf::stacktrace;
+using namespace jf::debug;
 
 void f000() {
     JFSTACKTRACE();
@@ -53,16 +53,36 @@ void f0() {
     f01();
 }
 
-
 } // /<anonymous>
 
 namespace jflinux {
-namespace stacktrace {
+namespace debug {
 namespace tests {
 
 void StackTraceTest::run()
 {
+
+    StackHistory history;
+    StackHistory::set_current(&history);
+    f0();
+
+    JFUNIT_ASSERT(history.descendants().size() == 1);
+    const StackFrame& s0 = history.descendants()[0];
+    JFUNIT_ASSERT(s0.data() == f0);
+
+    JFUNIT_ASSERT(s0.descendants().size() == 2);
+    const StackFrame& s00 = s0.descendants()[0];
+    JFUNIT_ASSERT(s00.data() == f00);
+    const StackFrame& s01 = s0.descendants()[0];
+    JFUNIT_ASSERT(s01.data() == f01);
     
+    JFUNIT_ASSERT(s00.descendants().size() == 1);
+    const StackFrame& s000 = s00.descendants()[0];
+    JFUNIT_ASSERT(s000.data() == f000);
+
+    JFUNIT_ASSERT(s01.descendants().size() == 1);
+    const StackFrame& s010 = s01.descendants()[0];
+    JFUNIT_ASSERT(s010.data() == f010);
 }
 
 }

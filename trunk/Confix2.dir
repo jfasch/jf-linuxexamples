@@ -20,6 +20,6 @@
 DIRECTORY(['common'])
 DIRECTORY(['pthread'])
 DIRECTORY(['io'])
-DIRECTORY(['stacktrace'])
+DIRECTORY(['debug'])
 DIRECTORY(['tests'])
 DIRECTORY(['demo'])
