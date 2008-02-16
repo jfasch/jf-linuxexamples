@@ -38,7 +38,7 @@ public:
     T* get();
 private:
     pthread_key_t key_;
-} ;
+};
 
 template<typename T> inline ThreadSpecific<T>::ThreadSpecific(DTOR dtor) {
     int err = ::pthread_key_create(&key_, dtor);

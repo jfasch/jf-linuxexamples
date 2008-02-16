@@ -1,4 +1,4 @@
-// -*- mode: C++; c-basic-offset: 4 -*-
+// -*- C++ -*-
 
 // Copyright (C) 2008 Joerg Faschingbauer
 
@@ -17,19 +17,19 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_PTHREAD_TESTS_TSD_TEST_H
-#define HAVE_JFLINUX_PTHREAD_TESTS_TSD_TEST_H
+#ifndef HAVE_JFLINUX_STACKTRACE_TESTS_STACKTRACE_TEST_H
+#define HAVE_JFLINUX_STACKTRACE_TESTS_STACKTRACE_TEST_H
 
 #include <jf/unittest/test_case.h>
 
 namespace jflinux {
-namespace pthread {
+namespace stacktrace {
 namespace tests {
 
-class ThreadSpecificDataTest : public jf::unittest::TestCase
+class StackTraceTest : public jf::unittest::TestCase
 {
 public:
-    ThreadSpecificDataTest() : jf::unittest::TestCase("jflinux::pthread::tests::ThreadSpecificDataTest") {}
+    StackTraceTest() : jf::unittest::TestCase("jflinux::stacktrace::tests::StackTraceTest") {}
     virtual void run();
 };
 

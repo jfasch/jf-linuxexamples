@@ -17,36 +17,23 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "tsd_test.h"
+#ifndef HAVE_JFLINUX_PTHREAD_TESTS_TSD_SUITE_H
+#define HAVE_JFLINUX_PTHREAD_TESTS_TSD_SUITE_H
 
-#include <jflinux/pthread/thread_specific.h>
-#include <jflinux/pthread/joinable_thread.h>
-
-namespace {
-
-jflinux::pthread::ThreadSpecific<int> the_semi_global_thing;
-
-}
-
-class Worker : public jflinux::pthread::JoinableThreadStarter::Worker
-{
-public:
-    Worker(const IO& channel) : channel_(channel) {}
-    virtual void run()
-    {
-        
-    }
-};
+#include <jf/unittest/test_suite.h>
 
 namespace jflinux {
 namespace pthread {
 namespace tests {
 
-void ThreadSpecificDataTest::run()
+class ThreadSpecificDataSuite : public jf::unittest::TestSuite
 {
-    JFUNIT_FAIL();
-}
+public:
+    ThreadSpecificDataSuite();
+};
 
 }
 }
 }
+
+#endif

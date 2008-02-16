@@ -38,7 +38,7 @@ public:
     Future() : result_valid_(false), result_ready_(lock_) {}
 
     /** Wait for the result to become valid. */
-    const DATA& get_result()
+    const DATA& get()
     {
         Mutex::Guard g(lock_);
         while (!result_valid_)
@@ -48,7 +48,7 @@ public:
 
     /** Make the result valid and wakeup the one who's waiting for it,
         if any. */
-    void set_result(const DATA& result)
+    void set(const DATA& result)
     {
         lock_.lock();
         result_valid_ = true;
