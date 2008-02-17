@@ -18,11 +18,12 @@
 # USA
 
 h = [
-    'stackframe.h',
+    'stack_frame.h',
+    'stack_history.h',
     ]
 
 cc = [
-    'stackframe.cc',
+    'stack_history.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jflinux', 'debug']) for f in h] + [CXX(filename=f) for f in cc])

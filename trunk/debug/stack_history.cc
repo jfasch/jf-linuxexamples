@@ -17,21 +17,24 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_STACKFRAME_H
-#define HAVE_JFLINUX_STACKFRAME_H
+#include "stack_history.h"
+
+#include <jflinux/pthread/thread_specific.h>
 
 namespace jflinux {
+namespace debug {
 
-class StackFrame
+static jflinux::pthread::ThreadSpecific<StackHistory> current_history;
+
+StackHistory* StackHistory::current()
 {
-public:
-    StackFrame(const char* name) : name_(name) {}
-    const char* name() const { return name_; }
-
-private:
-    const char* name_;
-};
-
+    return current_history.get();
 }
 
-#endif
+void StackHistory::set_current(StackHistory* h)
+{
+    current_history.set(h);
+}
+
+}
+}
