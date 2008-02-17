@@ -17,8 +17,8 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_DEBUG_TESTS_STACKFRAME_TEST_H
-#define HAVE_JFLINUX_DEBUG_TESTS_STACKFRAME_TEST_H
+#ifndef HAVE_JFLINUX_DEBUG_TESTS_STACKHISTORY_TEST_H
+#define HAVE_JFLINUX_DEBUG_TESTS_STACKHISTORY_TEST_H
 
 #include <jf/unittest/test_case.h>
 
@@ -26,11 +26,11 @@ namespace jflinux {
 namespace debug {
 namespace tests {
 
-class StackFrameTest : public jf::unittest::TestCase
+class StackHistoryTest : public jf::unittest::TestCase
 {
 public:
-    StackFrameTest() : jf::unittest::TestCase("jflinux::debug::tests::StackFrameTest") {}
-    virtual void run() { JFUNIT_FAIL(); }
+    StackHistoryTest() : jf::unittest::TestCase("jflinux::debug::tests::StackHistoryTest") {}
+    virtual void run();
 };
 
 }

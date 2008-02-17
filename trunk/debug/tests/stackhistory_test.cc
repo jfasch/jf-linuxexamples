@@ -17,7 +17,10 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include <jflinux/debug/stacktrace.h>
+#include "stackhistory_test.h"
+
+#include <jflinux/debug/stack_frame.h>
+#include <jflinux/debug/stack_history.h>
 
 // * f0
 //   * f00
@@ -25,30 +28,35 @@
 //   * f01
 //     * f010
 
+using namespace jflinux::debug;
+
 namespace {
 
-using namespace jf::debug;
+#define TESTSTACKTRACE(str) \
+    StackFrame jflinux_debug_stackframe(str); \
+    StackFrame::Guard jflinux_debug_stackframe_guard(jflinux_debug_stackframe, \
+                                                     StackHistory::current());
 
 void f000() {
-    JFSTACKTRACE();
+    TESTSTACKTRACE("f000");
 }
 
 void f010() {
-    JFSTACKTRACE();
+    TESTSTACKTRACE("f010");
 }
 
 void f00() {
-    JFSTACKTRACE();
+    TESTSTACKTRACE("f00");
     f000();
 }
 
 void f01() {
-    JFSTACKTRACE();
+    TESTSTACKTRACE("f01");
     f010();
 }
 
 void f0() {
-    JFSTACKTRACE();
+    TESTSTACKTRACE("f0");
     f00();
     f01();
 }
@@ -59,7 +67,7 @@ namespace jflinux {
 namespace debug {
 namespace tests {
 
-void StackTraceTest::run()
+void StackHistoryTest::run()
 {
 
     StackHistory history;

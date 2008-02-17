@@ -19,7 +19,7 @@
 
 #include "suite.h"
 
-#include "stackframe_test.h"
+#include "stackhistory_test.h"
 
 namespace jflinux {
 namespace debug {
@@ -28,7 +28,7 @@ namespace tests {
 Suite::Suite()
 : jf::unittest::TestSuite("jflinux::debug::tests::Suite")
 {
-    add_test(new StackFrameTest);
+    add_test(new StackHistoryTest);
 }
 
 }

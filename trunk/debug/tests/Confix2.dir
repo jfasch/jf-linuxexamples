@@ -1,13 +1,12 @@
 # -*- python -*-
 
 h = [
-    'stackframe_test.h',
-    'stacktrace_test.h',
+    'stackhistory_test.h',
     'suite.h',
     ]
 
 cc = [
-    'stacktrace_test.cc',
+    'stackhistory_test.cc',
     'suite.cc',
     ]
 
