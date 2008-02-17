@@ -21,10 +21,14 @@ h = [
     'stack_history.h',
     ]
 
-cc = [
-    'stack_history.cc',
-    ]
+## cc = [
+##     'stack_history.cc',
+##     ]
 
-LIBRARY(members=[H(filename=f, install=['jflinux', 'debug']) for f in h] + [CXX(filename=f) for f in cc])
+## LIBRARY(members=[H(filename=f, install=['jflinux', 'debug']) for f in h] + [CXX(filename=f) for f in cc])
+
+for f in h:
+    H(filename=f, install=['jflinux', 'debug'])
+    pass
         
 DIRECTORY(['tests'])
