@@ -19,7 +19,7 @@
 
 #include "suite.h"
 
-#include "stackhistory_test.h"
+#include "stack_history_test.h"
 
 namespace jflinux {
 namespace debug {

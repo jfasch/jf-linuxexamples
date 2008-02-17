@@ -19,22 +19,9 @@
 
 #include "stack_history.h"
 
-#include <jflinux/pthread/thread_specific.h>
 
 namespace jflinux {
 namespace debug {
-
-static jflinux::pthread::ThreadSpecific<StackHistory> current_history;
-
-StackHistory* StackHistory::current()
-{
-    return current_history.get();
-}
-
-void StackHistory::set_current(StackHistory* h)
-{
-    current_history.set(h);
-}
 
 }
 }

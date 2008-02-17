@@ -18,7 +18,6 @@
 # USA
 
 h = [
-    'stack_frame.h',
     'stack_history.h',
     ]
 
