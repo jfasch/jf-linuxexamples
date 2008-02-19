@@ -17,8 +17,8 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_DEBUG_STACK_HISTORY_H
-#define HAVE_JFLINUX_DEBUG_STACK_HISTORY_H
+#ifndef HAVE_JFLINUX_DEBUG_STACK_HISTORY_IMPL_H
+#define HAVE_JFLINUX_DEBUG_STACK_HISTORY_IMPL_H
 
 #include <jflinux/timespec.h>
 #include <jflinux/pthread/thread_specific.h>

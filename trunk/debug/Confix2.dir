@@ -18,7 +18,10 @@
 # USA
 
 h = [
+    'indent.h',
     'stack_history.h',
+    'stack_history_impl.h',
+    'stack_history_print.h',
     ]
 
 ## cc = [
