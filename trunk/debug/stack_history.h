@@ -42,6 +42,8 @@ public:
     }
 
     const FRAMEDESCRIPTION& description() const { return description_; }
+    const jflinux::TimeSpec& enter() const { return enter_; }
+    const jflinux::TimeSpec& leave() const { return leave_; }
     const std::vector<StackElement*> descendants() const { return descendants_; }
 
     void add_descendant(StackElement* e)
