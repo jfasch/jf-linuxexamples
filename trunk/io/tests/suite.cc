@@ -20,6 +20,7 @@
 #include "suite.h"
 
 #include "io_test.h"
+#include "file_suite.h"
 
 namespace jflinux {
 namespace io {
@@ -29,6 +30,7 @@ Suite::Suite()
 : jf::unittest::TestSuite("jflinux::io::tests::Suite")
 {
     add_test(new IOTest);
+    add_test(new FileSuite);
 }
 
 }

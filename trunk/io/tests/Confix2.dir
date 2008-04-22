@@ -19,11 +19,13 @@
 
 h = [
     'io_test.h',
+    'file_test.h',
     'suite.h',
     ]
 
 cc = [
     'io_test.cc',
+    'file_test.cc',
     'suite.cc',
     ]
 
