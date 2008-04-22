@@ -25,16 +25,14 @@
 
 namespace jflinux {
 namespace pthread {
-namespace tests {
 
 Suite::Suite()
-: jf::unittest::TestSuite("jflinux::pthread::tests::Suite")
+: jf::unittest::TestSuite("jflinux::pthread::Suite")
 {
     add_test(new BasicThreadTest);
     add_test(new TimedConditionTest);
     add_test(new ThreadSpecificDataSuite);
 }
 
-}
 }
 }

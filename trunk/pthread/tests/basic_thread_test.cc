@@ -40,7 +40,6 @@ private:
 
 namespace jflinux {
 namespace pthread {
-namespace tests {
 
 void BasicThreadTest::run()
 {
@@ -51,6 +50,5 @@ void BasicThreadTest::run()
     JFUNIT_ASSERT(worker->was_running());
 }
 
-}
 }
 }

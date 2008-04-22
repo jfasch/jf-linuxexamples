@@ -1,4 +1,4 @@
-// -*- C++ -*-
+// -*- mode: C++; c-basic-offset: 4 -*-
 
 // Copyright (C) 2008 Joerg Faschingbauer
 
@@ -17,19 +17,22 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_DEBUG_SUITE_H
-#define HAVE_JFLINUX_DEBUG_SUITE_H
+#ifndef HAVE_JFLINUX_DEBUG_STACK_HISTORY_H
+#define HAVE_JFLINUX_DEBUG_STACK_HISTORY_H
 
-#include <jf/unittest/test_suite.h>
+#include "stack_history_impl.h"
 
 namespace jflinux {
 namespace debug {
 
-class Suite : public jf::unittest::TestSuite
-{
-public:
-    Suite();
-};
+typedef jflinux::debug::StackHistory<const char*> __PRETTY_FUNCTION__StackHistory;
+typedef jflinux::debug::StackFrame<const char*> __PRETTY_FUNCTION__StackFrame;
+typedef jflinux::debug::StackElement<const char*> __PRETTY_FUNCTION__StackElement;
+
+#define JF_STACKTRACE() \
+    jflinux::debug::StackFrame<const char*> _jfdebug_stacktrace_( \
+        __PRETTY_FUNCTION__, \
+        jflinux::debug::StackHistory<const char*>::instance());
 
 }
 }

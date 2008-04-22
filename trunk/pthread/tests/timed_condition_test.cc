@@ -24,7 +24,6 @@
 
 namespace jflinux {
 namespace pthread {
-namespace tests {
 
 void TimedConditionTest::run()
 {
@@ -40,6 +39,5 @@ void TimedConditionTest::run()
     JFUNIT_ASSERT(jflinux::TimeSpec::now().secs() - now.secs() >= 0.25);
 }
 
-}
 }
 }

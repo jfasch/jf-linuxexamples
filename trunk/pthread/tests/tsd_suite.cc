@@ -78,7 +78,6 @@ jflinux::pthread::ThreadSpecific<int> DestructorWorker::the_semi_global_thing(De
 
 namespace jflinux {
 namespace pthread {
-namespace tests {
 
 // the main thread and a dedicated worker thread make use of the same
 // TSD slot. both check that they see their own values (ok, this is
@@ -86,7 +85,7 @@ namespace tests {
 class SeparateValuesTest : public jf::unittest::TestCase
 {
 public:
-    SeparateValuesTest() : jf::unittest::TestCase("jflinux::pthread::tests::SeparateValuesTest") {}
+    SeparateValuesTest() : jf::unittest::TestCase("jflinux::pthread::SeparateValuesTest") {}
     virtual void run()
     {
         SeparateValuesWorker::the_semi_global_thing.set(new int(1));
@@ -110,7 +109,7 @@ public:
 class DestructorTest : public jf::unittest::TestCase
 {
 public:
-    DestructorTest() : jf::unittest::TestCase("jflinux::pthread::tests::DestructorTest") {}
+    DestructorTest() : jf::unittest::TestCase("jflinux::pthread::DestructorTest") {}
     virtual void run()
     {
         DestructorWorker::the_semi_global_thing.set(new int(1));
@@ -126,12 +125,11 @@ public:
 };
 
 ThreadSpecificDataSuite::ThreadSpecificDataSuite()
-: jf::unittest::TestSuite("jflinux::pthread::tests::ThreadSpecificDataTest")
+: jf::unittest::TestSuite("jflinux::pthread::ThreadSpecificDataTest")
 {
     add_test(new SeparateValuesTest);
     add_test(new DestructorTest);
 }
 
-}
 }
 }

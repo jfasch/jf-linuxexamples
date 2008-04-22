@@ -10,7 +10,6 @@ using namespace std;
 
 namespace jflinux {
 namespace io {
-namespace tests {
 
 IOTest::IOTest()
 : jf::unittest::TestCase("jflinux::io::tests::IOTest") {}
@@ -78,6 +77,5 @@ void IOTest::run()
     }
 }
 
-}
 }
 }

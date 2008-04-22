@@ -6,7 +6,6 @@
 #include <jf/unittest/test_suite.h>
 
 namespace jflinux {
-namespace tests {
 
 class Suite : public jf::unittest::TestSuite
 {
@@ -14,7 +13,6 @@ public:
     Suite();
 };
 
-}
 }
 
 #endif

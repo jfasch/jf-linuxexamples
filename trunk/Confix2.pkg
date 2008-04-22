@@ -22,6 +22,5 @@ PACKAGE_VERSION('0.0.1')
 
 from libconfix.setups.explicit_setup import ExplicitSetup
 
-SETUPS([
-    ExplicitSetup(use_libtool=False),
-    ])
+## SETUPS([ExplicitSetup(use_libtool=True)])
+SETUPS([ExplicitSetup(use_libtool=False)])

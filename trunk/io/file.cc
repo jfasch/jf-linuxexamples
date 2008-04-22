@@ -1,4 +1,4 @@
-// -*- C++ -*-
+// -*- mode: C++; c-basic-offset: 4 -*-
 
 // Copyright (C) 2008 Joerg Faschingbauer
 
@@ -17,21 +17,29 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_DEBUG_SUITE_H
-#define HAVE_JFLINUX_DEBUG_SUITE_H
+#include "file.h"
 
-#include <jf/unittest/test_suite.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 namespace jflinux {
-namespace debug {
+namespace io {
 
-class Suite : public jf::unittest::TestSuite
+void File::create(const char* pathname, mode_t mode)
 {
-public:
-    Suite();
-};
+    int fd = ::creat(pathname, mode);
+    if (fd < 0)
+        throw IO::Exception(errno);
+    set_fd(fd);
+}
 
+void File::open(const char* pathname)
+{
+    int fd = ::open(pathname, O_RDWR);
+    if (fd < 0)
+        throw IO::Exception(errno);
+    set_fd(fd);
+}
+    
 }
 }
-
-#endif

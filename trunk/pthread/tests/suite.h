@@ -20,11 +20,11 @@
 #ifndef HAVE_JFLINUX_PTHREAD_TESTS_SUITE_H
 #define HAVE_JFLINUX_PTHREAD_TESTS_SUITE_H
 
+// CONFIX:REQUIRE_H("jf/unittest/test_suite.h", REQUIRED)
 #include <jf/unittest/test_suite.h>
 
 namespace jflinux {
 namespace pthread {
-namespace tests {
 
 class Suite : public jf::unittest::TestSuite
 {
@@ -32,7 +32,6 @@ public:
     Suite();
 };
 
-}
 }
 }
 

@@ -1,4 +1,4 @@
-// -*- C++ -*-
+// -*- mode: C++; c-basic-offset: 4 -*-
 
 // Copyright (C) 2008 Joerg Faschingbauer
 
@@ -17,21 +17,27 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_DEBUG_SUITE_H
-#define HAVE_JFLINUX_DEBUG_SUITE_H
+#include "fileutil_suite.h"
 
-#include <jf/unittest/test_suite.h>
+#include <jf/unittest/test_case.h>
 
 namespace jflinux {
-namespace debug {
 
-class Suite : public jf::unittest::TestSuite
+class FileUtilExistTest : public jf::unittest::TestCase
 {
 public:
-    Suite();
+    FileUtilExistTest() : jf::unittest::TestCase("jf::unittest::FileUtilExistTest") {}
+    virtual void run()
+    {
+        // TBD: write something meaningful here
+    }
 };
 
-}
+
+FileUtilSuite::FileUtilSuite()
+: jf::unittest::TestSuite("jflinux::FileUtilSuite")
+{
+    add_test(new FileUtilExistTest);
 }
 
-#endif
+}

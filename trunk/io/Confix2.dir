@@ -19,11 +19,13 @@
 
 h = [
     'io.h',
+    'file.h',
     'socketpair.h',
     ]
 
 cc = [
     'io.cc',
+    'file.cc',
     'socketpair.cc',
     ]
 

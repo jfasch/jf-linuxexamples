@@ -17,14 +17,13 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_PTHREAD_TESTS_TSD_SUITE_H
-#define HAVE_JFLINUX_PTHREAD_TESTS_TSD_SUITE_H
+#ifndef HAVE_JFLINUX_PTHREAD_TSD_SUITE_H
+#define HAVE_JFLINUX_PTHREAD_TSD_SUITE_H
 
 #include <jf/unittest/test_suite.h>
 
 namespace jflinux {
 namespace pthread {
-namespace tests {
 
 class ThreadSpecificDataSuite : public jf::unittest::TestSuite
 {
@@ -32,7 +31,6 @@ public:
     ThreadSpecificDataSuite();
 };
 
-}
 }
 }
 

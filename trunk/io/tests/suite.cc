@@ -24,15 +24,13 @@
 
 namespace jflinux {
 namespace io {
-namespace tests {
 
 Suite::Suite()
-: jf::unittest::TestSuite("jflinux::io::tests::Suite")
+: jf::unittest::TestSuite("jflinux::io::Suite")
 {
     add_test(new IOTest);
     add_test(new FileSuite);
 }
 
-}
 }
 }

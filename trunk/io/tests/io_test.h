@@ -24,7 +24,6 @@
 
 namespace jflinux {
 namespace io {
-namespace tests {
 
 class IOTest : public jf::unittest::TestCase
 {
@@ -33,7 +32,6 @@ public:
     virtual void run();
 };
 
-}
 }
 }
 

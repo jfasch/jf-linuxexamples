@@ -23,14 +23,12 @@
 
 namespace jflinux {
 namespace debug {
-namespace tests {
 
 Suite::Suite()
-: jf::unittest::TestSuite("jflinux::debug::tests::Suite")
+: jf::unittest::TestSuite("jflinux::debug::Suite")
 {
     add_test(new StackHistoryTest);
 }
 
-}
 }
 }

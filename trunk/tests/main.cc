@@ -23,7 +23,7 @@
 
 int main()
 {
-    jflinux::tests::Suite suite;
+    jflinux::Suite suite;
     jf::unittest::TreeTestRunner runner;
     return runner.run(&suite)? 0: 1;
 }

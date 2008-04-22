@@ -69,7 +69,6 @@ void f0() {
 
 namespace jflinux {
 namespace debug {
-namespace tests {
 
 void StackHistoryTest::run()
 {
@@ -97,6 +96,5 @@ void StackHistoryTest::run()
     JFUNIT_ASSERT(e010->description() == f010);
 }
 
-}
 }
 }

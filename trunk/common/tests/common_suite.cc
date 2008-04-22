@@ -17,24 +17,16 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUX_IO_FILE_TEST_H
-#define HAVE_JF_LINUX_IO_FILE_TEST_H
+#include "common_suite.h"
 
-#include <jf/unittest/test_case.h>
+#include "fileutil_suite.h"
 
 namespace jflinux {
-namespace io {
-namespace tests {
 
-class FileTest : public jf::unittest::TestCase
+CommonSuite::CommonSuite()
+: jf::unittest::TestSuite("jflinux::CommonSuite")
 {
-public:
-    FileTest();
-    virtual void run();
-};
-
-}
-}
+    add_test(new FileUtilSuite);
 }
 
-#endif
+}

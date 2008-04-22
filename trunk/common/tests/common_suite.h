@@ -1,4 +1,4 @@
-// -*- C++ -*-
+// -*- mode: C++; c-basic-offset: 4 -*-
 
 // Copyright (C) 2008 Joerg Faschingbauer
 
@@ -17,21 +17,19 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_DEBUG_SUITE_H
-#define HAVE_JFLINUX_DEBUG_SUITE_H
+#ifndef HAVE_JFLINUX_COMMONSUITE_H
+#define HAVE_JFLINUX_COMMONSUITE_H
 
 #include <jf/unittest/test_suite.h>
 
 namespace jflinux {
-namespace debug {
 
-class Suite : public jf::unittest::TestSuite
+class CommonSuite : public jf::unittest::TestSuite
 {
 public:
-    Suite();
+    CommonSuite();
 };
 
-}
 }
 
 #endif

@@ -18,15 +18,11 @@
 # USA
 
 h = [
-    'io_test.h',
-    'file_suite.h',
-    'suite.h',
+    'tty.h',
     ]
 
 cc = [
-    'io_test.cc',
-    'file_suite.cc',
-    'suite.cc',
+    'tty.cc',
     ]
 
-LIBRARY(members=[H(filename=f, install=['jflinux', 'io', 'tests']) for f in h] + [CXX(filename=f) for f in cc])
+LIBRARY(members=[H(filename=f, install=['jflinux', 'serial']) for f in h] + [CXX(filename=f) for f in cc])

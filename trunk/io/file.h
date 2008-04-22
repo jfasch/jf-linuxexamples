@@ -1,4 +1,4 @@
-// -*- C++ -*-
+// -*- mode: C++; c-basic-offset: 4 -*-
 
 // Copyright (C) 2008 Joerg Faschingbauer
 
@@ -17,20 +17,29 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_DEBUG_SUITE_H
-#define HAVE_JFLINUX_DEBUG_SUITE_H
+#ifndef HAVE_JF_LINUX_IO_FILE_H
+#define HAVE_JF_LINUX_IO_FILE_H
 
-#include <jf/unittest/test_suite.h>
+#include "io.h"
+
+// include to get the mode flags for our users
+#include <fcntl.h>
+
+#include <string>
 
 namespace jflinux {
-namespace debug {
+namespace io {
 
-class Suite : public jf::unittest::TestSuite
+class File : public IO
 {
 public:
-    Suite();
-};
+    void create(const std::string& pathname, mode_t mode) { create(pathname.c_str(),  mode); }
+    void create(const char* pathname, mode_t);
 
+    void open(const std::string& pathname) { open(pathname.c_str()); }
+    void open(const char* pathname);
+};
+    
 }
 }
 

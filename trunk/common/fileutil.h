@@ -1,4 +1,4 @@
-// -*- C++ -*-
+// -*- mode: C++; c-basic-offset: 4 -*-
 
 // Copyright (C) 2008 Joerg Faschingbauer
 
@@ -17,21 +17,23 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_DEBUG_SUITE_H
-#define HAVE_JFLINUX_DEBUG_SUITE_H
+#ifndef HAVE_JF_LINUX_FILEUTIL_H
+#define HAVE_JF_LINUX_FILEUTIL_H
 
-#include <jf/unittest/test_suite.h>
+#include <string>
 
 namespace jflinux {
-namespace debug {
 
-class Suite : public jf::unittest::TestSuite
+class FileUtil
 {
 public:
-    Suite();
+    static bool exist(const char* pathname);
+    static bool exist(const std::string& pathname) { return exist(pathname.c_str()); }
+
+    static bool unlink(const char* pathname);
+    static bool unlink(const std::string& pathname) { return exist(pathname.c_str()); }
 };
 
-}
 }
 
 #endif
