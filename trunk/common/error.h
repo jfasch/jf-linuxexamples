@@ -17,8 +17,8 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUX_ERRORS_H
-#define HAVE_JF_LINUX_ERRORS_H
+#ifndef HAVE_JF_LINUX_ERROR_H
+#define HAVE_JF_LINUX_ERROR_H
 
 #include <exception>
 
