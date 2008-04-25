@@ -52,7 +52,7 @@ public:
                 try {
                     f.create(filename, S_IRUSR|S_IWUSR);
                 }
-                catch (IO::Exception&) {
+                catch (ErrnoException&) {
                     JFUNIT_FAIL();
                 }
                 JFUNIT_ASSERT(jflinux::FileUtil::exist(filename));
@@ -61,10 +61,10 @@ public:
             {
                 File f;
                 try {
-                    f.open(filename);
+                    f.open(filename, O_RDWR);
                     JFUNIT_ASSERT(f.write("x", 1) == 1);
                 }
-                catch (IO::Exception&) {
+                catch (ErrnoException&) {
                     JFUNIT_FAIL();
                 }
             }

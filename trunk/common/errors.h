@@ -17,30 +17,25 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUX_IO_FILE_H
-#define HAVE_JF_LINUX_IO_FILE_H
+#ifndef HAVE_JF_LINUX_ERRORS_H
+#define HAVE_JF_LINUX_ERRORS_H
 
-#include "io.h"
-
-// include to get the mode flags for our users
-#include <fcntl.h>
-
-#include <string>
+#include <exception>
 
 namespace jflinux {
-namespace io {
 
-class File : public IO
+class ErrnoException : public std::exception
 {
 public:
-    void create(const std::string& pathname, mode_t mode) { create(pathname.c_str(),  mode); }
-    void create(const char* pathname, mode_t);
+    ErrnoException(int error) : error_(error) {}
+    int error() const { return error_; }
 
-    void open(const std::string& pathname, int flags) { open(pathname.c_str(), flags); }
-    void open(const char* pathname, int flags);
+    /** Dictated by std::exception */
+    virtual const char* what() const throw();
+private:
+    int error_;
 };
     
-}
 }
 
 #endif

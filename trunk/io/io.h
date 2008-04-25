@@ -20,10 +20,11 @@
 #ifndef HAVE_JF_LINUX_IO_IO_H
 #define HAVE_JF_LINUX_IO_IO_H
 
+#include <jflinux/errors.h>
+
 // CONFIX:REQUIRE_H('boost/shared_ptr.hpp', REQUIRED)
 #include <boost/shared_ptr.hpp>
 
-#include <exception>
 #include <errno.h>
 
 namespace jflinux {
@@ -43,19 +44,6 @@ i.e. close() it.
 */
 class IO
 {
-public:
-    class Exception : public std::exception
-    {
-    public:
-        Exception(int error) : error_(error) {}
-        int error() const { return error_; }
-
-        /** Dictated by std::exception */
-        virtual const char* what() const throw();
-    private:
-        int error_;
-    };
-    
 public:
     /** Create an "empty" IO object that has no file descriptor
         yet. */
@@ -112,11 +100,11 @@ private:
 private:
     inline void throw_if_null() const
     {
-        if (!shared_fd_) throw Exception(EBADF);
+        if (!shared_fd_) throw ErrnoException(EBADF);
     }
     inline ssize_t throw_if_error(ssize_t n) const
     {
-        if (n < 0) throw Exception(errno);
+        if (n < 0) throw ErrnoException(errno);
         return n;
     }
 

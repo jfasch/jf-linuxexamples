@@ -17,30 +17,20 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUX_IO_FILE_H
-#define HAVE_JF_LINUX_IO_FILE_H
+#include "errors.h"
 
-#include "io.h"
-
-// include to get the mode flags for our users
-#include <fcntl.h>
-
-#include <string>
+#include <string.h>
 
 namespace jflinux {
-namespace io {
 
-class File : public IO
+const char* ErrnoException::what() const throw()
 {
-public:
-    void create(const std::string& pathname, mode_t mode) { create(pathname.c_str(),  mode); }
-    void create(const char* pathname, mode_t);
+    // should suffice to store error strings like "Permission denied"
+    // or "No such device".
+    static const size_t buflen = 256;
+    char buf[256]; 
 
-    void open(const std::string& pathname, int flags) { open(pathname.c_str(), flags); }
-    void open(const char* pathname, int flags);
-};
-    
-}
+    return strerror_r(error_, buf, buflen);
 }
 
-#endif
+}

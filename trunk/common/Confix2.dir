@@ -18,11 +18,13 @@
 # USA
 
 h = [
+    'errors.h',
     'fileutil.h',
     'timespec.h',
     ]
 
 cc = [
+    'errors.cc',
     'fileutil.cc',
     'timespec.cc',
     ]

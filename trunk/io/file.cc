@@ -19,6 +19,8 @@
 
 #include "file.h"
 
+#include <jflinux/errors.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -29,15 +31,15 @@ void File::create(const char* pathname, mode_t mode)
 {
     int fd = ::creat(pathname, mode);
     if (fd < 0)
-        throw IO::Exception(errno);
+        throw ErrnoException(errno);
     set_fd(fd);
 }
 
-void File::open(const char* pathname)
+void File::open(const char* pathname, int flags)
 {
-    int fd = ::open(pathname, O_RDWR);
+    int fd = ::open(pathname, flags);
     if (fd < 0)
-        throw IO::Exception(errno);
+        throw ErrnoException(errno);
     set_fd(fd);
 }
     
