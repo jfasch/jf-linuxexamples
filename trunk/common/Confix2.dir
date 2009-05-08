@@ -18,15 +18,17 @@
 # USA
 
 h = [
-    'errors.h',
+    'error.h',
     'fileutil.h',
     'timespec.h',
+    'timeval.h',
     ]
 
 cc = [
-    'errors.cc',
+    'error.cc',
     'fileutil.cc',
     'timespec.cc',
+    'timeval.cc',
     ]
 
 LIBRARY(members=[H(filename=fn, install=['jflinux']) for fn in h] + [CXX(filename=fn) for fn in cc])

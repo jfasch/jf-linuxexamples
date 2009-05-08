@@ -20,7 +20,7 @@
 #ifndef HAVE_JF_LINUX_IO_IO_H
 #define HAVE_JF_LINUX_IO_IO_H
 
-#include <jflinux/errors.h>
+#include <jflinux/error.h>
 
 // CONFIX:REQUIRE_H('boost/shared_ptr.hpp', REQUIRED)
 #include <boost/shared_ptr.hpp>

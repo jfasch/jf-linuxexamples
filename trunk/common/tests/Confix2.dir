@@ -19,11 +19,13 @@
 
 h = [
     'fileutil_suite.h',
+    'timespec_suite.h',
     'common_suite.h',
     ]
 
 cc = [
     'fileutil_suite.cc',
+    'timespec_suite.cc',
     'common_suite.cc',
     ]
 

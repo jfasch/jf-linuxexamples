@@ -17,10 +17,13 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
+// CONFIX:REQUIRE_SYMBOL('jf.externals.clock_gettime', REQUIRED)
+
 #include "timespec.h"
 
 #include <cassert>
-#include <sys/time.h>
+#include <sys/types.h>
+#include <time.h>
 
 namespace jflinux {
 
@@ -54,46 +57,81 @@ bool TimeSpec::operator>(const TimeSpec& t) const {
 }
 
 bool TimeSpec::operator==(const TimeSpec& t) const {
-   return tv_sec == t.tv_nsec  &&  tv_nsec == t.tv_nsec;
+   return tv_sec == t.tv_sec  &&  tv_nsec == t.tv_nsec;
 }
 
 TimeSpec TimeSpec::now() {
     struct timeval tv;
-    int err = ::gettimeofday(&tv, NULL);
-//     timespec ts;
-//     int err = ::clock_gettime(CLOCK_REALTIME, &ts);
+    int err = ::gettimeofday(&tv, 0);
     assert(!err);
     return TimeSpec(tv.tv_sec, tv.tv_usec*1000);
 }
 
-TimeSpec operator+(const TimeSpec& t1, const TimeSpec& t2) {
-    TimeSpec sum;
-    sum.tv_sec = t1.tv_sec + t2.tv_sec;
-    sum.tv_nsec = t1.tv_nsec + t2.tv_nsec;
-    if (sum.tv_nsec >= TimeSpec::one_second) {
-        sum.tv_nsec -= TimeSpec::one_second;
-        sum.tv_sec++;
-    }
-    else if (sum.tv_sec >= 1 && sum.tv_nsec < 0) {
-        sum.tv_nsec += TimeSpec::one_second;
-        sum.tv_sec--;
-    }
-    return sum;   
+TimeSpec TimeSpec::now_monotonic() {
+    timespec ts;
+    int err = ::clock_gettime(CLOCK_MONOTONIC, &ts);
+    assert(!err);
+    return TimeSpec(ts.tv_sec, ts.tv_nsec);
 }
 
-TimeSpec operator-(const TimeSpec& t1, const TimeSpec& t2) {
-    TimeSpec delta;
-    delta.tv_sec = t1.tv_sec - t2.tv_sec;
-    delta.tv_nsec = t1.tv_nsec - t2.tv_nsec;
-    if (delta.tv_nsec < 0) {
-        delta.tv_nsec += TimeSpec::one_second;
-        delta.tv_sec--;
+// TimeSpec operator+(const TimeSpec& t1, const TimeSpec& t2) {
+//     TimeSpec sum;
+//     sum.tv_sec = t1.tv_sec + t2.tv_sec;
+//     sum.tv_nsec = t1.tv_nsec + t2.tv_nsec;
+//     if (sum.tv_nsec >= TimeSpec::one_second) {
+//         sum.tv_nsec -= TimeSpec::one_second;
+//         sum.tv_sec++;
+//     }
+//     else if (sum.tv_sec >= 1 && sum.tv_nsec < 0) {
+//         sum.tv_nsec += TimeSpec::one_second;
+//         sum.tv_sec--;
+//     }
+//     return sum;   
+// }
+
+TimeSpec operator+(const TimeSpec& lhs, const TimeSpec& rhs)
+{
+    TimeSpec ret;
+    ret.tv_sec = lhs.tv_sec + rhs.tv_sec;
+    ret.tv_nsec = lhs.tv_nsec + rhs.tv_nsec;
+    // take care of overflows
+    ret.tv_sec += ret.tv_nsec / TimeSpec::one_second;
+    ret.tv_nsec = ret.tv_nsec % TimeSpec::one_second;
+    return ret;
+}
+
+// TimeSpec operator-(const TimeSpec& t1, const TimeSpec& t2) {
+//     TimeSpec delta;
+//     delta.tv_sec = t1.tv_sec - t2.tv_sec;
+//     delta.tv_nsec = t1.tv_nsec - t2.tv_nsec;
+//     if (delta.tv_nsec < 0) {
+//         delta.tv_nsec += TimeSpec::one_second;
+//         delta.tv_sec--;
+//     }
+//     else if (delta.tv_nsec >= TimeSpec::one_second) {
+//         delta.tv_nsec -= TimeSpec::one_second;
+//         delta.tv_sec++;
+//     }
+//     return delta;
+// }
+
+TimeSpec operator-(const TimeSpec& lhs, const TimeSpec& rhs)
+{
+    bool debit = false;
+    long ret_nsec;
+    if (rhs.tv_nsec > lhs.tv_nsec) {
+        debit = true;
+        ret_nsec = TimeSpec::one_second - rhs.tv_nsec + lhs.tv_nsec;
     }
-    else if (delta.tv_nsec >= TimeSpec::one_second) {
-        delta.tv_nsec -= TimeSpec::one_second;
-        delta.tv_sec++;
+    else
+        ret_nsec = lhs.tv_nsec - rhs.tv_nsec;
+
+    long sub_sec = debit? rhs.tv_sec+1: rhs.tv_sec;
+    if (sub_sec > lhs.tv_sec) {
+        throw TimeSpec::UnderflowError();
     }
-    return delta;
+
+    return TimeSpec(lhs.tv_sec - sub_sec, ret_nsec);
 }
 
 }

@@ -130,12 +130,15 @@ void TTY::open(const char* pathname, int flags, const Config& config)
 
     try {
         get_termios(fd(), termios_);
-        if (apply_raw(termios_, config.raw()) ||
-            apply_speed(termios_, config.baudrate()) ||
-            apply_charsize(termios_, config.charsize()) ||
-            apply_stopbits(termios_, config.stopbits()) ||
-            apply_parity(termios_, config.parity()))
+        
+        bool changed;
+        changed = apply_raw(termios_, config.raw());
+        changed = apply_speed(termios_, config.baudrate());
+        changed = apply_charsize(termios_, config.charsize());
+        changed = apply_stopbits(termios_, config.stopbits());
+        changed = apply_parity(termios_, config.parity());
 
+        if (changed)
             set_termios(fd(), termios_);
     }
     catch (const std::exception&) {

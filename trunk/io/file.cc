@@ -19,7 +19,7 @@
 
 #include "file.h"
 
-#include <jflinux/errors.h>
+#include <jflinux/error.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>

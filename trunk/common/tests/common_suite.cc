@@ -20,6 +20,7 @@
 #include "common_suite.h"
 
 #include "fileutil_suite.h"
+#include "timespec_suite.h"
 
 namespace jflinux {
 
@@ -27,6 +28,7 @@ CommonSuite::CommonSuite()
 : jf::unittest::TestSuite("jflinux::CommonSuite")
 {
     add_test(new FileUtilSuite);
+    add_test(new TimeSpecSuite);
 }
 
 }

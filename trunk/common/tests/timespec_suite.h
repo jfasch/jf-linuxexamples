@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2009 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,20 +17,20 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "error.h"
+#ifndef HAVE_JFLINUX_TIMESPECSUITE_H
+#define HAVE_JFLINUX_TIMESPECSUITE_H
 
-#include <string.h>
+#include <jf/unittest/test_suite.h>
 
-namespace jflinux {
-
-const char* ErrnoException::what() const throw()
+namespace jflinux
 {
-    // should suffice to store error strings like "Permission denied"
-    // or "No such device".
-    static const size_t buflen = 256;
-    char buf[256]; 
 
-    return strerror_r(error_, buf, buflen);
+class TimeSpecSuite : public jf::unittest::TestSuite
+{
+public:
+    TimeSpecSuite();
+};
+
 }
 
-}
+#endif

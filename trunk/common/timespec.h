@@ -20,13 +20,19 @@
 #ifndef HAVE_JF_LINUX_TIMESPEC_H
 #define HAVE_JF_LINUX_TIMESPEC_H
 
-#include <time.h>
+#include <exception>
+#include <sys/time.h>
 
 namespace jflinux {
 
 class TimeSpec : public timespec {
 public:
     enum Inf { Infinity };
+    class UnderflowError : public std::exception
+    {
+    public:
+        virtual const char* what() { return "TimeSpec::UnderflowError"; }
+    };
     
 public:
     /** Infinity */
@@ -53,6 +59,9 @@ public:
 
     /** Current point in time (as given by gettimeofday(2)) */
     static TimeSpec now();
+    /** Current point in time (as given by clock_gettime(2),
+        CLOCK_MONOTONIC) */
+    static TimeSpec now_monotonic();
 
     enum { one_second = 1000000000 /*nanoseconds*/ };
 };
