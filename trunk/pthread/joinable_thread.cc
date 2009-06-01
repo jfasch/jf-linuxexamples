@@ -39,7 +39,6 @@ JoinableThreadStarter::JoinableThreadStarter(const Args& a)
 JoinableThreadStarter::~JoinableThreadStarter() {
     if (!joined_)
         join();
-    delete args_.worker();
 }
 
 bool JoinableThreadStarter::start() {

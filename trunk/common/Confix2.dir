@@ -32,5 +32,5 @@ cc = [
     ]
 
 LIBRARY(members=[H(filename=fn, install=['jflinux']) for fn in h] + [CXX(filename=fn) for fn in cc])
-        
+
 DIRECTORY(['tests'])

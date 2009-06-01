@@ -43,11 +43,11 @@ namespace pthread {
 
 void BasicThreadTest::run()
 {
-    TestWorker* worker = new TestWorker;
-    JoinableThreadStarter t(worker);
+    TestWorker worker;
+    JoinableThreadStarter t(&worker);
     t.start();
     t.join();
-    JFUNIT_ASSERT(worker->was_running());
+    JFUNIT_ASSERT(worker.was_running());
 }
 
 }

@@ -39,6 +39,9 @@ behavior by simply implementing an interface, Worker, and passing it
 to a thread starter object. The user's object will run in the new
 thread, and nowhere else.
 
+Note that the Worker object is not deleted; this has to be done by the
+user (he needs to join() anyway).
+
 */
 class JoinableThreadStarter {
 public:
