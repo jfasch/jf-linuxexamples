@@ -37,7 +37,7 @@ the thread's context. So, generally, the user doesn't have to worry
 about what runs in which context. He can customize the thread's
 behavior by simply implementing an interface, Worker, and passing it
 to a thread starter object. The user's object will run in the new
-thread, ond nowhere else.
+thread, and nowhere else.
 
 */
 class JoinableThreadStarter {
