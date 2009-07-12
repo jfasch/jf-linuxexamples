@@ -33,7 +33,6 @@ public:
     }
 };
 
-
 FileUtilSuite::FileUtilSuite()
 : jf::unittest::TestSuite("jflinux::FileUtilSuite")
 {
