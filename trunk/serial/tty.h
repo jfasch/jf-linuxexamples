@@ -17,17 +17,16 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUX_SERIAL_TTY_H
-#define HAVE_JF_LINUX_SERIAL_TTY_H
+#ifndef HAVE_JFLINUX_TTY_H
+#define HAVE_JFLINUX_TTY_H
 
-#include <jflinux/io/file.h>
+#include <jflinux/file.h>
 
 #include <termios.h>
 
 namespace jflinux {
-namespace serial {
 
-class TTY : public jflinux::io::File
+class TTY : public jflinux::File
 {
 public:
     enum Raw {
@@ -99,7 +98,6 @@ private:
     termios termios_;
 };
     
-}
 }
 
 #endif

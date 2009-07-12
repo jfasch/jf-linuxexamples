@@ -20,13 +20,13 @@
 h = [
     'io_test.h',
     'file_suite.h',
-    'suite.h',
+    'io_suite.h',
     ]
 
 cc = [
     'io_test.cc',
     'file_suite.cc',
-    'suite.cc',
+    'io_suite.cc',
     ]
 
-LIBRARY(members=[H(filename=f, install=['jflinux', 'io', 'tests']) for f in h] + [CXX(filename=f) for f in cc])
+LIBRARY(members=[H(filename=f, install=['jflinux', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

@@ -16,9 +16,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-
-#ifndef HAVE_JFLINUX_PTHREAD_QUEUE_H
-#define HAVE_JFLINUX_PTHREAD_QUEUE_H
+#ifndef HAVE_JFLINUX_QUEUE_H
+#define HAVE_JFLINUX_QUEUE_H
 
 #include "mutex.h"
 #include "condition.h"
@@ -26,7 +25,6 @@
 #include <deque>
 
 namespace jflinux {
-namespace pthread {
 
 template<typename T> class Queue {
 public:
@@ -94,7 +92,6 @@ template<typename T> bool Queue<T>::timed_pop(T& elem, const TimeSpec& abstime) 
     return false;
 }
 
-}
 }
 
 #endif

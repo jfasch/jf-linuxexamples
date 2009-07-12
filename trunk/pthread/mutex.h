@@ -16,15 +16,13 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-
-#ifndef HAVE_JFLINUX_PTHREAD_MUTEX_H
-#define HAVE_JFLINUX_PTHREAD_MUTEX_H
+#ifndef HAVE_JFLINUX_MUTEX_H
+#define HAVE_JFLINUX_MUTEX_H
 
 #include <boost/utility.hpp>
 #include <pthread.h>
 
 namespace jflinux {
-namespace pthread {
 
 class Mutex : public boost::noncopyable
 {
@@ -51,7 +49,6 @@ private:
     friend class Condition;
 };
 
-}
 }
 
 #endif

@@ -16,17 +16,15 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-
-#ifndef HAVE_JFLINUX_DEBUG_STACK_HISTORY_IMPL_H
-#define HAVE_JFLINUX_DEBUG_STACK_HISTORY_IMPL_H
+#ifndef HAVE_JFLINUX_STACK_HISTORY_IMPL_H
+#define HAVE_JFLINUX_STACK_HISTORY_IMPL_H
 
 #include <jflinux/timespec.h>
-#include <jflinux/pthread/thread_specific.h>
+#include <jflinux/thread_specific.h>
 
 #include <vector>
 
 namespace jflinux {
-namespace debug {
 
 template <typename FRAMEDESCRIPTION> class StackElement
 {
@@ -100,11 +98,11 @@ private:
     StackElement<FRAMEDESCRIPTION> root_;
     StackElement<FRAMEDESCRIPTION>* current_;
 
-    static jflinux::pthread::ThreadSpecific<StackHistory> history_instance;
+    static jflinux::ThreadSpecific<StackHistory> history_instance;
 };
 
 template <typename FRAMEDESCRIPTION>
-jflinux::pthread::ThreadSpecific<StackHistory<FRAMEDESCRIPTION> > StackHistory<FRAMEDESCRIPTION>::history_instance;
+jflinux::ThreadSpecific<StackHistory<FRAMEDESCRIPTION> > StackHistory<FRAMEDESCRIPTION>::history_instance;
 
 template <typename FRAMEDESCRIPTION> class StackFrame
 {
@@ -127,7 +125,6 @@ private:
     StackElement<FRAMEDESCRIPTION>* predecessor_;
 };
 
-}
 }
 
 #endif

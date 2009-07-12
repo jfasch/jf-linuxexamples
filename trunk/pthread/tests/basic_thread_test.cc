@@ -16,14 +16,13 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-
 #include "basic_thread_test.h"
 
-#include <jflinux/pthread/joinable_thread.h>
+#include <jflinux/joinable_thread.h>
 
 namespace {
 
-class TestWorker : public jflinux::pthread::JoinableThreadStarter::Worker {
+class TestWorker : public jflinux::JoinableThreadStarter::Worker {
 public:
     TestWorker() : was_running_(false) {}
     bool was_running() const { return was_running_; }
@@ -39,7 +38,6 @@ private:
 }
 
 namespace jflinux {
-namespace pthread {
 
 void BasicThreadTest::run()
 {
@@ -50,5 +48,4 @@ void BasicThreadTest::run()
     JFUNIT_ASSERT(worker.was_running());
 }
 
-}
 }

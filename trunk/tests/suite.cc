@@ -3,14 +3,14 @@
 #include "suite.h"
 
 #include <jflinux/tests/common_suite.h>
-#include <jflinux/pthread/tests/suite.h>
-#include <jflinux/io/tests/suite.h>
-#include <jflinux/debug/tests/suite.h>
+#include <jflinux/tests/pthread_suite.h>
+#include <jflinux/tests/io_suite.h>
+#include <jflinux/tests/debug_suite.h>
 
 // CONFIX:REQUIRE_H('jflinux/tests/common_suite.h', REQUIRED)
-// CONFIX:REQUIRE_H('jflinux/pthread/tests/suite.h', REQUIRED)
-// CONFIX:REQUIRE_H('jflinux/io/tests/suite.h', REQUIRED)
-// CONFIX:REQUIRE_H('jflinux/debug/tests/suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jflinux/tests/pthread_suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jflinux/tests/io_suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jflinux/tests/debug_suite.h', REQUIRED)
 
 namespace jflinux {
 
@@ -18,9 +18,9 @@ Suite::Suite()
 : jf::unittest::TestSuite("jflinux::Suite")
 {
     add_test(new jflinux::CommonSuite);
-    add_test(new jflinux::pthread::Suite);
-    add_test(new jflinux::io::Suite);
-    add_test(new jflinux::debug::Suite);
+    add_test(new jflinux::PThreadSuite);
+    add_test(new jflinux::IOSuite);
+    add_test(new jflinux::DebugSuite);
 }
 
 }

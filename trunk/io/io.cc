@@ -19,7 +19,6 @@
 #include "io.h"
 
 namespace jflinux {
-namespace io {
 
 IO::IO(int fd)
 : shared_fd_(new FileDescriptor(fd)) {}
@@ -110,5 +109,4 @@ void IO::FileDescriptor::close()
     fd_ = -1;
 }   
 
-}
 }

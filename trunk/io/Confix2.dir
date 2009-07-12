@@ -29,6 +29,6 @@ cc = [
     'socketpair.cc',
     ]
 
-LIBRARY(members=[H(filename=f, install=['jflinux', 'io']) for f in h] + [CXX(filename=f) for f in cc])
+LIBRARY(members=[H(filename=f, install=['jflinux']) for f in h] + [CXX(filename=f) for f in cc])
         
 DIRECTORY(['tests'])

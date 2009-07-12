@@ -16,7 +16,6 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-
 #include "file.h"
 
 #include <jflinux/error.h>
@@ -25,7 +24,6 @@
 #include <sys/stat.h>
 
 namespace jflinux {
-namespace io {
 
 void File::create(const char* pathname, mode_t mode)
 {
@@ -43,5 +41,4 @@ void File::open(const char* pathname, int flags)
     set_fd(fd);
 }
     
-}
 }

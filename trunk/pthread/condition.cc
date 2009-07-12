@@ -16,14 +16,12 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-
 #include "condition.h"
 
 #include <cassert>
 #include <cerrno>
 
 namespace jflinux {
-namespace pthread {
 
 Condition::Condition(Mutex& m)
 : mutex_(m) {
@@ -56,5 +54,4 @@ void Condition::signal() {
     assert(!err);
 }
 
-}
 }

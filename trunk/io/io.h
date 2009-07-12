@@ -16,8 +16,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#ifndef HAVE_JF_LINUX_IO_IO_H
-#define HAVE_JF_LINUX_IO_IO_H
+#ifndef HAVE_JFLINUX_IO_H
+#define HAVE_JFLINUX_IO_H
 
 #include <jflinux/error.h>
 
@@ -27,7 +27,6 @@
 #include <errno.h>
 
 namespace jflinux {
-namespace io {
 
 /** Base class for all Unix style IO objects.
 
@@ -111,7 +110,6 @@ private:
     boost::shared_ptr<FileDescriptor> shared_fd_;
 };
     
-}
 }
 
 #endif

@@ -17,13 +17,12 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUX_IO_SOCKETPAIR_H
-#define HAVE_JF_LINUX_IO_SOCKETPAIR_H
+#ifndef HAVE_JFLINUX_SOCKETPAIR_H
+#define HAVE_JFLINUX_SOCKETPAIR_H
 
 #include "io.h"
 
 namespace jflinux {
-namespace io {
 
 class SocketPair
 {
@@ -37,7 +36,6 @@ private:
     IO right_;
 };
     
-}
 }
 
 #endif

@@ -16,7 +16,6 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-
 #include "joinable_thread.h"
 
 #include <cstring>
@@ -24,7 +23,6 @@
 #include <iostream>
 
 namespace jflinux {
-namespace pthread {
 
 JoinableThreadStarter::JoinableThreadStarter(Worker* w)
 : joined_(false)
@@ -115,5 +113,4 @@ void* JoinableThreadStarter::start_(void* obj) {
     return NULL;
 }
 
-}
 }

@@ -16,15 +16,13 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-
-#ifndef HAVE_JFLINUX_PTHREAD_THREAD_SPECIFIC_H
-#define HAVE_JFLINUX_PTHREAD_THREAD_SPECIFIC_H
+#ifndef HAVE_JFLINUX_THREAD_SPECIFIC_H
+#define HAVE_JFLINUX_THREAD_SPECIFIC_H
 
 #include <pthread.h>
 #include <cassert>
 
 namespace jflinux {
-namespace pthread {
 
 /** \brief Typesafe encapsulation of thread specific data. */
 template<typename T> class ThreadSpecific {
@@ -59,7 +57,6 @@ template<typename T> T* ThreadSpecific<T>::get() {
     return (T*)::pthread_getspecific(key_);
 }
 
-}
 }
 
 #endif

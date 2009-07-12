@@ -17,18 +17,19 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "suite.h"
+#ifndef HAVE_JFLINUX_DEBUG_SUITE_H
+#define HAVE_JFLINUX_DEBUG_SUITE_H
 
-#include "stack_history_test.h"
+#include <jf/unittest/test_suite.h>
 
 namespace jflinux {
-namespace debug {
 
-Suite::Suite()
-: jf::unittest::TestSuite("jflinux::debug::Suite")
+class DebugSuite : public jf::unittest::TestSuite
 {
-    add_test(new StackHistoryTest);
-}
+public:
+    DebugSuite();
+};
 
 }
-}
+
+#endif

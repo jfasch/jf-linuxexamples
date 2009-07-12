@@ -16,23 +16,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+#include "pthread_suite.h"
 
-#ifndef HAVE_JFLINUX_PTHREAD_TESTS_SUITE_H
-#define HAVE_JFLINUX_PTHREAD_TESTS_SUITE_H
-
-// CONFIX:REQUIRE_H("jf/unittest/test_suite.h", REQUIRED)
-#include <jf/unittest/test_suite.h>
+#include "basic_thread_test.h"
+#include "timed_condition_test.h"
+#include "tsd_suite.h"
 
 namespace jflinux {
-namespace pthread {
 
-class Suite : public jf::unittest::TestSuite
+PThreadSuite::PThreadSuite()
+: jf::unittest::TestSuite("PThreadSuite")
 {
-public:
-    Suite();
-};
-
-}
+    add_test(new BasicThreadTest);
+    add_test(new TimedConditionTest);
+    add_test(new ThreadSpecificDataSuite);
 }
 
-#endif
+}

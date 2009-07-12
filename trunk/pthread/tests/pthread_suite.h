@@ -16,21 +16,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+#ifndef HAVE_JFLINUX_PTHREAD_SUITE_H
+#define HAVE_JFLINUX_PTHREAD_SUITE_H
 
-#include "suite.h"
-
-#include "io_test.h"
-#include "file_suite.h"
+// CONFIX:REQUIRE_H("jf/unittest/test_suite.h", REQUIRED)
+#include <jf/unittest/test_suite.h>
 
 namespace jflinux {
-namespace io {
 
-Suite::Suite()
-: jf::unittest::TestSuite("jflinux::io::Suite")
+class PThreadSuite : public jf::unittest::TestSuite
 {
-    add_test(new IOTest);
-    add_test(new FileSuite);
-}
+public:
+    PThreadSuite();
+};
 
 }
-}
+
+#endif

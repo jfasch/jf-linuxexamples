@@ -16,15 +16,13 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-
-#ifndef HAVE_JFLINUX_DEBUG_STACK_HISTORY_PRINT_H
-#define HAVE_JFLINUX_DEBUG_STACK_HISTORY_PRINT_H
+#ifndef HAVE_JFLINUX_STACK_HISTORY_PRINT_H
+#define HAVE_JFLINUX_STACK_HISTORY_PRINT_H
 
 #include "indent.h"
 #include "stack_history_impl.h"
 
 namespace jflinux {
-namespace debug {
 
 template <typename FRAMEDESCRIPTION> void print(std::ostream& o, const StackElement<FRAMEDESCRIPTION>& e, int indentation)
 {
@@ -46,7 +44,6 @@ template <typename FRAMEDESCRIPTION> inline void print(std::ostream& o, const St
     print(o, h.root(), indentation);
 }
 
-}
 }
 
 #endif

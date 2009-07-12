@@ -17,12 +17,12 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include <jflinux/debug/stack_history.h>
-#include <jflinux/debug/stack_history_print.h>
+#include <jflinux/stack_history.h>
+#include <jflinux/stack_history_print.h>
 
 #include <iostream>
 
-using namespace jflinux::debug;
+using namespace jflinux;
 
 void f0();
 void f00();

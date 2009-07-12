@@ -23,15 +23,13 @@
 #include <jf/unittest/test_suite.h>
 
 namespace jflinux {
-namespace io {
 
-class Suite : public jf::unittest::TestSuite
+class IOSuite : public jf::unittest::TestSuite
 {
 public:
-    Suite();
+    IOSuite();
 };
 
-}
 }
 
 #endif

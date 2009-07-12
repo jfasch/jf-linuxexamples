@@ -19,19 +19,19 @@
 
 #include "file_suite.h"
 
-#include <jflinux/io/file.h>
+#include <jflinux/file.h>
 #include <jflinux/fileutil.h>
+
 #include <jf/unittest/test_case.h>
 
 #include <sstream>
 
 namespace jflinux {
-namespace io {
 
 class FileCreateOpenTest : public jf::unittest::TestCase
 {
 public:
-    FileCreateOpenTest() : jf::unittest::TestCase("jflinux::io::FileCreateOpenTest") {}
+    FileCreateOpenTest() : jf::unittest::TestCase("FileCreateOpenTest") {}
 
     virtual void run()
     {
@@ -75,10 +75,9 @@ public:
 };
 
 FileSuite::FileSuite()
-: jf::unittest::TestSuite("jflinux::io::tests::FileSuite")
+: jf::unittest::TestSuite("FileSuite")
 {
     add_test(new FileCreateOpenTest);
 }
 
-}
 }

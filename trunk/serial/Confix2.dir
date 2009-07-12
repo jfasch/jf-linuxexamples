@@ -25,4 +25,4 @@ cc = [
     'tty.cc',
     ]
 
-LIBRARY(members=[H(filename=f, install=['jflinux', 'serial']) for f in h] + [CXX(filename=f) for f in cc])
+LIBRARY(members=[H(filename=f, install=['jflinux']) for f in h] + [CXX(filename=f) for f in cc])

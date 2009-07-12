@@ -16,23 +16,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-
-#ifndef HAVE_JFLINUX_DEBUG_STACKHISTORY_TEST_H
-#define HAVE_JFLINUX_DEBUG_STACKHISTORY_TEST_H
+#ifndef HAVE_JFLINUX_STACKHISTORY_TEST_H
+#define HAVE_JFLINUX_STACKHISTORY_TEST_H
 
 #include <jf/unittest/test_case.h>
 
 namespace jflinux {
-namespace debug {
 
 class StackHistoryTest : public jf::unittest::TestCase
 {
 public:
-    StackHistoryTest() : jf::unittest::TestCase("jflinux::debug::tests::StackHistoryTest") {}
+    StackHistoryTest() : jf::unittest::TestCase("StackHistoryTest") {}
     virtual void run();
 };
 
-}
 }
 
 #endif

@@ -17,24 +17,22 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_DEBUG_STACK_HISTORY_H
-#define HAVE_JFLINUX_DEBUG_STACK_HISTORY_H
+#ifndef HAVE_JFLINUX_STACK_HISTORY_H
+#define HAVE_JFLINUX_STACK_HISTORY_H
 
 #include "stack_history_impl.h"
 
 namespace jflinux {
-namespace debug {
 
-typedef jflinux::debug::StackHistory<const char*> __PRETTY_FUNCTION__StackHistory;
-typedef jflinux::debug::StackFrame<const char*> __PRETTY_FUNCTION__StackFrame;
-typedef jflinux::debug::StackElement<const char*> __PRETTY_FUNCTION__StackElement;
+typedef jflinux::StackHistory<const char*> __PRETTY_FUNCTION__StackHistory;
+typedef jflinux::StackFrame<const char*> __PRETTY_FUNCTION__StackFrame;
+typedef jflinux::StackElement<const char*> __PRETTY_FUNCTION__StackElement;
 
 #define JF_STACKTRACE() \
-    jflinux::debug::StackFrame<const char*> _jfdebug_stacktrace_( \
-        __PRETTY_FUNCTION__, \
-        jflinux::debug::StackHistory<const char*>::instance());
+    jflinux::StackFrame<const char*> _jfdebug_stacktrace_( \
+        __PRETTY_FUNCTION__,                               \
+        jflinux::StackHistory<const char*>::instance());
 
-}
 }
 
 #endif

@@ -18,17 +18,16 @@
 // USA
 #include "io_test.h"
 
-#include <jflinux/io/io.h>
-#include <jflinux/io/socketpair.h>
+#include <jflinux/io.h>
+#include <jflinux/socketpair.h>
 
 #include <iostream>
 using namespace std;
 
 namespace jflinux {
-namespace io {
 
 IOTest::IOTest()
-: jf::unittest::TestCase("jflinux::io::tests::IOTest") {}
+: jf::unittest::TestCase("IOTest") {}
 
 void IOTest::run()
 {
@@ -93,5 +92,4 @@ void IOTest::run()
     }
 }
 
-}
 }

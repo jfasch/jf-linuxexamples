@@ -1,4 +1,4 @@
-// -*- C++ -*-
+// -*- mode: C++; c-basic-offset: 4 -*-
 
 // Copyright (C) 2008 Joerg Faschingbauer
 
@@ -16,22 +16,18 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+#include "io_suite.h"
 
-#ifndef HAVE_JFLINUX_DEBUG_SUITE_H
-#define HAVE_JFLINUX_DEBUG_SUITE_H
-
-#include <jf/unittest/test_suite.h>
+#include "io_test.h"
+#include "file_suite.h"
 
 namespace jflinux {
-namespace debug {
 
-class Suite : public jf::unittest::TestSuite
+IOSuite::IOSuite()
+: jf::unittest::TestSuite("IOSuite")
 {
-public:
-    Suite();
-};
-
-}
+    add_test(new IOTest);
+    add_test(new FileSuite);
 }
 
-#endif
+}

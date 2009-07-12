@@ -16,13 +16,12 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#ifndef HAVE_JF_LINUX_IO_IO_TEST_H
-#define HAVE_JF_LINUX_IO_IO_TEST_H
+#ifndef HAVE_JFLINUX_IO_TEST_H
+#define HAVE_JFLINUX_IO_TEST_H
 
 #include <jf/unittest/test_case.h>
 
 namespace jflinux {
-namespace io {
 
 class IOTest : public jf::unittest::TestCase
 {
@@ -31,7 +30,6 @@ public:
     virtual void run();
 };
 
-}
 }
 
 #endif

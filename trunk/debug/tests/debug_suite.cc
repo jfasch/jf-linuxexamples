@@ -1,4 +1,4 @@
-// -*- mode: C++; c-basic-offset: 4 -*-
+// -*- C++ -*-
 
 // Copyright (C) 2008 Joerg Faschingbauer
 
@@ -16,23 +16,16 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+#include "debug_suite.h"
 
-#include "suite.h"
-
-#include "basic_thread_test.h"
-#include "timed_condition_test.h"
-#include "tsd_suite.h"
+#include "stack_history_test.h"
 
 namespace jflinux {
-namespace pthread {
 
-Suite::Suite()
-: jf::unittest::TestSuite("jflinux::pthread::Suite")
+DebugSuite::DebugSuite()
+: jf::unittest::TestSuite("DebugSuite")
 {
-    add_test(new BasicThreadTest);
-    add_test(new TimedConditionTest);
-    add_test(new ThreadSpecificDataSuite);
+    add_test(new StackHistoryTest);
 }
 
-}
 }
