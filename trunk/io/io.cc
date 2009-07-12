@@ -46,8 +46,7 @@ ssize_t IO::writeall(const void* buf, size_t len)
     throw_if_null();
     const ssize_t retval = len;
     const char* the_data = (const char*)buf;
-    while (len)
-    {
+    while (len) {
         int nwritten = throw_if_error(::write(shared_fd_->fd(), the_data, len));
 
         // man 2 write says this cannot happen as long as we don't
@@ -86,9 +85,7 @@ bool IO::good() const
 IO::FileDescriptor::~FileDescriptor()
 {
     if (fd_ >= 0)
-    {
         ::close(fd_);
-    }
 }
 
 void IO::FileDescriptor::close()
