@@ -1,0 +1,5 @@
+# -*- python -*-
+
+EXECUTABLE(
+    center=CXX('stack_history.cc'),
+    exename='jf_stack_history')

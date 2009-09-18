@@ -1,0 +1,6 @@
+# -*- python -*-
+
+EXECUTABLE(
+    center=CXX('main.cc'),
+    members=[H(filename='suite.h', install=['jflinux']), CXX('suite.cc')],
+    what=EXECUTABLE_CHECK)

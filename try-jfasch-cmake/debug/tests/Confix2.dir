@@ -1,0 +1,13 @@
+# -*- python -*-
+
+h = [
+    'stack_history_test.h',
+    'debug_suite.h',
+    ]
+
+cc = [
+    'stack_history_test.cc',
+    'debug_suite.cc',
+    ]
+
+LIBRARY(members=[H(filename=f, install=['jflinux', 'tests']) for f in h] + [CXX(filename=f) for f in cc])
