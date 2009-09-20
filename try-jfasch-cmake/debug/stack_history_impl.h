@@ -29,7 +29,8 @@ namespace jflinux {
 template <typename FRAMEDESCRIPTION> class StackElement
 {
 public:
-    StackElement() {}
+    StackElement()
+    : description_(NULL) {}
     StackElement(FRAMEDESCRIPTION description)
     : description_(description),
       enter_(jflinux::TimeSpec::now()) {}
