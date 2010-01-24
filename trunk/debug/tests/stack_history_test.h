@@ -26,7 +26,7 @@ namespace jflinux {
 class StackHistoryTest : public jf::unittest::TestCase
 {
 public:
-    StackHistoryTest() : jf::unittest::TestCase("StackHistoryTest") {}
+    StackHistoryTest() : jf::unittest::TestCase("StackHistory") {}
     virtual void run();
 };
 

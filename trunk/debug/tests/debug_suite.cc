@@ -23,7 +23,7 @@
 namespace jflinux {
 
 DebugSuite::DebugSuite()
-: jf::unittest::TestSuite("DebugSuite")
+: jf::unittest::TestSuite("Debug")
 {
     add_test(new StackHistoryTest);
 }

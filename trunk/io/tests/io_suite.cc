@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -20,14 +20,16 @@
 
 #include "io_test.h"
 #include "file_suite.h"
+#include "linux_special_fd_suite.h"
 
 namespace jflinux {
 
 IOSuite::IOSuite()
-: jf::unittest::TestSuite("IOSuite")
+: jf::unittest::TestSuite("IO")
 {
     add_test(new IOTest);
     add_test(new FileSuite);
+    add_test(new LinuxSpecialFDSuite);
 }
 
 }

@@ -25,7 +25,7 @@
 namespace jflinux {
 
 CommonSuite::CommonSuite()
-: jf::unittest::TestSuite("jflinux::CommonSuite")
+: jf::unittest::TestSuite("Common")
 {
     add_test(new FileUtilSuite);
     add_test(new TimeSpecSuite);

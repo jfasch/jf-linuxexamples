@@ -26,7 +26,7 @@ namespace jflinux {
 class FileUtilExistTest : public jf::unittest::TestCase
 {
 public:
-    FileUtilExistTest() : jf::unittest::TestCase("jf::unittest::FileUtilExistTest") {}
+    FileUtilExistTest() : jf::unittest::TestCase("Exist") {}
     virtual void run()
     {
         // TBD: write something meaningful here
@@ -34,7 +34,7 @@ public:
 };
 
 FileUtilSuite::FileUtilSuite()
-: jf::unittest::TestSuite("jflinux::FileUtilSuite")
+: jf::unittest::TestSuite("FileUtil")
 {
     add_test(new FileUtilExistTest);
 }

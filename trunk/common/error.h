@@ -30,12 +30,11 @@ public:
     ErrnoException(int error) : error_(error) {}
     int error() const { return error_; }
 
-    /** Dictated by std::exception */
     virtual const char* what() const throw();
 private:
     int error_;
 };
-    
+
 }
 
 #endif

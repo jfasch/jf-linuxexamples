@@ -27,7 +27,7 @@ using namespace std;
 namespace jflinux {
 
 IOTest::IOTest()
-: jf::unittest::TestCase("IOTest") {}
+: jf::unittest::TestCase("IO") {}
 
 void IOTest::run()
 {

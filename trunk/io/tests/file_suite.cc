@@ -31,7 +31,7 @@ namespace jflinux {
 class FileCreateOpenTest : public jf::unittest::TestCase
 {
 public:
-    FileCreateOpenTest() : jf::unittest::TestCase("FileCreateOpenTest") {}
+    FileCreateOpenTest() : jf::unittest::TestCase("FileCreateOpen") {}
 
     virtual void run()
     {
@@ -75,7 +75,7 @@ public:
 };
 
 FileSuite::FileSuite()
-: jf::unittest::TestSuite("FileSuite")
+: jf::unittest::TestSuite("File")
 {
     add_test(new FileCreateOpenTest);
 }

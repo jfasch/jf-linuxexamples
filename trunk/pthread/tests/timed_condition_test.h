@@ -26,7 +26,7 @@ namespace jflinux {
 class TimedConditionTest : public jf::unittest::TestCase
 {
 public:
-    TimedConditionTest() : jf::unittest::TestCase("TimedConditionTest") {}
+    TimedConditionTest() : jf::unittest::TestCase("TimedCondition") {}
     virtual void run();
 };
 

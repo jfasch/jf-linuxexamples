@@ -27,7 +27,7 @@ namespace jflinux {
 class Arithmetic : public jf::unittest::TestCase
 {
 public:
-    Arithmetic() : jf::unittest::TestCase("jflinux.TimeSpecSuite.Arithmetic") {}
+    Arithmetic() : jf::unittest::TestCase("Arithmetic") {}
     virtual void run()
     {
         {
@@ -72,7 +72,7 @@ public:
 class Underflow : public jf::unittest::TestCase
 {
 public:
-    Underflow() : jf::unittest::TestCase("jflinux.TimeSpecSuite.Arithmetic") {}
+    Underflow() : jf::unittest::TestCase("UnderFlow") {}
     virtual void run()
     {
         {
@@ -95,7 +95,7 @@ public:
 class Monotonic : public jf::unittest::TestCase
 {
 public:
-    Monotonic() : jf::unittest::TestCase("jflinux.TimeSpecSuite.Monotonic") {}
+    Monotonic() : jf::unittest::TestCase("Monotonic") {}
     virtual void run()
     {
         TimeSpec before = TimeSpec::now_monotonic();
@@ -108,7 +108,7 @@ public:
 
 
 TimeSpecSuite::TimeSpecSuite()
-: jf::unittest::TestSuite("jflinux.TimeSpecSuite")
+: jf::unittest::TestSuite("TimeSpec")
 {
     add_test(new Arithmetic);
     add_test(new Underflow);

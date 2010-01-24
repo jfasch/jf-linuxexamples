@@ -54,6 +54,7 @@ public:
 
     bool operator<(const TimeSpec&) const;
     bool operator==(const TimeSpec&) const;
+    bool operator!=(const TimeSpec& t) const { return !operator==(t); }
     bool operator>(const TimeSpec&) const;
     bool operator<=(const TimeSpec& t) const { return !operator>(t); }
     bool operator>=(const TimeSpec& t) const { return !operator<(t); }

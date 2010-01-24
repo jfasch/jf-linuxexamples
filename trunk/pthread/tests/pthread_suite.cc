@@ -25,7 +25,7 @@
 namespace jflinux {
 
 PThreadSuite::PThreadSuite()
-: jf::unittest::TestSuite("PThreadSuite")
+: jf::unittest::TestSuite("PThread")
 {
     add_test(new BasicThreadTest);
     add_test(new TimedConditionTest);

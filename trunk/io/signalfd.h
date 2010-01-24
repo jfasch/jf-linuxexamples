@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,20 +16,23 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#ifndef HAVE_JFLINUX_BASIC_THREAD_TEST_H
-#define HAVE_JFLINUX_BASIC_THREAD_TEST_H
 
-#include <jf/unittest/test_case.h>
+#ifndef HAVE_JFLINUX_SIGNALFD_H
+#define HAVE_JFLINUX_SIGNALFD_H
+
+#include "io.h"
+
+#include <sys/signalfd.h>
 
 namespace jflinux {
 
-class BasicThreadTest : public jf::unittest::TestCase
+class SignalFD : public IO
 {
 public:
-    BasicThreadTest() : jf::unittest::TestCase("Basic") {}
-    virtual void run();
+    SignalFD(const sigset_t&);
+    void wait(signalfd_siginfo&);
 };
-
+    
 }
 
 #endif

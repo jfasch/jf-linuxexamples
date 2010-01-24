@@ -15,7 +15,7 @@
 namespace jflinux {
 
 Suite::Suite()
-: jf::unittest::TestSuite("jflinux::Suite")
+: jf::unittest::TestSuite("LinuxTools")
 {
     add_test(new jflinux::CommonSuite);
     add_test(new jflinux::PThreadSuite);

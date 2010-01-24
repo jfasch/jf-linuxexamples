@@ -83,7 +83,7 @@ namespace jflinux {
 class SeparateValuesTest : public jf::unittest::TestCase
 {
 public:
-    SeparateValuesTest() : jf::unittest::TestCase("jflinux::SeparateValuesTest") {}
+    SeparateValuesTest() : jf::unittest::TestCase("SeparateValues") {}
     virtual void run()
     {
         SeparateValuesWorker::the_semi_global_thing.set(new int(1));
@@ -107,7 +107,7 @@ public:
 class DestructorTest : public jf::unittest::TestCase
 {
 public:
-    DestructorTest() : jf::unittest::TestCase("DestructorTest") {}
+    DestructorTest() : jf::unittest::TestCase("Destructor") {}
     virtual void run()
     {
         DestructorWorker::the_semi_global_thing.set(new int(1));
@@ -123,7 +123,7 @@ public:
 };
 
 ThreadSpecificDataSuite::ThreadSpecificDataSuite()
-: jf::unittest::TestSuite("jflinux::ThreadSpecificDataTest")
+: jf::unittest::TestSuite("ThreadSpecificData")
 {
     add_test(new SeparateValuesTest);
     add_test(new DestructorTest);
