@@ -20,6 +20,7 @@
 
 #include <jflinux/mutex.h>
 #include <jflinux/condition.h>
+#include <jflinux/timespec.h>
 
 namespace jflinux {
 
