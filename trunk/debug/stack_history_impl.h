@@ -33,7 +33,7 @@ public:
     : description_(NULL) {}
     StackElement(FRAMEDESCRIPTION description)
     : description_(description),
-      enter_(jflinux::TimeSpec::now()) {}
+      enter_(jflinux::TimeSpec::now_timeofday()) {}
     ~StackElement()
     {
         for (unsigned i=0; i<descendants_.size(); i++)
@@ -52,7 +52,7 @@ public:
 
     void terminate()
     {
-        leave_ = jflinux::TimeSpec::now();
+        leave_ = jflinux::TimeSpec::now_timeofday();
     }
 
 private:

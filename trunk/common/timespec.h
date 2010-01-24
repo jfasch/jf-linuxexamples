@@ -49,26 +49,24 @@ public:
     long nsec() const { return tv_nsec; }
     double secs() const { return tv_sec+(double)tv_nsec/(double)one_second; }
     
-    bool is_infinite() const;
+    bool is_infinite() const { return tv_sec == -1; }
+    static TimeSpec infinity() { return TimeSpec(Infinity); }
 
     bool operator<(const TimeSpec&) const;
     bool operator==(const TimeSpec&) const;
     bool operator>(const TimeSpec&) const;
     bool operator<=(const TimeSpec& t) const { return !operator>(t); }
     bool operator>=(const TimeSpec& t) const { return !operator<(t); }
+    TimeSpec& operator+=(const TimeSpec&);
 
     /** Current point in time (as given by gettimeofday(2)) */
-    static TimeSpec now();
+    static TimeSpec now_timeofday();
     /** Current point in time (as given by clock_gettime(2),
         CLOCK_MONOTONIC) */
     static TimeSpec now_monotonic();
 
     enum { one_second = 1000000000 /*nanoseconds*/ };
 };
-
-inline bool TimeSpec::is_infinite() const {
-    return tv_sec == -1;
-}
 
 TimeSpec operator+(const TimeSpec&, const TimeSpec&);
 TimeSpec operator-(const TimeSpec&, const TimeSpec&);

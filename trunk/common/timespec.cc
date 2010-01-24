@@ -60,7 +60,13 @@ bool TimeSpec::operator==(const TimeSpec& t) const {
    return tv_sec == t.tv_sec  &&  tv_nsec == t.tv_nsec;
 }
 
-TimeSpec TimeSpec::now() {
+TimeSpec& TimeSpec::operator+=(const TimeSpec& rhs)
+{
+    *this = *this + rhs;
+    return *this;
+}
+
+TimeSpec TimeSpec::now_timeofday() {
     struct timeval tv;
     int err = ::gettimeofday(&tv, 0);
     assert(!err);
