@@ -22,6 +22,7 @@ h = [
     'fileutil.h',
     'timespec.h',
     'timeval.h',
+    'sigset.h',
     ]
 
 cc = [

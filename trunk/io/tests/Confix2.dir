@@ -22,6 +22,7 @@ h = [
     'file_suite.h',
     'io_suite.h',
     'linux_special_fd_suite.h',
+    'dispatcher_suite.h',
     ]
 
 cc = [
@@ -29,6 +30,7 @@ cc = [
     'file_suite.cc',
     'io_suite.cc',
     'linux_special_fd_suite.cc',
+    'dispatcher_suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jflinux', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

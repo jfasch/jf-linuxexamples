@@ -21,18 +21,22 @@ h = [
     'io.h',
     'file.h',
     'socketpair.h',
+    'tty.h',
     'eventfd.h',
     'timerfd.h',
     'signalfd.h',
+    'dispatcher.h',
     ]
 
 cc = [
     'io.cc',
     'file.cc',
     'socketpair.cc',
+    'tty.cc',
     'eventfd.cc',
     'timerfd.cc',
     'signalfd.cc',
+    'dispatcher.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jflinux']) for f in h] + [CXX(filename=f) for f in cc])

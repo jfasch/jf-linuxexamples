@@ -25,7 +25,8 @@
 
 namespace jflinux {
 
-class TimeSpec : public timespec {
+class TimeSpec : public timespec
+{
 public:
     enum Inf { Infinity };
     class UnderflowError : public std::exception

@@ -23,6 +23,7 @@
 #include <jflinux/timerfd.h>
 #include <jflinux/signalfd.h>
 #include <jflinux/timespec.h>
+#include <jflinux/sigset.h>
 
 #include <jf/unittest/test_case.h>
 
@@ -97,12 +98,10 @@ public:
 
     virtual void setup()
     {
-        sigset_t blocked;
+        SigSet blocked;
+        blocked.add(SIGTERM);
 
-        ::sigemptyset(&blocked);
-        ::sigaddset(&blocked, SIGTERM);
-
-        sigset_t old_blocked;
+        SigSet old_blocked;
         int rv = ::sigprocmask(SIG_BLOCK, &blocked, &old_blocked);
         assert(rv>=0);
         unblock_sigterm_ = ! ::sigismember(&old_blocked, SIGTERM);
@@ -110,12 +109,11 @@ public:
 
     virtual void teardown()
     {
-        sigset_t cur_blocked;
+        SigSet cur_blocked;
         int rv = ::sigprocmask(SIG_BLOCK, NULL, &cur_blocked);
         assert(rv>=0);
         if (unblock_sigterm_) {
-            int rv = ::sigdelset(&cur_blocked, SIGTERM);
-            assert(rv>=0);
+            cur_blocked.del(SIGTERM);
             rv = ::sigprocmask(SIG_UNBLOCK, &cur_blocked, NULL);
             assert(rv>=0);
         }
@@ -123,16 +121,13 @@ public:
 
     virtual void run()
     {
-        {
-            sigset_t signals;
-            ::sigemptyset(&signals);
-            ::sigaddset(&signals, SIGTERM);
-            SignalFD signal_fd(signals);
-            ::kill(getpid(), SIGTERM);
-            signalfd_siginfo info;
-            signal_fd.wait(info);
-            JFUNIT_ASSERT(info.ssi_signo == SIGTERM);
-        }
+        SigSet signals;
+        signals.add(SIGTERM);
+        SignalFD signal_fd(signals);
+        ::kill(getpid(), SIGTERM);
+        signalfd_siginfo info;
+        signal_fd.wait(info);
+        JFUNIT_ASSERT(info.ssi_signo == SIGTERM);
     }
 
 private:
