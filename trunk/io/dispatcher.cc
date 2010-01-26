@@ -85,7 +85,7 @@ void Dispatcher::dispatch()
         max_fd = std::max(max_fd, i->first);
     }
 
-    // save away handler sets for later usage as the live ones may
+    // save away handler sets for later usage as the live ones may be
     // changed during the callback phase. this should probably be
     // optimized a bit as this is done quite often.
     HandlerSet saved_in_handlers(in_handlers_);
