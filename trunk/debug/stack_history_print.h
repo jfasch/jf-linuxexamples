@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,13 +16,15 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#ifndef HAVE_JFLINUX_STACK_HISTORY_PRINT_H
-#define HAVE_JFLINUX_STACK_HISTORY_PRINT_H
+
+#ifndef HAVE_JF_LINUXTOOLS_STACK_HISTORY_PRINT_H
+#define HAVE_JF_LINUXTOOLS_STACK_HISTORY_PRINT_H
 
 #include "indent.h"
 #include "stack_history_impl.h"
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 template <typename FRAMEDESCRIPTION> void print(std::ostream& o, const StackElement<FRAMEDESCRIPTION>& e, int indentation)
 {
@@ -32,7 +34,7 @@ template <typename FRAMEDESCRIPTION> void print(std::ostream& o, const StackElem
     if (e.leave() < e.enter())
         o << indent(indentation+2) << "total: (skew detected)" << '\n';
     else {
-        jflinux::TimeSpec total(e.leave() - e.enter());
+        jf::linuxtools::TimeSpec total(e.leave() - e.enter());
         o << indent(indentation+2) << "total: " << total.sec() << ':' << total.nsec() << '\n';
     }
     for (unsigned int i=0; i<e.descendants().size(); i++)
@@ -44,6 +46,7 @@ template <typename FRAMEDESCRIPTION> inline void print(std::ostream& o, const St
     print(o, h.root(), indentation);
 }
 
+}
 }
 
 #endif

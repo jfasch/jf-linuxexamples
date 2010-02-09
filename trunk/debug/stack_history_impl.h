@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,15 +16,16 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#ifndef HAVE_JFLINUX_STACK_HISTORY_IMPL_H
-#define HAVE_JFLINUX_STACK_HISTORY_IMPL_H
+#ifndef HAVE_JF_LINUXTOOLS_STACK_HISTORY_IMPL_H
+#define HAVE_JF_LINUXTOOLS_STACK_HISTORY_IMPL_H
 
-#include <jflinux/timespec.h>
-#include <jflinux/thread_specific.h>
+#include <jf/linuxtools/timespec.h>
+#include <jf/linuxtools/thread_specific.h>
 
 #include <vector>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 template <typename FRAMEDESCRIPTION> class StackElement
 {
@@ -33,7 +34,7 @@ public:
     : description_(NULL) {}
     StackElement(FRAMEDESCRIPTION description)
     : description_(description),
-      enter_(jflinux::TimeSpec::now_timeofday()) {}
+      enter_(jf::linuxtools::TimeSpec::now_timeofday()) {}
     ~StackElement()
     {
         for (unsigned i=0; i<descendants_.size(); i++)
@@ -41,8 +42,8 @@ public:
     }
 
     const FRAMEDESCRIPTION& description() const { return description_; }
-    const jflinux::TimeSpec& enter() const { return enter_; }
-    const jflinux::TimeSpec& leave() const { return leave_; }
+    const jf::linuxtools::TimeSpec& enter() const { return enter_; }
+    const jf::linuxtools::TimeSpec& leave() const { return leave_; }
     const std::vector<StackElement*> descendants() const { return descendants_; }
 
     void add_descendant(StackElement* e)
@@ -52,13 +53,13 @@ public:
 
     void terminate()
     {
-        leave_ = jflinux::TimeSpec::now_timeofday();
+        leave_ = jf::linuxtools::TimeSpec::now_timeofday();
     }
 
 private:
     FRAMEDESCRIPTION description_;
-    jflinux::TimeSpec enter_;
-    jflinux::TimeSpec leave_;
+    jf::linuxtools::TimeSpec enter_;
+    jf::linuxtools::TimeSpec leave_;
     std::vector<StackElement*> descendants_;
 };
 
@@ -99,11 +100,11 @@ private:
     StackElement<FRAMEDESCRIPTION> root_;
     StackElement<FRAMEDESCRIPTION>* current_;
 
-    static jflinux::ThreadSpecific<StackHistory> history_instance;
+    static jf::linuxtools::ThreadSpecific<StackHistory> history_instance;
 };
 
 template <typename FRAMEDESCRIPTION>
-jflinux::ThreadSpecific<StackHistory<FRAMEDESCRIPTION> > StackHistory<FRAMEDESCRIPTION>::history_instance;
+jf::linuxtools::ThreadSpecific<StackHistory<FRAMEDESCRIPTION> > StackHistory<FRAMEDESCRIPTION>::history_instance;
 
 template <typename FRAMEDESCRIPTION> class StackFrame
 {
@@ -126,6 +127,7 @@ private:
     StackElement<FRAMEDESCRIPTION>* predecessor_;
 };
 
+}
 }
 
 #endif

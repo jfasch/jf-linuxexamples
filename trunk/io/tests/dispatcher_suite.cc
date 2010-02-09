@@ -19,14 +19,14 @@
 
 #include "dispatcher_suite.h"
 
-#include <jflinux/dispatcher.h>
-#include <jflinux/socketpair.h>
+#include <jf/linuxtools/dispatcher.h>
+#include <jf/linuxtools/socketpair.h>
 
 #include <jf/unittest/test_case.h>
 
 namespace {
 
-using namespace jflinux;
+using namespace jf::linuxtools;
 
 class DispatcherBasicTest : public jf::unittest::TestCase
 {
@@ -73,7 +73,8 @@ private:
 
 }
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 DispatcherSuite::DispatcherSuite()
 : jf::unittest::TestSuite("Dispatcher")
@@ -81,4 +82,5 @@ DispatcherSuite::DispatcherSuite()
     add_test(new DispatcherBasicTest);
 }
 
+}
 }

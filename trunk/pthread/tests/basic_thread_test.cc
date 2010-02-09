@@ -18,11 +18,11 @@
 // USA
 #include "basic_thread_test.h"
 
-#include <jflinux/joinable_thread.h>
+#include <jf/linuxtools/joinable_thread.h>
 
 namespace {
 
-class TestWorker : public jflinux::JoinableThreadStarter::Worker {
+class TestWorker : public jf::linuxtools::JoinableThreadStarter::Worker {
 public:
     TestWorker() : was_running_(false) {}
     bool was_running() const { return was_running_; }
@@ -37,7 +37,8 @@ private:
 
 }
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 void BasicThreadTest::run()
 {
@@ -48,4 +49,5 @@ void BasicThreadTest::run()
     JFUNIT_ASSERT(worker.was_running());
 }
 
+}
 }

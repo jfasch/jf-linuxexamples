@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -25,7 +25,8 @@
 #include <sys/types.h>
 #include <time.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 TimeSpec::TimeSpec(long sec, long nsec) {
     assert(sec>=0);
@@ -140,4 +141,5 @@ TimeSpec operator-(const TimeSpec& lhs, const TimeSpec& rhs)
     return TimeSpec(lhs.tv_sec - sub_sec, ret_nsec);
 }
 
+}
 }

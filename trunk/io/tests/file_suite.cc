@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -19,14 +19,15 @@
 
 #include "file_suite.h"
 
-#include <jflinux/file.h>
-#include <jflinux/fileutil.h>
+#include <jf/linuxtools/file.h>
+#include <jf/linuxtools/fileutil.h>
 
 #include <jf/unittest/test_case.h>
 
 #include <sstream>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 class FileCreateOpenTest : public jf::unittest::TestCase
 {
@@ -55,7 +56,7 @@ public:
                 catch (ErrnoException&) {
                     JFUNIT_FAIL();
                 }
-                JFUNIT_ASSERT(jflinux::FileUtil::exist(filename));
+                JFUNIT_ASSERT(jf::linuxtools::FileUtil::exist(filename));
             }
 
             {
@@ -69,7 +70,7 @@ public:
                 }
             }
 
-            JFUNIT_ASSERT(jflinux::FileUtil::unlink(filename));
+            JFUNIT_ASSERT(jf::linuxtools::FileUtil::unlink(filename));
         }
     }
 };
@@ -80,4 +81,5 @@ FileSuite::FileSuite()
     add_test(new FileCreateOpenTest);
 }
 
+}
 }

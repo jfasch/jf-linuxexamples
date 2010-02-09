@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,22 +17,24 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_STACK_HISTORY_H
-#define HAVE_JFLINUX_STACK_HISTORY_H
+#ifndef HAVE_JF_LINUXTOOLS_STACK_HISTORY_H
+#define HAVE_JF_LINUXTOOLS_STACK_HISTORY_H
 
 #include "stack_history_impl.h"
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
-typedef jflinux::StackHistory<const char*> __PRETTY_FUNCTION__StackHistory;
-typedef jflinux::StackFrame<const char*> __PRETTY_FUNCTION__StackFrame;
-typedef jflinux::StackElement<const char*> __PRETTY_FUNCTION__StackElement;
+typedef jf::linuxtools::StackHistory<const char*> __PRETTY_FUNCTION__StackHistory;
+typedef jf::linuxtools::StackFrame<const char*> __PRETTY_FUNCTION__StackFrame;
+typedef jf::linuxtools::StackElement<const char*> __PRETTY_FUNCTION__StackElement;
 
 #define JF_STACKTRACE() \
-    jflinux::StackFrame<const char*> _jfdebug_stacktrace_( \
+    jf::linuxtools::StackFrame<const char*> _jfdebug_stacktrace_(   \
         __PRETTY_FUNCTION__,                               \
-        jflinux::StackHistory<const char*>::instance());
+        jf::linuxtools::StackHistory<const char*>::instance());
 
+}
 }
 
 #endif

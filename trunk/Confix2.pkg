@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
-PACKAGE_NAME('jf-linux-tools')
+PACKAGE_NAME('jf-linuxtools')
 PACKAGE_VERSION('0.0.2')
 
 from libconfix.setups.boilerplate import Boilerplate

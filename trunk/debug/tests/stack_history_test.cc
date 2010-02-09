@@ -1,6 +1,6 @@
 // -*- C++ -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,9 +16,10 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+
 #include "stack_history_test.h"
 
-#include <jflinux/stack_history.h>
+#include <jf/linuxtools/stack_history.h>
 
 #include <iostream>
 using namespace std;
@@ -29,14 +30,14 @@ using namespace std;
 //   * f01
 //     * f010
 
-using namespace jflinux;
+using namespace jf::linuxtools;
 
 namespace {
 
 typedef void(*vfunc)(void);
-typedef jflinux::StackHistory<vfunc> TestStackHistory;
-typedef jflinux::StackFrame<vfunc> TestStackFrame;
-typedef jflinux::StackElement<vfunc> TestStackElement;
+typedef jf::linuxtools::StackHistory<vfunc> TestStackHistory;
+typedef jf::linuxtools::StackFrame<vfunc> TestStackFrame;
+typedef jf::linuxtools::StackElement<vfunc> TestStackElement;
 
 #define TESTSTACKTRACE(fn) TestStackFrame teststackframe(fn, TestStackHistory::instance());
 
@@ -66,7 +67,8 @@ void f0() {
 
 } // /<anonymous>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 void StackHistoryTest::run()
 {
@@ -94,4 +96,5 @@ void StackHistoryTest::run()
     JFUNIT_ASSERT(e010->description() == f010);
 }
 
+}
 }

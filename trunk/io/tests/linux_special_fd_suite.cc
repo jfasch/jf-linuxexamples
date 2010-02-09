@@ -19,11 +19,11 @@
 
 #include "linux_special_fd_suite.h"
 
-#include <jflinux/eventfd.h>
-#include <jflinux/timerfd.h>
-#include <jflinux/signalfd.h>
-#include <jflinux/timespec.h>
-#include <jflinux/sigset.h>
+#include <jf/linuxtools/eventfd.h>
+#include <jf/linuxtools/timerfd.h>
+#include <jf/linuxtools/signalfd.h>
+#include <jf/linuxtools/timespec.h>
+#include <jf/linuxtools/sigset.h>
 
 #include <jf/unittest/test_case.h>
 
@@ -32,7 +32,7 @@
 
 namespace {
 
-using namespace jflinux;
+using namespace jf::linuxtools;
 
 class EventFDTest : public jf::unittest::TestCase
 {
@@ -136,7 +136,8 @@ private:
 
 }
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 LinuxSpecialFDSuite::LinuxSpecialFDSuite()
 : jf::unittest::TestSuite("LinuxSpecialFD")
@@ -146,4 +147,5 @@ LinuxSpecialFDSuite::LinuxSpecialFDSuite()
     add_test(new SignalFDTest);
 }
 
+}
 }

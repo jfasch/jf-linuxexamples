@@ -17,16 +17,17 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_TIMERFD_H
-#define HAVE_JFLINUX_TIMERFD_H
+#ifndef HAVE_JF_LINUXTOOLS_TIMERFD_H
+#define HAVE_JF_LINUXTOOLS_TIMERFD_H
 
 #include "io.h"
 
-#include <jflinux/timespec.h>
+#include <jf/linuxtools/timespec.h>
 
 #include <sys/timerfd.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 class TimerFD : public IO
 {
@@ -39,6 +40,7 @@ public:
     uint64_t wait();
 };
     
+}
 }
 
 #endif

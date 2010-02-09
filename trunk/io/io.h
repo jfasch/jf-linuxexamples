@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,17 +16,18 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#ifndef HAVE_JFLINUX_IO_H
-#define HAVE_JFLINUX_IO_H
+#ifndef HAVE_JF_LINUXTOOLS_IO_H
+#define HAVE_JF_LINUXTOOLS_IO_H
 
-#include <jflinux/error.h>
+#include <jf/linuxtools/error.h>
 
 // CONFIX:REQUIRE_H('boost/shared_ptr.hpp', REQUIRED)
 #include <boost/shared_ptr.hpp>
 
 #include <errno.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 /** Base class for all Unix style IO objects.
 
@@ -110,6 +111,7 @@ private:
     boost::shared_ptr<FileDescriptor> shared_fd_;
 };
     
+}
 }
 
 #endif

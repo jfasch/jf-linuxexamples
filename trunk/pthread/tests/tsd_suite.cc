@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,24 +16,25 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+
 #include "tsd_suite.h"
 
-#include <jflinux/thread_specific.h>
-#include <jflinux/joinable_thread.h>
-#include <jflinux/future.h>
+#include <jf/linuxtools/thread_specific.h>
+#include <jf/linuxtools/joinable_thread.h>
+#include <jf/linuxtools/future.h>
 
 #include <jf/unittest/test_case.h>
 
 namespace {
 
-class SeparateValuesWorker : public jflinux::JoinableThreadStarter::Worker
+class SeparateValuesWorker : public jf::linuxtools::JoinableThreadStarter::Worker
 {
 public:
     static void tsd_dtor(void* data) { delete (int*)data; }
-    static jflinux::ThreadSpecific<int> the_semi_global_thing;
+    static jf::linuxtools::ThreadSpecific<int> the_semi_global_thing;
 
 public:
-    SeparateValuesWorker(jflinux::Future<bool>* retval) : retval_(retval) {}
+    SeparateValuesWorker(jf::linuxtools::Future<bool>* retval) : retval_(retval) {}
     virtual void run()
     {
         // our context has not yet touched the TSD, so we must not see
@@ -49,20 +50,20 @@ public:
     }
 
 private:
-    jflinux::Future<bool>* retval_;
+    jf::linuxtools::Future<bool>* retval_;
 };
-jflinux::ThreadSpecific<int> SeparateValuesWorker::the_semi_global_thing(SeparateValuesWorker::tsd_dtor);
+jf::linuxtools::ThreadSpecific<int> SeparateValuesWorker::the_semi_global_thing(SeparateValuesWorker::tsd_dtor);
 
-class DestructorWorker : public jflinux::JoinableThreadStarter::Worker
+class DestructorWorker : public jf::linuxtools::JoinableThreadStarter::Worker
 {
 public:
-    static jflinux::Future<bool> destroyed;
+    static jf::linuxtools::Future<bool> destroyed;
     static void tsd_dtor(void* data) 
     {
         delete (int*)data;
         destroyed.set(true);
     }
-    static jflinux::ThreadSpecific<int> the_semi_global_thing;
+    static jf::linuxtools::ThreadSpecific<int> the_semi_global_thing;
 
 public:
     virtual void run()
@@ -70,12 +71,13 @@ public:
         the_semi_global_thing.set(new int);
     }
 };
-jflinux::Future<bool> DestructorWorker::destroyed;
-jflinux::ThreadSpecific<int> DestructorWorker::the_semi_global_thing(DestructorWorker::tsd_dtor);
+jf::linuxtools::Future<bool> DestructorWorker::destroyed;
+jf::linuxtools::ThreadSpecific<int> DestructorWorker::the_semi_global_thing(DestructorWorker::tsd_dtor);
 
 } // /<anonymous>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 // the main thread and a dedicated worker thread make use of the same
 // TSD slot. both check that they see their own values (ok, this is
@@ -88,8 +90,8 @@ public:
     {
         SeparateValuesWorker::the_semi_global_thing.set(new int(1));
         
-        jflinux::Future<bool> result;
-        jflinux::JoinableThreadStarter starter(new SeparateValuesWorker(&result));
+        jf::linuxtools::Future<bool> result;
+        jf::linuxtools::JoinableThreadStarter starter(new SeparateValuesWorker(&result));
         starter.start();
 
         // our slave thread hasn't seen anything particularly bad.
@@ -112,7 +114,7 @@ public:
     {
         DestructorWorker::the_semi_global_thing.set(new int(1));
         
-        jflinux::JoinableThreadStarter starter(new DestructorWorker);
+        jf::linuxtools::JoinableThreadStarter starter(new DestructorWorker);
         starter.start();
 
         // synchronize with the dtor call. NOTE thaht we cannot simply
@@ -129,4 +131,5 @@ ThreadSpecificDataSuite::ThreadSpecificDataSuite()
     add_test(new DestructorTest);
 }
 
+}
 }

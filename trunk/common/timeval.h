@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,12 +17,13 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUX_TIMEVAL_H
-#define HAVE_JF_LINUX_TIMEVAL_H
+#ifndef HAVE_JF_LINUXTOOLS_TIMEVAL_H
+#define HAVE_JF_LINUXTOOLS_TIMEVAL_H
 
 #include <sys/time.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 class TimeVal : public timeval {
 public:
@@ -64,6 +65,7 @@ inline bool TimeVal::is_infinite() const {
 TimeVal operator+(const TimeVal&, const TimeVal&);
 TimeVal operator-(const TimeVal&, const TimeVal&);
 
+}
 }
 
 #endif

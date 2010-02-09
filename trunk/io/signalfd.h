@@ -17,14 +17,15 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_SIGNALFD_H
-#define HAVE_JFLINUX_SIGNALFD_H
+#ifndef HAVE_JF_LINUXTOOLS_SIGNALFD_H
+#define HAVE_JF_LINUXTOOLS_SIGNALFD_H
 
 #include "io.h"
 
 #include <sys/signalfd.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 class SignalFD : public IO
 {
@@ -33,6 +34,7 @@ public:
     void wait(signalfd_siginfo&);
 };
     
+}
 }
 
 #endif

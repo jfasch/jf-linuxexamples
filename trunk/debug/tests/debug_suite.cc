@@ -20,7 +20,8 @@
 
 #include "stack_history_test.h"
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 DebugSuite::DebugSuite()
 : jf::unittest::TestSuite("Debug")
@@ -28,4 +29,5 @@ DebugSuite::DebugSuite()
     add_test(new StackHistoryTest);
 }
 
+}
 }

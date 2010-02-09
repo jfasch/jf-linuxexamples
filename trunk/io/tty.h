@@ -17,16 +17,17 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_TTY_H
-#define HAVE_JFLINUX_TTY_H
+#ifndef HAVE_JF_LINUXTOOLS_TTY_H
+#define HAVE_JF_LINUXTOOLS_TTY_H
 
-#include <jflinux/file.h>
+#include "file.h"
 
 #include <termios.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
-class TTY : public jflinux::File
+class TTY : public jf::linuxtools::File
 {
 public:
     enum Raw {
@@ -91,13 +92,14 @@ public:
         Parity parity_;
     };
 public:
-    void open(const std::string& pathname, int flags, const Config& c) { open(pathname.c_str(), flags, c); }
+    void open(const std::string& pathname, int flags, const Config& c) { this->open(pathname.c_str(), flags, c); }
     void open(const char* pathname, int flags, const Config&);
 
 private:
     termios termios_;
 };
 
+}
 }
 
 #endif

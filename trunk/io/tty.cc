@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,9 +16,11 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+
 #include "tty.h"
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 static inline void get_termios(int fd, termios& t)
 {
@@ -146,4 +148,4 @@ void TTY::open(const char* pathname, int flags, const Config& config)
 }
     
 }
-
+}

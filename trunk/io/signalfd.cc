@@ -19,12 +19,13 @@
 
 #include "signalfd.h"
 
-#include <jflinux/error.h>
+#include <jf/linuxtools/error.h>
 
 #include <cstring>
 #include <unistd.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 SignalFD::SignalFD(const sigset_t& signals)
 {
@@ -42,4 +43,5 @@ void SignalFD::wait(signalfd_siginfo& info)
     assert(nread==sizeof(info));
 }
 
+}
 }

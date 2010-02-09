@@ -17,14 +17,15 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_EVENTFD_H
-#define HAVE_JFLINUX_EVENTFD_H
+#ifndef HAVE_JF_LINUXTOOLS_EVENTFD_H
+#define HAVE_JF_LINUXTOOLS_EVENTFD_H
 
 #include "io.h"
 
 #include <sys/eventfd.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 class EventFD : public IO
 {
@@ -34,6 +35,7 @@ public:
     uint64_t reset();
 };
     
+}
 }
 
 #endif

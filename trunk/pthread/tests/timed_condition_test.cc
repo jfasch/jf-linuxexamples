@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,26 +16,29 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+
 #include "timed_condition_test.h"
 
-#include <jflinux/mutex.h>
-#include <jflinux/condition.h>
-#include <jflinux/timespec.h>
+#include <jf/linuxtools/mutex.h>
+#include <jf/linuxtools/condition.h>
+#include <jf/linuxtools/timespec.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 void TimedConditionTest::run()
 {
-    jflinux::Mutex m;
-    jflinux::Condition c(m);
+    jf::linuxtools::Mutex m;
+    jf::linuxtools::Condition c(m);
 
-    jflinux::TimeSpec now(jflinux::TimeSpec::now_timeofday());
-    jflinux::TimeSpec until(now + jflinux::TimeSpec(0, jflinux::TimeSpec::one_second/4));
+    jf::linuxtools::TimeSpec now(jf::linuxtools::TimeSpec::now_timeofday());
+    jf::linuxtools::TimeSpec until(now + jf::linuxtools::TimeSpec(0, jf::linuxtools::TimeSpec::one_second/4));
 
     bool timedout = c.timed_wait(until);
 
     JFUNIT_ASSERT(timedout);
-    JFUNIT_ASSERT(jflinux::TimeSpec::now_timeofday().secs() - now.secs() >= 0.25);
+    JFUNIT_ASSERT(jf::linuxtools::TimeSpec::now_timeofday().secs() - now.secs() >= 0.25);
 }
 
+}
 }

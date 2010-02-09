@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -18,13 +18,14 @@
 // USA
 #include "io_test.h"
 
-#include <jflinux/io.h>
-#include <jflinux/socketpair.h>
+#include <jf/linuxtools/io.h>
+#include <jf/linuxtools/socketpair.h>
 
 #include <iostream>
 using namespace std;
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 IOTest::IOTest()
 : jf::unittest::TestCase("IO") {}
@@ -92,4 +93,5 @@ void IOTest::run()
     }
 }
 
+}
 }

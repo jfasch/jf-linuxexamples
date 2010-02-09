@@ -17,12 +17,13 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUX_SIGSET_H
-#define HAVE_JF_LINUX_SIGSET_H
+#ifndef HAVE_JF_LINUXTOOLS_SIGSET_H
+#define HAVE_JF_LINUXTOOLS_SIGSET_H
 
 #include <signal.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 class SigSet : public sigset_t
 {
@@ -53,6 +54,7 @@ public:
     }
 };
 
+}
 }
 
 #endif

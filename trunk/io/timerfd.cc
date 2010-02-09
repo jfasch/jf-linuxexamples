@@ -19,12 +19,13 @@
 
 #include "timerfd.h"
 
-#include <jflinux/error.h>
+#include <jf/linuxtools/error.h>
 
 #include <cstring>
 #include <unistd.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 TimerFD::TimerFD(int clockid)
 {
@@ -95,4 +96,5 @@ uint64_t TimerFD::wait()
     return num_expirations;
 }
 
+}
 }

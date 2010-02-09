@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -21,7 +21,8 @@
 
 #include <string.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 const char* ErrnoException::what() const throw()
 {
@@ -33,4 +34,5 @@ const char* ErrnoException::what() const throw()
     return strerror_r(error_, buf, buflen);
 }
 
+}
 }

@@ -10,4 +10,4 @@ cc = [
     'debug_suite.cc',
     ]
 
-LIBRARY(members=[H(filename=f, install=['jflinux', 'tests']) for f in h] + [CXX(filename=f) for f in cc])
+LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

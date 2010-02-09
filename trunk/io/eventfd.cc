@@ -19,11 +19,12 @@
 
 #include "eventfd.h"
 
-#include <jflinux/error.h>
+#include <jf/linuxtools/error.h>
 
 #include <unistd.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 EventFD::EventFD(unsigned int initval)
 {
@@ -49,4 +50,5 @@ uint64_t EventFD::reset()
     return value;
 }
 
+}
 }

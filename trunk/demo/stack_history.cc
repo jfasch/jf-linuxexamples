@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,12 +17,12 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include <jflinux/stack_history.h>
-#include <jflinux/stack_history_print.h>
+#include <jf/linuxtools/stack_history.h>
+#include <jf/linuxtools/stack_history_print.h>
 
 #include <iostream>
 
-using namespace jflinux;
+using namespace jf::linuxtools;
 
 void f0();
 void f00();

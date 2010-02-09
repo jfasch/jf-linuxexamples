@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,13 +17,14 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUX_TIMESPEC_H
-#define HAVE_JF_LINUX_TIMESPEC_H
+#ifndef HAVE_JF_LINUXTOOLS_TIMESPEC_H
+#define HAVE_JF_LINUXTOOLS_TIMESPEC_H
 
 #include <exception>
 #include <sys/time.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 class TimeSpec : public timespec
 {
@@ -73,6 +74,7 @@ public:
 TimeSpec operator+(const TimeSpec&, const TimeSpec&);
 TimeSpec operator-(const TimeSpec&, const TimeSpec&);
 
+}
 }
 
 #endif

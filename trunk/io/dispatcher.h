@@ -17,12 +17,13 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_DISPATCHER_H
-#define HAVE_JFLINUX_DISPATCHER_H
+#ifndef HAVE_JF_LINUXTOOLS_DISPATCHER_H
+#define HAVE_JF_LINUXTOOLS_DISPATCHER_H
 
 #include <map>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 class Dispatcher
 {
@@ -54,6 +55,7 @@ private:
     HandlerSet out_handlers_;
 };
 
+}
 }
 
 #endif

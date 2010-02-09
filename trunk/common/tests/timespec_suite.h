@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2009 Joerg Faschingbauer
+// Copyright (C) 2009-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,13 +17,13 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JFLINUX_TIMESPECSUITE_H
-#define HAVE_JFLINUX_TIMESPECSUITE_H
+#ifndef HAVE_JF_LINUXTOOLS_TIMESPECSUITE_H
+#define HAVE_JF_LINUXTOOLS_TIMESPECSUITE_H
 
 #include <jf/unittest/test_suite.h>
 
-namespace jflinux
-{
+namespace jf {
+namespace linuxtools {
 
 class TimeSpecSuite : public jf::unittest::TestSuite
 {
@@ -31,6 +31,7 @@ public:
     TimeSpecSuite();
 };
 
+}
 }
 
 #endif

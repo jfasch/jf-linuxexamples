@@ -16,12 +16,13 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#ifndef HAVE_JFLINUX_LINUX_SPECIAL_FD_SUITE_H
-#define HAVE_JFLINUX_LINUX_SPECIAL_FD_SUITE_H
+#ifndef HAVE_JF_LINUXTOOLS_LINUX_SPECIAL_FD_SUITE_H
+#define HAVE_JF_LINUXTOOLS_LINUX_SPECIAL_FD_SUITE_H
 
 #include <jf/unittest/test_suite.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 class LinuxSpecialFDSuite : public jf::unittest::TestSuite
 {
@@ -29,6 +30,7 @@ public:
     LinuxSpecialFDSuite();
 };
 
+}
 }
 
 #endif

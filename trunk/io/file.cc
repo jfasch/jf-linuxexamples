@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -18,12 +18,13 @@
 // USA
 #include "file.h"
 
-#include <jflinux/error.h>
+#include <jf/linuxtools/error.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 void File::create(const char* pathname, mode_t mode)
 {
@@ -41,4 +42,5 @@ void File::open(const char* pathname, int flags)
     set_fd(fd);
 }
     
+}
 }

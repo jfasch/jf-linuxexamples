@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -22,7 +22,8 @@
 #include "fileutil_suite.h"
 #include "timespec_suite.h"
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 CommonSuite::CommonSuite()
 : jf::unittest::TestSuite("Common")
@@ -31,4 +32,5 @@ CommonSuite::CommonSuite()
     add_test(new TimeSpecSuite);
 }
 
+}
 }

@@ -1,6 +1,6 @@
 # -*- python -*-
 
-# Copyright (C) 2008 Joerg Faschingbauer
+# Copyright (C) 2008-2010 Joerg Faschingbauer
 
 # This library is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -32,6 +32,6 @@ cc = [
     'timeval.cc',
     ]
 
-LIBRARY(members=[H(filename=fn, install=['jflinux']) for fn in h] + [CXX(filename=fn) for fn in cc])
+LIBRARY(members=[H(filename=fn, install=['jf', 'linuxtools']) for fn in h] + [CXX(filename=fn) for fn in cc])
 
 DIRECTORY(['tests'])

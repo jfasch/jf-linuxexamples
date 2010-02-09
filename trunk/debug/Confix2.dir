@@ -1,6 +1,6 @@
 # -*- python -*-
 
-# Copyright (C) 2008 Joerg Faschingbauer
+# Copyright (C) 2008-2010 Joerg Faschingbauer
 
 # This library is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -24,14 +24,8 @@ h = [
     'stack_history_print.h',
     ]
 
-## cc = [
-##     'stack_history.cc',
-##     ]
-
-## LIBRARY(members=[H(filename=f, install=['jflinux', 'debug']) for f in h] + [CXX(filename=f) for f in cc])
-
 for f in h:
-    H(filename=f, install=['jflinux'])
+    H(filename=f, install=['jf', 'linuxtools'])
     pass
         
 DIRECTORY(['tests'])

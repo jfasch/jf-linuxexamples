@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -21,7 +21,8 @@
 
 #include <jf/unittest/test_case.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 class FileUtilExistTest : public jf::unittest::TestCase
 {
@@ -39,4 +40,5 @@ FileUtilSuite::FileUtilSuite()
     add_test(new FileUtilExistTest);
 }
 
+}
 }

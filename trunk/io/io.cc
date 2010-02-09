@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008 Joerg Faschingbauer
+// Copyright (C) 2008-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -18,7 +18,8 @@
 // USA
 #include "io.h"
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 IO::IO(int fd)
 : shared_fd_(new FileDescriptor(fd)) {}
@@ -109,4 +110,5 @@ void IO::FileDescriptor::close()
     fd_ = -1;
 }   
 
+}
 }

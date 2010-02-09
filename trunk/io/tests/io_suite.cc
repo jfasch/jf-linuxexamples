@@ -23,7 +23,8 @@
 #include "linux_special_fd_suite.h"
 #include "dispatcher_suite.h"
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 IOSuite::IOSuite()
 : jf::unittest::TestSuite("IO")
@@ -34,4 +35,5 @@ IOSuite::IOSuite()
     add_test(new DispatcherSuite);
 }
 
+}
 }

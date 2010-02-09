@@ -19,13 +19,14 @@
 
 #include "dispatcher.h"
 
-#include <jflinux/error.h>
+#include <jf/linuxtools/error.h>
 
 #include <cassert>
 #include <sys/select.h>
 #include <errno.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 Dispatcher::~Dispatcher()
 {
@@ -113,4 +114,5 @@ void Dispatcher::dispatch()
         }
 }
 
+}
 }

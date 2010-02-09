@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2009 Joerg Faschingbauer
+// Copyright (C) 2009-2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,13 +16,15 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+
 #include "timespec_suite.h"
 
-#include <jflinux/timespec.h>
+#include <jf/linuxtools/timespec.h>
 
 #include <jf/unittest/test_case.h>
 
-namespace jflinux {
+namespace jf {
+namespace linuxtools {
 
 class Arithmetic : public jf::unittest::TestCase
 {
@@ -115,4 +117,5 @@ TimeSpecSuite::TimeSpecSuite()
     add_test(new Monotonic);
 }
 
+}
 }
