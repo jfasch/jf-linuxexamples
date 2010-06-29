@@ -26,6 +26,8 @@
 
 #include <sys/timerfd.h>
 
+#include <stdint.h>
+
 namespace jf {
 namespace linuxtools {
 
