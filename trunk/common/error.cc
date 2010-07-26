@@ -26,12 +26,7 @@ namespace linuxtools {
 
 const char* ErrnoException::what() const throw()
 {
-    // should suffice to store error strings like "Permission denied"
-    // or "No such device".
-    static const size_t buflen = 256;
-    char buf[256]; 
-
-    return strerror_r(error_, buf, buflen);
+    return strerror_r(error_, msgbuf_, buflen);
 }
 
 }

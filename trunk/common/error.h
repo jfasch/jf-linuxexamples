@@ -33,6 +33,10 @@ public:
 
     virtual const char* what() const throw();
 private:
+    // should suffice to store error strings like "Permission denied"
+    // or "No such device".
+    enum { buflen = 64 };
+    mutable char msgbuf_[buflen];
     int error_;
 };
 
