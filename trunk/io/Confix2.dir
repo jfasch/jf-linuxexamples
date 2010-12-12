@@ -25,7 +25,10 @@ h = [
     'eventfd.h',
     'timerfd.h',
     'signalfd.h',
+
     'dispatcher.h',
+    'active_object.h',
+    'timer.h',
     ]
 
 cc = [
@@ -37,6 +40,7 @@ cc = [
     'timerfd.cc',
     'signalfd.cc',
     'dispatcher.cc',
+    'timer.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools']) for f in h] + [CXX(filename=f) for f in cc])

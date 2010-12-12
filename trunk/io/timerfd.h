@@ -25,7 +25,7 @@
 #include <jf/linuxtools/timespec.h>
 
 #include <sys/timerfd.h>
-
+#include <time.h>
 #include <stdint.h>
 
 namespace jf {
@@ -34,7 +34,7 @@ namespace linuxtools {
 class TimerFD : public IO
 {
 public:
-    TimerFD(int clockid);
+    TimerFD(clockid_t = CLOCK_MONOTONIC);
     void arm_oneshot(const TimeSpec& initial_expiration);
     void arm_periodic(const TimeSpec& initial_expiration, const TimeSpec& interval);
     void disarm();

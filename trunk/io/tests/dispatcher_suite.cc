@@ -21,6 +21,7 @@
 
 #include <jf/linuxtools/dispatcher.h>
 #include <jf/linuxtools/socketpair.h>
+#include <jf/linuxtools/active_object.h>
 
 #include <jf/unittest/test_case.h>
 
@@ -43,16 +44,22 @@ public:
     }
 
 private:
-    class MyHandler : public Dispatcher::Handler {
+    class MyHandler : public ActiveObject,
+                      private Dispatcher::Handler {
     public:
         MyHandler() : seen_(0) {}
         void activate(Dispatcher* d) {
+            assert(dispatcher_==NULL);
+            dispatcher_ = d;
             d->watch_in(channel_.left().fd(), this);
             d->watch_out(channel_.right().fd(), this);
         }
-        void deactivate(Dispatcher* d) {
-            d->unwatch_in(channel_.left().fd(), this);
-            d->unwatch_out(channel_.right().fd(), this);
+        void deactivate(const Dispatcher* d) {
+            assert(dispatcher_!=NULL);
+            assert(dispatcher_==d);
+            dispatcher_->unwatch_in(channel_.left().fd(), this);
+            dispatcher_->unwatch_out(channel_.right().fd(), this);
+            dispatcher_ = NULL;
         }
         virtual void out_ready(int fd) {
             const char x = 1;
@@ -63,6 +70,7 @@ private:
         }
         char seen() const { return seen_; }
     private:
+        Dispatcher* dispatcher_;
         SocketPair channel_;
         char seen_; 
     };

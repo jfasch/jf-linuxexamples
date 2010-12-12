@@ -27,7 +27,7 @@
 namespace jf {
 namespace linuxtools {
 
-TimerFD::TimerFD(int clockid)
+TimerFD::TimerFD(clockid_t clockid)
 {
     int fd = ::timerfd_create(clockid, 0);
     if (fd < 0)

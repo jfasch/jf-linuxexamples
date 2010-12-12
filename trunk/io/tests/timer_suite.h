@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008-2010 Joerg Faschingbauer
+// Copyright (C) 2010 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,26 +16,22 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#include "io_suite.h"
 
-#include "io_test.h"
-#include "file_suite.h"
-#include "linux_special_fd_suite.h"
-#include "dispatcher_suite.h"
-#include "timer_suite.h"
+#ifndef HAVE_JF_LINUXTOOLS_TIMER_SUITE_H
+#define HAVE_JF_LINUXTOOLS_TIMER_SUITE_H
+
+#include <jf/unittest/test_suite.h>
 
 namespace jf {
 namespace linuxtools {
 
-IOSuite::IOSuite()
-: jf::unittest::TestSuite("IO")
+class TimerSuite : public jf::unittest::TestSuite
 {
-    add_test(new IOTest);
-    add_test(new FileSuite);
-    add_test(new LinuxSpecialFDSuite);
-    add_test(new DispatcherSuite);
-    add_test(new TimerSuite);
-}
+public:
+    TimerSuite();
+};
 
 }
 }
+
+#endif
