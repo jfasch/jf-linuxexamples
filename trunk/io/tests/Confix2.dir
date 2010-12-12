@@ -18,7 +18,7 @@
 # USA
 
 h = [
-    'io_test.h',
+    'fd_test.h',
     'file_suite.h',
     'io_suite.h',
     'linux_special_fd_suite.h',
@@ -27,7 +27,7 @@ h = [
     ]
 
 cc = [
-    'io_test.cc',
+    'fd_test.cc',
     'file_suite.cc',
     'io_suite.cc',
     'linux_special_fd_suite.cc',

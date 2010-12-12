@@ -20,7 +20,7 @@
 #ifndef HAVE_JF_LINUXTOOLS_SOCKETPAIR_H
 #define HAVE_JF_LINUXTOOLS_SOCKETPAIR_H
 
-#include "io.h"
+#include "fd.h"
 
 namespace jf {
 namespace linuxtools {
@@ -29,12 +29,12 @@ class SocketPair
 {
 public:
     SocketPair();
-    IO& left() { return left_; }
-    IO& right() { return right_; }
+    FD& left() { return left_; }
+    FD& right() { return right_; }
 
 private:
-    IO left_;
-    IO right_;
+    FD left_;
+    FD right_;
 };
     
 }

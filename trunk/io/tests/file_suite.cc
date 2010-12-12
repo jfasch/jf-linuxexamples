@@ -26,8 +26,9 @@
 
 #include <sstream>
 
-namespace jf {
-namespace linuxtools {
+namespace {
+
+using namespace jf::linuxtools;
 
 class FileCreateOpenTest : public jf::unittest::TestCase
 {
@@ -74,6 +75,11 @@ public:
         }
     }
 };
+
+}
+
+namespace jf {
+namespace linuxtools {
 
 FileSuite::FileSuite()
 : jf::unittest::TestSuite("File")

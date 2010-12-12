@@ -20,14 +20,14 @@
 #ifndef HAVE_JF_LINUXTOOLS_SIGNALFD_H
 #define HAVE_JF_LINUXTOOLS_SIGNALFD_H
 
-#include "io.h"
+#include "fd.h"
 
 #include <sys/signalfd.h>
 
 namespace jf {
 namespace linuxtools {
 
-class SignalFD : public IO
+class SignalFD : public FD
 {
 public:
     SignalFD(const sigset_t&);

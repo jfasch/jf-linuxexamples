@@ -16,9 +16,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#include "io_test.h"
+#include "fd_test.h"
 
-#include <jf/linuxtools/io.h>
+#include <jf/linuxtools/fd.h>
 #include <jf/linuxtools/socketpair.h>
 
 #include <iostream>
@@ -27,47 +27,47 @@ using namespace std;
 namespace jf {
 namespace linuxtools {
 
-IOTest::IOTest()
-: jf::unittest::TestCase("IO") {}
+FDTest::FDTest()
+: jf::unittest::TestCase("FD") {}
 
-void IOTest::run()
+void FDTest::run()
 {
     // copy with refcount semantics.
     {
-        IO io1;
-        JFUNIT_ASSERT_THROWS(ErrnoException, io1.fd());
-        IO io2(666);
-        JFUNIT_ASSERT(io2.fd() == 666);
-        IO io3 = io2;
-        JFUNIT_ASSERT(io3.fd() == 666);
-        IO io4(io2);
-        JFUNIT_ASSERT(io4.fd() == 666);
-        io2 = IO();
-        JFUNIT_ASSERT_THROWS(ErrnoException, io2.fd());
-        JFUNIT_ASSERT(io3.fd() == io4.fd() && io4.fd() == 666);
-        io2 = io4;
-        JFUNIT_ASSERT(io2.fd() == 666);
+        FD fd1;
+        JFUNIT_ASSERT_THROWS(ErrnoException, fd1.fd());
+        FD fd2(666);
+        JFUNIT_ASSERT(fd2.fd() == 666);
+        FD fd3 = fd2;
+        JFUNIT_ASSERT(fd3.fd() == 666);
+        FD fd4(fd2);
+        JFUNIT_ASSERT(fd4.fd() == 666);
+        fd2 = FD();
+        JFUNIT_ASSERT_THROWS(ErrnoException, fd2.fd());
+        JFUNIT_ASSERT(fd3.fd() == fd4.fd() && fd4.fd() == 666);
+        fd2 = fd4;
+        JFUNIT_ASSERT(fd2.fd() == 666);
     }
 
     // operations on bad objects must fail.
     {
-        IO io;
-        JFUNIT_ASSERT(!io.good());
-        JFUNIT_ASSERT_THROWS(ErrnoException, io.write("1", 1));
+        FD fd;
+        JFUNIT_ASSERT(!fd.good());
+        JFUNIT_ASSERT_THROWS(ErrnoException, fd.write("1", 1));
         char c;
-        JFUNIT_ASSERT_THROWS(ErrnoException, io.read(&c, 1));
+        JFUNIT_ASSERT_THROWS(ErrnoException, fd.read(&c, 1));
     }
 
     // explicit assignment of a file descriptor.
     {
-        IO io;
-        io.set_fd(666);
-        JFUNIT_ASSERT(io.fd() == 666);
+        FD fd;
+        fd.set_fd(666);
+        JFUNIT_ASSERT(fd.fd() == 666);
     }
 
     // see if real file descriptor operations are ok.
     {
-        IO left, right;
+        FD left, right;
         {
             SocketPair pair;
             left = pair.left();
@@ -87,7 +87,7 @@ void IOTest::run()
         // since left and right are the only references to our
         // sockets, the following must close left. thus, reading from
         // right must signal us an end-of-file.
-        left = IO();
+        left = FD();
         nread = right.read(&c, 1);
         JFUNIT_ASSERT(nread == 0);
     }

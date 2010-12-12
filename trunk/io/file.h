@@ -20,7 +20,7 @@
 #ifndef HAVE_JF_LINUXTOOLS_FILE_H
 #define HAVE_JF_LINUXTOOLS_FILE_H
 
-#include "io.h"
+#include "fd.h"
 
 // include to get the mode flags for our users
 #include <fcntl.h>
@@ -30,7 +30,7 @@
 namespace jf {
 namespace linuxtools {
 
-class File : public IO
+class File : public FD
 {
 public:
     void create(const std::string& pathname, mode_t mode) { create(pathname.c_str(),  mode); }

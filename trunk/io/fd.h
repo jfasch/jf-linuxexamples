@@ -16,8 +16,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#ifndef HAVE_JF_LINUXTOOLS_IO_H
-#define HAVE_JF_LINUXTOOLS_IO_H
+#ifndef HAVE_JF_LINUXTOOLS_FD_H
+#define HAVE_JF_LINUXTOOLS_FD_H
 
 #include <jf/linuxtools/error.h>
 
@@ -29,35 +29,35 @@
 namespace jf {
 namespace linuxtools {
 
-/** Base class for all Unix style IO objects.
+/** Base class for all Unix style file descriptor objects.
 
 Under Unix almost everything is a "file". This is what this class
 encapsulates: common operations on a file - read and write -, as well
 as the file descriptor itself.
 
 Copy semantics of this class (and all inherited classes) is
-"refcounting". That is, one can copy IO objects around at will, and
+"refcounting". That is, one can copy FD objects around at will, and
 the last one that is deallocated will release the file descriptor -
 i.e. close() it.
 
 */
-class IO
+class FD
 {
 public:
-    /** Create an "empty" IO object that has no file descriptor
+    /** Create an "empty" FD object that has no file descriptor
         yet. */
-    IO() {}
+    FD() {}
     /** Create a new file object which is wrapped around file
         descriptor fd. */
-    IO(int fd);
-    /** Copy an existing IO object. Increases the refcount of the
+    FD(int fd);
+    /** Copy an existing FD object. Increases the refcount of the
         underlying file descriptor if any. */
     //@{
-    IO(const IO&);
-    IO& operator=(const IO&);
+    FD(const FD&);
+    FD& operator=(const FD&);
     //@}
 
-    /** Get the file descriptor. If the IO object is invalid, -1 is
+    /** Get the file descriptor. If the FD object is invalid, -1 is
         returned. */
     int fd() const;
     /** Release the reference to an existing file descriptor if

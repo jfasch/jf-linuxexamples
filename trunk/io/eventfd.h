@@ -20,14 +20,14 @@
 #ifndef HAVE_JF_LINUXTOOLS_EVENTFD_H
 #define HAVE_JF_LINUXTOOLS_EVENTFD_H
 
-#include "io.h"
+#include "fd.h"
 
 #include <sys/eventfd.h>
 
 namespace jf {
 namespace linuxtools {
 
-class EventFD : public IO
+class EventFD : public FD
 {
 public:
     EventFD(unsigned int initval=0);

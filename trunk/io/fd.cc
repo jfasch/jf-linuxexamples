@@ -16,48 +16,48 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#include "io.h"
+#include "fd.h"
 
 namespace jf {
 namespace linuxtools {
 
-IO::IO(int fd)
+FD::FD(int fd)
 : shared_fd_(new FileDescriptor(fd)) {}
 
-IO::IO(const IO& io)
-: shared_fd_(io.shared_fd_) {}
+FD::FD(const FD& fd)
+: shared_fd_(fd.shared_fd_) {}
 
-IO& IO::operator=(const IO& io)
+FD& FD::operator=(const FD& fd)
 {
-    shared_fd_ = io.shared_fd_;
+    shared_fd_ = fd.shared_fd_;
     return *this;
 }
 
-ssize_t IO::read(void* buf, size_t len)
+ssize_t FD::read(void* buf, size_t len)
 {
     throw_if_null();
     return throw_if_error(::read(shared_fd_->fd(), buf, len));
 }
 
-ssize_t IO::pread(void* buf, size_t count, off_t offset)
+ssize_t FD::pread(void* buf, size_t count, off_t offset)
 {
     throw_if_null();
     return throw_if_error(::pread(shared_fd_->fd(), buf, count, offset));
 }
 
-ssize_t IO::write(const void* buf, size_t len)
+ssize_t FD::write(const void* buf, size_t len)
 {
     throw_if_null();
     return throw_if_error(::write(shared_fd_->fd(), buf, len));
 }
 
-ssize_t IO::pwrite(const void *buf, size_t count, off_t offset)
+ssize_t FD::pwrite(const void *buf, size_t count, off_t offset)
 {
     throw_if_null();
     return throw_if_error(::pwrite(shared_fd_->fd(), buf, count, offset));
 }
 
-ssize_t IO::writeall(const void* buf, size_t len)
+ssize_t FD::writeall(const void* buf, size_t len)
 {
     throw_if_null();
     const ssize_t retval = len;
@@ -75,13 +75,13 @@ ssize_t IO::writeall(const void* buf, size_t len)
     return retval;
 }
 
-int IO::fd() const
+int FD::fd() const
 {
     throw_if_null();
     return shared_fd_->fd();
 }
 
-void IO::set_fd(int fd)
+void FD::set_fd(int fd)
 {
     if (fd >=0)
         shared_fd_ = boost::shared_ptr<FileDescriptor>(new FileDescriptor(fd));
@@ -89,7 +89,7 @@ void IO::set_fd(int fd)
         shared_fd_.reset();
 }
 
-bool IO::good() const
+bool FD::good() const
 {
     if (shared_fd_)
         // can this be < 0 at all?
@@ -98,13 +98,13 @@ bool IO::good() const
 }
     
 // -------------------------------------------
-IO::FileDescriptor::~FileDescriptor()
+FD::FileDescriptor::~FileDescriptor()
 {
     if (fd_ >= 0)
         ::close(fd_);
 }
 
-void IO::FileDescriptor::close()
+void FD::FileDescriptor::close()
 {
     ::close(fd_);
     fd_ = -1;

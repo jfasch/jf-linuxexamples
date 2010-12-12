@@ -18,7 +18,7 @@
 // USA
 #include "io_suite.h"
 
-#include "io_test.h"
+#include "fd_test.h"
 #include "file_suite.h"
 #include "linux_special_fd_suite.h"
 #include "dispatcher_suite.h"
@@ -30,7 +30,7 @@ namespace linuxtools {
 IOSuite::IOSuite()
 : jf::unittest::TestSuite("IO")
 {
-    add_test(new IOTest);
+    add_test(new FDTest);
     add_test(new FileSuite);
     add_test(new LinuxSpecialFDSuite);
     add_test(new DispatcherSuite);

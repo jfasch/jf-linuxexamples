@@ -20,7 +20,7 @@
 #ifndef HAVE_JF_LINUXTOOLS_TIMERFD_H
 #define HAVE_JF_LINUXTOOLS_TIMERFD_H
 
-#include "io.h"
+#include "fd.h"
 
 #include <jf/linuxtools/timespec.h>
 
@@ -31,7 +31,7 @@
 namespace jf {
 namespace linuxtools {
 
-class TimerFD : public IO
+class TimerFD : public FD
 {
 public:
     TimerFD(clockid_t = CLOCK_MONOTONIC);

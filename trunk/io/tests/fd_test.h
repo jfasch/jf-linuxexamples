@@ -16,18 +16,18 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#ifndef HAVE_JF_LINUXTOOLS_IO_TEST_H
-#define HAVE_JF_LINUXTOOLS_IO_TEST_H
+#ifndef HAVE_JF_LINUXTOOLS_FD_TEST_H
+#define HAVE_JF_LINUXTOOLS_FD_TEST_H
 
 #include <jf/unittest/test_case.h>
 
 namespace jf {
 namespace linuxtools {
 
-class IOTest : public jf::unittest::TestCase
+class FDTest : public jf::unittest::TestCase
 {
 public:
-    IOTest();
+    FDTest();
     virtual void run();
 };
 
