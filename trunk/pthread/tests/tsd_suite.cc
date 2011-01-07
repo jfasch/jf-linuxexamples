@@ -91,7 +91,8 @@ public:
         SeparateValuesWorker::the_semi_global_thing.set(new int(1));
         
         jf::linuxtools::Future<bool> result;
-        jf::linuxtools::JoinableThreadStarter starter(new SeparateValuesWorker(&result));
+        SeparateValuesWorker worker(&result);
+        jf::linuxtools::JoinableThreadStarter starter(&worker);
         starter.start();
 
         // our slave thread hasn't seen anything particularly bad.
@@ -113,8 +114,9 @@ public:
     virtual void run()
     {
         DestructorWorker::the_semi_global_thing.set(new int(1));
-        
-        jf::linuxtools::JoinableThreadStarter starter(new DestructorWorker);
+
+        DestructorWorker worker;
+        jf::linuxtools::JoinableThreadStarter starter(&worker);
         starter.start();
 
         // synchronize with the dtor call. NOTE thaht we cannot simply

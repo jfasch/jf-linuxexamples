@@ -85,8 +85,7 @@ public:
     };
 
 public:
-    /** Take ownership of the worker (delete it in the dtor). Do
-        nothing else but wait until you are started. */
+    /** Constructor, passing in a worker object. */
     JoinableThreadStarter(Worker*);
     /** Enhanced version of the constructor, accepting "named"
         parameters. */

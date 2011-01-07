@@ -43,7 +43,6 @@ public:
 
     void lock();
     void unlock();
-    bool try_lock();
 
 private:
     pthread_mutex_t mutex_;

@@ -8,7 +8,7 @@ using namespace jf::linux;
 
 namespace {
 
-class Sleeper : public JoinableThreadStarter::Worker
+class SleeperWorker : public JoinableThreadStarter::Worker
 {
 public:
     virtual void run()
@@ -17,7 +17,7 @@ public:
     }
 };
 
-class Spinner : public JoinableThreadStarter::Worker
+class SpinnerWorker : public JoinableThreadStarter::Worker
 {
 public:
     virtual void run()
@@ -30,8 +30,8 @@ public:
 
 int main()
 {
-    JoinableThreadStarter sleeper(JoinableThreadStarter::Args().worker(new Sleeper));
-    JoinableThreadStarter spinner(JoinableThreadStarter::Args().worker(new Spinner));
+    JoinableThreadStarter sleeper(JoinableThreadStarter::Args().worker(new SleeperWorker));
+    JoinableThreadStarter spinner(JoinableThreadStarter::Args().worker(new SpinnerWorker));
     sleeper.start();
     spinner.start();
     return 0;
