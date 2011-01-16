@@ -19,7 +19,7 @@
 
 h = [
     'dispatcher.h',
-    'active_object.h',
+    'dispatchee.h',
     'timer.h',
     ]
 

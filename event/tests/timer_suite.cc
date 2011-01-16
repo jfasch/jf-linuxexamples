@@ -47,10 +47,10 @@ public:
         MyHandler handler;
         Timer timer(&handler);
         timer.arm_oneshot(TimeSpec(0, TimeSpec::one_second/1000));
-        timer.activate(&dispatcher);
+        timer.activate_object(&dispatcher);
         while (!handler.called())
             dispatcher.dispatch();
-        timer.deactivate(&dispatcher);
+        timer.deactivate_object(&dispatcher);
     }
 };
 

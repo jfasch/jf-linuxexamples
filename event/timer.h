@@ -20,8 +20,8 @@
 #ifndef HAVE_JF_LINUXTOOLS_TIMER_H
 #define HAVE_JF_LINUXTOOLS_TIMER_H
 
+#include "dispatchee.h"
 #include "dispatcher.h"
-#include "active_object.h"
 
 #include <jf/linuxtools/timerfd.h>
 
@@ -29,7 +29,7 @@ namespace jf {
 namespace linuxtools {
 
 /** Adds callbacks to TimerFD. */
-class Timer : public ActiveObject,
+class Timer : public Dispatchee,
               private Dispatcher::Handler
 {
 public:
@@ -62,10 +62,10 @@ public:
     }
 
 public:
-    /** ActiveObject implementation. */
+    /** Dispatchee implementation. */
     //@{
-    virtual void activate(Dispatcher*);
-    virtual void deactivate(const Dispatcher*);
+    virtual void activate_object(Dispatcher*);
+    virtual void deactivate_object(const Dispatcher*);
     //@}
 
 private:

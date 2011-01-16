@@ -27,7 +27,7 @@ Timer::~Timer()
     timerfd_.disarm();
 }
 
-void Timer::activate(Dispatcher* d)
+void Timer::activate_object(Dispatcher* d)
 {
     assert(dispatcher_==NULL);
     assert(d!=NULL);
@@ -35,7 +35,7 @@ void Timer::activate(Dispatcher* d)
     dispatcher_->watch_in(timerfd_.fd(), this);
 }
 
-void Timer::deactivate(const Dispatcher* d)
+void Timer::deactivate_object(const Dispatcher* d)
 {
     assert(dispatcher_!=NULL);
     (void)d;

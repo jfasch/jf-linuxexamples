@@ -16,21 +16,22 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#ifndef HAVE_JF_LINUXTOOLS_ACTIVE_OBJECT_H
-#define HAVE_JF_LINUXTOOLS_ACTIVE_OBJECT_H
+#ifndef HAVE_JF_LINUXTOOLS_DISPATCHEE_H
+#define HAVE_JF_LINUXTOOLS_DISPATCHEE_H
 
 #include "dispatcher.h"
 
 namespace jf {
 namespace linuxtools {
 
-class ActiveObject
+/** Anything that can receive events through a Dipatcher */
+class Dispatchee
 {
 public:
-    virtual ~ActiveObject() {}
+    virtual ~Dispatchee() {}
 
-    virtual void activate(Dispatcher*) = 0;
-    virtual void deactivate(const Dispatcher*) = 0;
+    virtual void activate_object(Dispatcher*) = 0;
+    virtual void deactivate_object(const Dispatcher*) = 0;
 };
     
 }

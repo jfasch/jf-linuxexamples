@@ -21,7 +21,7 @@
 
 #include <jf/linuxtools/dispatcher.h>
 #include <jf/linuxtools/socketpair.h>
-#include <jf/linuxtools/active_object.h>
+#include <jf/linuxtools/dispatchee.h>
 
 #include <jf/unittest/test_case.h>
 
@@ -34,8 +34,8 @@ class DispatcherBasicTest : public jf::unittest::TestCase
 public:
     DispatcherBasicTest() : jf::unittest::TestCase("Basic") {}
 
-    virtual void setup() { handler_.activate(&dispatcher_); }
-    virtual void teardown() { handler_.deactivate(&dispatcher_); }
+    virtual void setup() { handler_.activate_object(&dispatcher_); }
+    virtual void teardown() { handler_.deactivate_object(&dispatcher_); }
 
     virtual void run()
     {
@@ -44,17 +44,17 @@ public:
     }
 
 private:
-    class MyHandler : public ActiveObject,
+    class MyHandler : public Dispatchee,
                       private Dispatcher::Handler {
     public:
         MyHandler() : seen_(0) {}
-        void activate(Dispatcher* d) {
+        void activate_object(Dispatcher* d) {
             assert(dispatcher_==NULL);
             dispatcher_ = d;
             d->watch_in(channel_.left().fd(), this);
             d->watch_out(channel_.right().fd(), this);
         }
-        void deactivate(const Dispatcher* d) {
+        void deactivate_object(const Dispatcher* d) {
             assert(dispatcher_!=NULL);
             assert(dispatcher_==d);
             dispatcher_->unwatch_in(channel_.left().fd(), this);
