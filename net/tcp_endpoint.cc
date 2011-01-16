@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2010-2011 Joerg Faschingbauer
+// Copyright (C) 2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,31 +17,10 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "signalfd.h"
-
-#include <jf/linuxtools/error.h>
-
-#include <cstring>
-#include <unistd.h>
+#include "tcp_endpoint.h"
 
 namespace jf {
 namespace linuxtools {
-
-SignalFD::SignalFD(const sigset_t& signals)
-{
-    int fd = ::signalfd(-1, &signals, 0);
-    if (fd < 0)
-        throw ErrnoException(errno, "signalfd()");
-    set_fd(fd);
-}
-
-void SignalFD::wait(signalfd_siginfo& info)
-{
-    assert(this->fd()>=0);
-    
-    ssize_t nread = ::read(this->fd(), &info, sizeof(info));
-    assert(nread==sizeof(info));
-}
 
 }
 }

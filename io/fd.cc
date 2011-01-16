@@ -35,35 +35,47 @@ FD& FD::operator=(const FD& fd)
 
 ssize_t FD::read(void* buf, size_t len)
 {
-    throw_if_null();
-    return throw_if_error(::read(shared_fd_->fd(), buf, len));
+    assert(shared_fd_);
+    ssize_t nread = ::read(shared_fd_->fd(), buf, len);
+    if (nread < 0)
+        throw ErrnoException(errno, "read()");
+    return nread;
 }
 
 ssize_t FD::pread(void* buf, size_t count, off_t offset)
 {
-    throw_if_null();
-    return throw_if_error(::pread(shared_fd_->fd(), buf, count, offset));
+    assert(shared_fd_);
+    ssize_t nread = ::pread(shared_fd_->fd(), buf, count, offset);
+    if (nread < 0)
+        throw ErrnoException(errno, "pread()");
+    return nread;
 }
 
 ssize_t FD::write(const void* buf, size_t len)
 {
-    throw_if_null();
-    return throw_if_error(::write(shared_fd_->fd(), buf, len));
+    assert(shared_fd_);
+    ssize_t nread = ::write(shared_fd_->fd(), buf, len);
+    if (nread < 0)
+        throw ErrnoException(errno, "write()");
+    return nread;
 }
 
 ssize_t FD::pwrite(const void *buf, size_t count, off_t offset)
 {
-    throw_if_null();
-    return throw_if_error(::pwrite(shared_fd_->fd(), buf, count, offset));
+    assert(shared_fd_);
+    ssize_t nread = ::pwrite(shared_fd_->fd(), buf, count, offset);
+    if (nread < 0)
+        throw ErrnoException(errno, "pwrite()");
+    return nread;
 }
 
 ssize_t FD::writeall(const void* buf, size_t len)
 {
-    throw_if_null();
+    assert(shared_fd_);
     const ssize_t retval = len;
     const char* the_data = (const char*)buf;
     while (len) {
-        int nwritten = throw_if_error(::write(shared_fd_->fd(), the_data, len));
+        int nwritten = this->write(the_data, len);
 
         // man 2 write says this cannot happen as long as we don't
         // write 0 bytes.
@@ -77,7 +89,7 @@ ssize_t FD::writeall(const void* buf, size_t len)
 
 int FD::fd() const
 {
-    throw_if_null();
+    assert(shared_fd_);
     return shared_fd_->fd();
 }
 

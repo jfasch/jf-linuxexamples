@@ -17,12 +17,20 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
-DIRECTORY(['common'])
-DIRECTORY(['pthread'])
-DIRECTORY(['io'])
-DIRECTORY(['events'])
-DIRECTORY(['net'])
-DIRECTORY(['externals'])
-DIRECTORY(['debug'])
+h = [
+    'ipaddress.h',
+    'tcp_connect.h',
+    'tcp_endpoint.h',
+    'tcp_port.h',
+    ]
+
+cc = [
+    'ipaddress.cc',
+    'tcp_connect.cc',
+    'tcp_endpoint.cc',
+    'tcp_port.cc',
+    ]
+
+LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools']) for f in h] + [CXX(filename=f) for f in cc])
+        
 DIRECTORY(['tests'])
-DIRECTORY(['demo'])

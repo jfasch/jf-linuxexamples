@@ -24,9 +24,20 @@
 namespace jf {
 namespace linuxtools {
 
+ErrnoException::ErrnoException(int error, const char* message)
+: message_(message),
+  error_(error)
+{
+    message_ += ": ";
+    char buf[64];
+    message_ += ::strerror_r(error_, buf, sizeof(buf));
+    ::sprintf(buf, " (%d)", error_);
+    message_ += buf;
+}
+
 const char* ErrnoException::what() const throw()
 {
-    return strerror_r(error_, msgbuf_, buflen);
+    return message_.c_str();
 }
 
 }

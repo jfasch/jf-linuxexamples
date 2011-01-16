@@ -25,13 +25,13 @@ namespace linuxtools {
 static inline void get_termios(int fd, termios& t)
 {
     if (::tcgetattr(fd, &t) < 0)
-        throw ErrnoException(errno);
+        throw ErrnoException(errno, "tcgetattr()");
 }
 
 static inline void set_termios(int fd, termios& t)
 {
     if (::tcsetattr(fd, TCSADRAIN, &t) < 0)
-        throw ErrnoException(errno);
+        throw ErrnoException(errno, "tcsetattr()");
 }
 
 static inline bool apply_raw(termios& t, TTY::Raw r)
@@ -58,8 +58,10 @@ static inline bool apply_speed(termios& t, TTY::Baudrate s)
         case TTY::B_115200: speed = B115200; break;
         case TTY::B_NOCHANGE: return false;
     }
-    if (::cfsetispeed(&t, speed) < 0 || ::cfsetospeed(&t, speed) < 0)
-        throw ErrnoException(errno);
+    if (::cfsetispeed(&t, speed) < 0)
+        throw ErrnoException(errno, "cfsetispeed()");
+    if (::cfsetospeed(&t, speed) < 0)
+        throw ErrnoException(errno, "cfsetospeed()");
     return true;
 }
 

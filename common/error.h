@@ -21,6 +21,7 @@
 #define HAVE_JF_LINUXTOOLS_ERROR_H
 
 #include <exception>
+#include <string>
 
 namespace jf {
 namespace linuxtools {
@@ -28,15 +29,15 @@ namespace linuxtools {
 class ErrnoException : public std::exception
 {
 public:
-    ErrnoException(int error) : error_(error) {}
+    ErrnoException(int error, const char* message);
+    ~ErrnoException() throw() {}
+
     int error() const { return error_; }
 
     virtual const char* what() const throw();
+
 private:
-    // should suffice to store error strings like "Permission denied"
-    // or "No such device".
-    enum { buflen = 64 };
-    mutable char msgbuf_[buflen];
+    std::string message_;
     int error_;
 };
 

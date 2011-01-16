@@ -30,7 +30,7 @@ void File::create(const char* pathname, mode_t mode)
 {
     int fd = ::creat(pathname, mode);
     if (fd < 0)
-        throw ErrnoException(errno);
+        throw ErrnoException(errno, "creat()");
     set_fd(fd);
 }
 
@@ -38,7 +38,7 @@ void File::open(const char* pathname, int flags)
 {
     int fd = ::open(pathname, flags);
     if (fd < 0)
-        throw ErrnoException(errno);
+        throw ErrnoException(errno, "open()");
     set_fd(fd);
 }
     

@@ -96,17 +96,6 @@ private:
         int fd_;
     };
 
-private:
-    inline void throw_if_null() const
-    {
-        if (!shared_fd_) throw ErrnoException(EBADF);
-    }
-    inline ssize_t throw_if_error(ssize_t n) const
-    {
-        if (n < 0) throw ErrnoException(errno);
-        return n;
-    }
-
 private:    
     boost::shared_ptr<FileDescriptor> shared_fd_;
 };

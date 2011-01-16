@@ -31,7 +31,7 @@ TimerFD::TimerFD(clockid_t clockid)
 {
     int fd = ::timerfd_create(clockid, 0);
     if (fd < 0)
-        throw ErrnoException(errno);
+        throw ErrnoException(errno, "timerfd_create()");
     set_fd(fd);
 }
 
@@ -45,7 +45,7 @@ void TimerFD::arm_oneshot(const TimeSpec& initial_expiration)
     new_value.it_value = initial_expiration;
     int retval = ::timerfd_settime(this->fd(), 0, &new_value, &old_value);
     if (retval < 0)
-        throw ErrnoException(errno);
+        throw ErrnoException(errno, "timerfd_settime()");
 }
 
 void TimerFD::arm_periodic(const TimeSpec& initial_expiration, const TimeSpec& interval)
@@ -65,7 +65,7 @@ void TimerFD::arm_periodic(const TimeSpec& initial_expiration, const TimeSpec& i
     new_value.it_interval = interval;
     int retval = ::timerfd_settime(this->fd(), 0, &new_value, &old_value);
     if (retval < 0)
-        throw ErrnoException(errno);
+        throw ErrnoException(errno, "timerfd_settime()");
 }
 
 void TimerFD::disarm()
@@ -77,7 +77,7 @@ void TimerFD::disarm()
     std::memset(&old_value, 0, sizeof(itimerspec));
     int retval = ::timerfd_settime(this->fd(), 0, &new_value, &old_value);
     if (retval < 0)
-        throw ErrnoException(errno);
+        throw ErrnoException(errno, "timerfd_settime()");
 }
 
 bool TimerFD::is_armed() const
@@ -87,7 +87,7 @@ bool TimerFD::is_armed() const
     itimerspec curr_value;
     int retval = ::timerfd_gettime(this->fd(), &curr_value);
     if (retval < 0)
-        throw ErrnoException(errno);
+        throw ErrnoException(errno, "timerfd_gettime()");
 
     return !(curr_value.it_value.tv_sec == 0 && curr_value.it_value.tv_nsec == 0);
 }

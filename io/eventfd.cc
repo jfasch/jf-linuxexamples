@@ -30,7 +30,7 @@ EventFD::EventFD(unsigned int initval)
 {
     int fd = ::eventfd(initval, 0);
     if (fd < 0)
-        throw ErrnoException(errno);
+        throw ErrnoException(errno, "eventfd()");
     set_fd(fd);
 }
 

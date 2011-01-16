@@ -29,7 +29,7 @@ SocketPair::SocketPair()
     int socket[2];
     int rv = ::socketpair(AF_UNIX, SOCK_STREAM, 0, socket);
     if (rv < 0)
-        throw ErrnoException(errno);
+        throw ErrnoException(errno, "socketpair()");
     left_.set_fd(socket[0]);
     right_.set_fd(socket[1]);
 }

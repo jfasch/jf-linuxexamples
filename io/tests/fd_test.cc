@@ -34,8 +34,6 @@ void FDTest::run()
 {
     // copy with refcount semantics.
     {
-        FD fd1;
-        JFUNIT_ASSERT_THROWS(ErrnoException, fd1.fd());
         FD fd2(666);
         JFUNIT_ASSERT(fd2.fd() == 666);
         FD fd3 = fd2;
@@ -43,19 +41,10 @@ void FDTest::run()
         FD fd4(fd2);
         JFUNIT_ASSERT(fd4.fd() == 666);
         fd2 = FD();
-        JFUNIT_ASSERT_THROWS(ErrnoException, fd2.fd());
+        JFUNIT_ASSERT(!fd2.good());
         JFUNIT_ASSERT(fd3.fd() == fd4.fd() && fd4.fd() == 666);
         fd2 = fd4;
         JFUNIT_ASSERT(fd2.fd() == 666);
-    }
-
-    // operations on bad objects must fail.
-    {
-        FD fd;
-        JFUNIT_ASSERT(!fd.good());
-        JFUNIT_ASSERT_THROWS(ErrnoException, fd.write("1", 1));
-        char c;
-        JFUNIT_ASSERT_THROWS(ErrnoException, fd.read(&c, 1));
     }
 
     // explicit assignment of a file descriptor.

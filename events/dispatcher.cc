@@ -96,7 +96,7 @@ void Dispatcher::dispatch()
     if (retval < 0) {
         if (errno == EINTR)
             return;
-        throw ErrnoException(errno);
+        throw ErrnoException(errno, "select()");
     }
     assert(retval>0); // we don't pass a timeout
 
