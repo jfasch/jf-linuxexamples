@@ -1,0 +1,28 @@
+# -*- python -*-
+
+""" On Linux, using glibc, clock_gettime(2) needs -lrt. """
+
+PROVIDE_SYMBOL('jf.linuxtools.externals.rt')
+
+# Automake
+if True:
+    CONFIGURE_AC(
+        lines=['AC_CHECK_LIB(rt, clock_gettime)'],
+        order=AC_LIBRARIES)
+    pass
+
+# CMake
+if True:
+    CMAKE_CMAKELISTS_ADD_INCLUDE(
+        'CheckLibraryExists',
+        CMAKE_BUILDINFO_PROPAGATE)
+    CMAKE_CMAKELISTS_ADD_FIND_CALL(
+        ['CHECK_LIBRARY_EXISTS(rt clock_gettime "" CLOCK_GETTIME_IN_RT)',
+         'IF (${CLOCK_GETTIME_IN_RT})',
+         '    SET(CONFIX_LIBRT rt)',
+         'ELSE(${CLOCK_GETTIME_IN_RT})',
+         '    SET(CONFIX_LIBRT "")',
+         'ENDIF(${CLOCK_GETTIME_IN_RT})'],
+        CMAKE_BUILDINFO_PROPAGATE)
+    CMAKE_EXTERNAL_LIBRARY(libs=['${CONFIX_LIBRT}'])
+    pass

@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008-2010 Joerg Faschingbauer
+// Copyright (C) 2008-2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,7 +17,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-// CONFIX:REQUIRE_SYMBOL('jf.externals.clock_gettime', REQUIRED)
+// CONFIX:REQUIRE_SYMBOL('jf.linuxtools.externals.rt', REQUIRED)
 
 #include "timespec.h"
 

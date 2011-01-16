@@ -1,6 +1,6 @@
 # -*- python -*-
 
-# Copyright (C) 2008-2010 Joerg Faschingbauer
+# Copyright (C) 2008-2011 Joerg Faschingbauer
 
 # This library is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -18,21 +18,19 @@
 # USA
 
 h = [
+    'io_suite.h',
+
     'fd_test.h',
     'file_suite.h',
-    'io_suite.h',
     'linux_special_fd_suite.h',
-    'dispatcher_suite.h',
-    'timer_suite.h',
     ]
 
 cc = [
+    'io_suite.cc',
+
     'fd_test.cc',
     'file_suite.cc',
-    'io_suite.cc',
     'linux_special_fd_suite.cc',
-    'dispatcher_suite.cc',
-    'timer_suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

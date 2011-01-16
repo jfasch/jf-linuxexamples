@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2010 Joerg Faschingbauer
+// Copyright (C) 2010-2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,45 +16,24 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+#ifndef HAVE_JF_LINUXTOOLS_ACTIVE_OBJECT_H
+#define HAVE_JF_LINUXTOOLS_ACTIVE_OBJECT_H
 
-#include "timer.h"
+#include "dispatcher.h"
 
 namespace jf {
 namespace linuxtools {
 
-Timer::~Timer()
+class ActiveObject
 {
-    timerfd_.disarm();
+public:
+    virtual ~ActiveObject() {}
+
+    virtual void activate(Dispatcher*) = 0;
+    virtual void deactivate(const Dispatcher*) = 0;
+};
+    
+}
 }
 
-void Timer::activate(Dispatcher* d)
-{
-    assert(dispatcher_==NULL);
-    assert(d!=NULL);
-    dispatcher_ = d;
-    dispatcher_->watch_in(timerfd_.fd(), this);
-}
-
-void Timer::deactivate(const Dispatcher* d)
-{
-    assert(dispatcher_!=NULL);
-    (void)d;
-    assert(d==dispatcher_);
-
-    dispatcher_->unwatch_in(timerfd_.fd(), this);
-    dispatcher_ = NULL;
-}
-
-void Timer::in_ready(int fd)
-{
-    assert(timerfd_.fd()==fd);
-    handler_->expired();
-}
-
-void Timer::out_ready(int)
-{
-    assert(false);
-}
-
-}
-}
+#endif

@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008-2010 Joerg Faschingbauer
+// Copyright (C) 2008-2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -21,8 +21,6 @@
 #include "fd_test.h"
 #include "file_suite.h"
 #include "linux_special_fd_suite.h"
-#include "dispatcher_suite.h"
-#include "timer_suite.h"
 
 namespace jf {
 namespace linuxtools {
@@ -33,8 +31,6 @@ IOSuite::IOSuite()
     add_test(new FDTest);
     add_test(new FileSuite);
     add_test(new LinuxSpecialFDSuite);
-    add_test(new DispatcherSuite);
-    add_test(new TimerSuite);
 }
 
 }

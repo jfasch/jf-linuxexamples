@@ -1,0 +1,64 @@
+# -*- mode: python; c-basic-offset: 4 -*-
+
+# Copyright (C) 2011 Joerg Faschingbauer
+
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public License
+# as published by the Free Software Foundation; either version 2.1 of
+# the License, or (at your option) any later version.
+
+# This library is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+# USA
+
+for f in ['boost/array_traits.hpp',
+          'boost/call_traits.hpp',
+          'boost/cast.hpp',
+          'boost/compose.hpp',
+          'boost/compressed_pair.hpp',
+          'boost/concept_archetype.hpp',
+          'boost/concept_check.hpp',
+          'boost/config.hpp',
+          'boost/counting_iterator.hpp',
+          'boost/cstdint.hpp',
+          'boost/cstdlib.hpp',
+          'boost/functional.hpp',
+          'boost/function_output_iterator.hpp',
+          'boost/half_open_range.hpp',
+          'boost/integer.hpp',
+          'boost/integer_traits.hpp',
+          'boost/iterator_adaptors.hpp',
+          'boost/iterator.hpp',
+          'boost/lexical_cast.hpp',
+          'boost/limits.hpp',
+          'boost/min_rand.hpp',
+          'boost/nondet_random.hpp',
+          'boost/operators.hpp',
+          'boost/progress.hpp',
+          'boost/property_map.hpp',
+          'boost/random.hpp',
+          'boost/rational.hpp',
+          'boost/smart_ptr.hpp',
+          'boost/shared_ptr.hpp',
+          'boost/static_assert.hpp',
+          'boost/stdint.h',
+          'boost/timer.hpp',
+          'boost/type.hpp',
+          'boost/type_traits.hpp',
+          'boost/utility.hpp'
+          ]:
+    PROVIDE_H(f)
+
+CONFIGURE_AC(
+    lines=["AC_LANG_PUSH(C++)",
+           "AC_CHECK_HEADER(boost/shared_ptr.hpp, [], [AC_MSG_ERROR('boost not found (boost/shared_ptr.hpp)')])",
+           "AC_LANG_POP",
+           ],
+    order=AC_HEADERS
+    )

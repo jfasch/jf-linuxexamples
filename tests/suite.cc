@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008-2010 Joerg Faschingbauer
+// Copyright (C) 2008-2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -20,13 +20,15 @@
 #include "suite.h"
 
 #include <jf/linuxtools/tests/common_suite.h>
-// #include <jf/linuxtools/tests/pthread_suite.h>
+#include <jf/linuxtools/tests/pthread_suite.h>
 #include <jf/linuxtools/tests/io_suite.h>
+#include <jf/linuxtools/tests/event_suite.h>
 #include <jf/linuxtools/tests/debug_suite.h>
 
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/common_suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/pthread_suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/io_suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jf/linuxtools/tests/event_suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/debug_suite.h', REQUIRED)
 
 namespace jf {
@@ -36,8 +38,9 @@ Suite::Suite()
 : jf::unittest::TestSuite("LinuxTools")
 {
     add_test(new jf::linuxtools::CommonSuite);
-    // add_test(new jf::linuxtools::PThreadSuite);
+    add_test(new jf::linuxtools::PThreadSuite);
     add_test(new jf::linuxtools::IOSuite);
+    add_test(new jf::linuxtools::EventSuite);
     add_test(new jf::linuxtools::DebugSuite);
 }
 

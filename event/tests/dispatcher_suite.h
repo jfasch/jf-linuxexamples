@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2010 Joerg Faschingbauer
+// Copyright (C) 2010-2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,23 +16,21 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#ifndef HAVE_JF_LINUXTOOLS_ACTIVE_OBJECT_H
-#define HAVE_JF_LINUXTOOLS_ACTIVE_OBJECT_H
 
-#include "dispatcher.h"
+#ifndef HAVE_JF_LINUXTOOLS_DISPATCHER_SUITE_H
+#define HAVE_JF_LINUXTOOLS_DISPATCHER_SUITE_H
+
+#include <jf/unittest/test_suite.h>
 
 namespace jf {
 namespace linuxtools {
 
-class ActiveObject
+class DispatcherSuite : public jf::unittest::TestSuite
 {
 public:
-    virtual ~ActiveObject() {}
-
-    virtual void activate(Dispatcher*) = 0;
-    virtual void deactivate(const Dispatcher*) = 0;
+    DispatcherSuite();
 };
-    
+
 }
 }
 
