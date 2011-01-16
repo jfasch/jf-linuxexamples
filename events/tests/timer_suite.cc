@@ -27,29 +27,74 @@ namespace {
 
 using namespace jf::linuxtools;
 
-class Basic : public jf::unittest::TestCase
+class MyHandler : public Timer::Handler
 {
 public:
-    Basic() : jf::unittest::TestCase("Basic") {}
+    MyHandler() : n_expires_(0) {}
+    uint64_t n_expires() const { return n_expires_; }
+private:
+    virtual void expired(uint64_t n_expires)
+    {
+        n_expires_ += n_expires;
+    }
+    uint64_t n_expires_;
+};
+
+class OneShotOneTime : public jf::unittest::TestCase
+{
+public:
+    OneShotOneTime() : jf::unittest::TestCase("OneShotOneTime") {}
     virtual void run()
     {
-        class MyHandler : public Timer::Handler
-        {
-        public:
-            MyHandler() : called_(false) {}
-            bool called() const { return called_; }
-        private:
-            virtual void expired() { called_ = true; }
-            bool called_;
-        };
-        
         Dispatcher dispatcher;
         MyHandler handler;
         Timer timer(&handler);
         timer.arm_oneshot(TimeSpec(0, TimeSpec::one_second/1000));
         timer.activate_object(&dispatcher);
-        while (!handler.called())
+        while (handler.n_expires() != 1)
             dispatcher.dispatch();
+        timer.deactivate_object(&dispatcher);
+    }
+};
+
+class OneShotMultipleTimes : public jf::unittest::TestCase
+{
+public:
+    OneShotMultipleTimes() : jf::unittest::TestCase("OneShotMultipleTimes") {}
+    virtual void run()
+    {
+        Dispatcher dispatcher;
+        MyHandler handler;
+        Timer timer(&handler);
+        timer.activate_object(&dispatcher);
+
+        timer.arm_oneshot(TimeSpec(0, TimeSpec::one_second/1000));
+        while (handler.n_expires() != 1)
+            dispatcher.dispatch();
+
+        timer.arm_oneshot(TimeSpec(0, TimeSpec::one_second/1000));
+        while (handler.n_expires() != 2)
+            dispatcher.dispatch();
+
+        timer.deactivate_object(&dispatcher);
+    }
+};
+
+class PeriodicMultipleTimes : public jf::unittest::TestCase
+{
+public:
+    PeriodicMultipleTimes() : jf::unittest::TestCase("PeriodicMultipleTimes") {}
+    virtual void run()
+    {
+        Dispatcher dispatcher;
+        MyHandler handler;
+        Timer timer(&handler);
+        timer.activate_object(&dispatcher);
+        timer.arm_periodic(TimeSpec(0,1), TimeSpec(0, TimeSpec::one_second/1000));
+
+        while (handler.n_expires() < 2)
+            dispatcher.dispatch();
+        
         timer.deactivate_object(&dispatcher);
     }
 };
@@ -62,7 +107,9 @@ namespace linuxtools {
 TimerSuite::TimerSuite()
 : jf::unittest::TestSuite("Timer")
 {
-    add_test(new Basic);
+    add_test(new OneShotOneTime);
+    add_test(new OneShotMultipleTimes);
+    add_test(new PeriodicMultipleTimes);
 }
 
 }

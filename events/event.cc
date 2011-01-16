@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2010-2011 Joerg Faschingbauer
+// Copyright (C) 2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,39 +17,38 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "timer.h"
+#include "event.h"
 
 namespace jf {
 namespace linuxtools {
 
-void Timer::activate_object(Dispatcher* d)
+void Event::activate_object(Dispatcher* d)
 {
     assert(dispatcher_==NULL);
     assert(d!=NULL);
 
     dispatcher_ = d;
-    dispatcher_->watch_in(timerfd_.fd(), this);
+    dispatcher_->watch_in(eventfd_.fd(), this);
 }
 
-void Timer::deactivate_object(const Dispatcher* d)
+void Event::deactivate_object(const Dispatcher* d)
 {
     assert(dispatcher_!=NULL);
     (void)d;
     assert(d==dispatcher_);
 
-    dispatcher_->unwatch_in(timerfd_.fd(), this);
+    dispatcher_->unwatch_in(eventfd_.fd(), this);
     dispatcher_ = NULL;
 }
 
-void Timer::in_ready(int fd)
+void Event::in_ready(int fd)
 {
-    assert(timerfd_.fd()==fd);
+    assert(eventfd_.fd()==fd);
 
-    uint64_t new_expires = timerfd_.wait();
-    handler_->expired(new_expires);
+    handler_->new_events(eventfd_.reset());
 }
 
-void Timer::out_ready(int)
+void Event::out_ready(int)
 {
     assert(false);
 }

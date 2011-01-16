@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008-2011 Joerg Faschingbauer
+// Copyright (C) 2010-2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -18,8 +18,43 @@
 // USA
 #include "event_suite.h"
 
-#include "dispatcher_suite.h"
-#include "timer_suite.h"
+#include <jf/linuxtools/event.h>
+
+#include <jf/unittest/test_suite.h>
+#include <jf/unittest/test_case.h>
+
+namespace {
+
+using namespace jf::linuxtools;
+
+class Basic : public jf::unittest::TestCase
+{
+public:
+    Basic() : jf::unittest::TestCase("Basic") {}
+    virtual void run()
+    {
+        class MyHandler : public Event::Handler
+        {
+        public:
+            MyHandler() : n_events_(0) {}
+            bool n_events() const { return n_events_; }
+        private:
+            virtual void new_events(uint64_t n) { n_events_ += n; }
+            uint64_t n_events_;
+        };
+        
+        Dispatcher dispatcher;
+        MyHandler handler;
+        Event event(&handler);
+        event.add(5);
+        event.activate_object(&dispatcher);
+        while (handler.n_events() == 0)
+            dispatcher.dispatch();
+        event.deactivate_object(&dispatcher);
+    }
+};
+
+}
 
 namespace jf {
 namespace linuxtools {
@@ -27,8 +62,7 @@ namespace linuxtools {
 EventSuite::EventSuite()
 : jf::unittest::TestSuite("Event")
 {
-    add_test(new DispatcherSuite);
-    add_test(new TimerSuite);
+    add_test(new Basic);
 }
 
 }

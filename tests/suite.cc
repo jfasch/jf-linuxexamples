@@ -22,13 +22,13 @@
 #include <jf/linuxtools/tests/common_suite.h>
 #include <jf/linuxtools/tests/pthread_suite.h>
 #include <jf/linuxtools/tests/io_suite.h>
-#include <jf/linuxtools/tests/event_suite.h>
+#include <jf/linuxtools/tests/events_suite.h>
 #include <jf/linuxtools/tests/debug_suite.h>
 
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/common_suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/pthread_suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/io_suite.h', REQUIRED)
-// CONFIX:REQUIRE_H('jf/linuxtools/tests/event_suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jf/linuxtools/tests/events_suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/debug_suite.h', REQUIRED)
 
 namespace jf {
@@ -40,7 +40,7 @@ Suite::Suite()
     add_test(new jf::linuxtools::CommonSuite);
     add_test(new jf::linuxtools::PThreadSuite);
     add_test(new jf::linuxtools::IOSuite);
-    add_test(new jf::linuxtools::EventSuite);
+    add_test(new jf::linuxtools::EventsSuite);
     add_test(new jf::linuxtools::DebugSuite);
 }
 

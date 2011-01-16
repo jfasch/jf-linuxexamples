@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2010-2011 Joerg Faschingbauer
+// Copyright (C) 2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,24 +17,23 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_TIMER_H
-#define HAVE_JF_LINUXTOOLS_TIMER_H
+#ifndef HAVE_JF_LINUXTOOLS_EVENT_H
+#define HAVE_JF_LINUXTOOLS_EVENT_H
 
 #include "dispatchee.h"
 #include "dispatcher.h"
 
-#include <jf/linuxtools/timerfd.h>
+#include <jf/linuxtools/eventfd.h>
 
 namespace jf {
 namespace linuxtools {
 
-/** Timer class that gives you callbacks.
+/** Gives callbacks with eventfd(2) semantics.
 
-    The class is-a Dispatchee, which means that it is supposed to live
-    inside an event loop. It mimicks TimerFD's interface (which is
-    used internally, of course).
+    Add an integer, and a callback will be fired, carrying the number
+    of increments.
  */
-class Timer : public Dispatchee,
+class Event : public Dispatchee,
               private Dispatcher::Handler
 {
 public:
@@ -42,28 +41,13 @@ public:
     {
     public:
         virtual ~Handler() {}
-        virtual void expired(uint64_t n_times) = 0;
+        virtual void new_events(uint64_t) = 0;
     };
     
 public:
-    Timer(Handler* handler): handler_(handler), dispatcher_(NULL) {}
+    Event(Handler* handler): handler_(handler), dispatcher_(NULL) {}
 
-    void arm_oneshot(const TimeSpec& initial_expiration)
-    {
-        timerfd_.arm_oneshot(initial_expiration);
-    }
-    void arm_periodic(const TimeSpec& initial_expiration, const TimeSpec& interval)
-    {
-        timerfd_.arm_periodic(initial_expiration, interval);
-    }
-    void disarm()
-    { 
-        timerfd_.disarm();
-    }
-    bool is_armed() const
-    {
-        return timerfd_.is_armed();
-    }
+    void add(uint64_t n) { eventfd_.add(n); }
 
 public:
     /** Dispatchee implementation. */
@@ -80,7 +64,7 @@ private:
     //@}
 
 private:
-    TimerFD timerfd_;
+    EventFD eventfd_;
     Handler* handler_;
     Dispatcher* dispatcher_;
 };

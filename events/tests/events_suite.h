@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2010-2011 Joerg Faschingbauer
+// Copyright (C) 2008-2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,42 +17,21 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "timer.h"
+#ifndef HAVE_JF_LINUXTOOLS_EVENTS_SUITE_H
+#define HAVE_JF_LINUXTOOLS_EVENTS_SUITE_H
+
+#include <jf/unittest/test_suite.h>
 
 namespace jf {
 namespace linuxtools {
 
-void Timer::activate_object(Dispatcher* d)
+class EventsSuite : public jf::unittest::TestSuite
 {
-    assert(dispatcher_==NULL);
-    assert(d!=NULL);
-
-    dispatcher_ = d;
-    dispatcher_->watch_in(timerfd_.fd(), this);
-}
-
-void Timer::deactivate_object(const Dispatcher* d)
-{
-    assert(dispatcher_!=NULL);
-    (void)d;
-    assert(d==dispatcher_);
-
-    dispatcher_->unwatch_in(timerfd_.fd(), this);
-    dispatcher_ = NULL;
-}
-
-void Timer::in_ready(int fd)
-{
-    assert(timerfd_.fd()==fd);
-
-    uint64_t new_expires = timerfd_.wait();
-    handler_->expired(new_expires);
-}
-
-void Timer::out_ready(int)
-{
-    assert(false);
-}
+public:
+    EventsSuite();
+};
 
 }
 }
+
+#endif

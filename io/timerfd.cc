@@ -52,6 +52,12 @@ void TimerFD::arm_periodic(const TimeSpec& initial_expiration, const TimeSpec& i
 {
     assert(this->fd()>=0);
 
+    // can't have immediate initial expiration, according to the
+    // semantics of timerfd_settime()
+    assert(initial_expiration!=TimeSpec(0,0));
+    // this would be a tight loop, kernel-wise.
+    assert(interval!=TimeSpec(0,0));
+
     itimerspec new_value, old_value;
     std::memset(&new_value, 0, sizeof(itimerspec));
     std::memset(&old_value, 0, sizeof(itimerspec));

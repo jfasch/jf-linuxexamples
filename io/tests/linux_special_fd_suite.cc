@@ -84,9 +84,9 @@ public:
             TimeSpec interval(0,1);
             TimerFD timer_fd(CLOCK_MONOTONIC);
             timer_fd.arm_periodic(initial, interval);
-            int nexpires = 5;
-            while (nexpires > 0)
-                nexpires -= timer_fd.wait();
+            uint64_t nexpires = 0;
+            while (nexpires < 5)
+                nexpires += timer_fd.wait();
         }
     }
 };
