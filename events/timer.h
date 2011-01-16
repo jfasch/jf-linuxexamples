@@ -28,7 +28,12 @@
 namespace jf {
 namespace linuxtools {
 
-/** Adds callbacks to TimerFD. */
+/** Timer class that gives you callbacks.
+
+    the class is-a Dispatchee, which means that it is supposed to live
+    inside an event loop. It mimicks TimerFD's interface (which is
+    used internally, of course).
+ */
 class Timer : public Dispatchee,
               private Dispatcher::Handler
 {
