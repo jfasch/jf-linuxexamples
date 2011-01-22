@@ -47,7 +47,7 @@ private:
     class MyHandler : public Dispatchee,
                       private Dispatcher::Handler {
     public:
-        MyHandler() : seen_(0) {}
+        MyHandler() : dispatcher_(NULL), seen_(0) {}
         void activate_object(Dispatcher* d) {
             assert(dispatcher_==NULL);
             dispatcher_ = d;
