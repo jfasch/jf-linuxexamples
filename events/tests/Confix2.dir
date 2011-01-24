@@ -18,15 +18,15 @@
 # USA
 
 h = [
-    'events_suite.h',
+    'events-suite.h',
     
-    'dispatcher_suite.h',
+    'dispatcher-suite.h',
     ]
 
 cc = [
-    'events_suite.cc',
+    'events-suite.cc',
 
-    'dispatcher_suite.cc',
+    'dispatcher-suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2011 Joerg Faschingbauer
+// Copyright (C) 2008-2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,19 +17,37 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "linux-events-events-suite.h"
+#include "basic-thread-test.h"
 
-#include "event-suite.h"
-#include "timer-suite.h"
+#include <jf/linuxtools/joinable-thread.h>
+
+namespace {
+
+class TestWorker : public jf::linuxtools::JoinableThreadStarter::Worker {
+public:
+    TestWorker() : was_running_(false) {}
+    bool was_running() const { return was_running_; }
+
+    virtual void run() {
+        was_running_ = true;
+    }
+
+private:
+    bool was_running_;
+};
+
+}
 
 namespace jf {
 namespace linuxtools {
 
-LinuxEventsEventsSuite::LinuxEventsEventsSuite()
-: jf::unittest::TestSuite("LinuxEventsEventsSuite")
+void BasicThreadTest::run()
 {
-    add_test(new EventSuite);
-    add_test(new TimerSuite);
+    TestWorker worker;
+    JoinableThreadStarter t(&worker);
+    t.start();
+    t.join();
+    JFUNIT_ASSERT(worker.was_running());
 }
 
 }

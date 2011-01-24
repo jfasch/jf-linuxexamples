@@ -20,15 +20,15 @@
 h = [
     'linux-events-events-suite.h',
     
-    'timer_suite.h',
-    'event_suite.h',
+    'timer-suite.h',
+    'event-suite.h',
     ]
 
 cc = [
     'linux-events-events-suite.cc',
 
-    'timer_suite.cc',
-    'event_suite.cc',
+    'timer-suite.cc',
+    'event-suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

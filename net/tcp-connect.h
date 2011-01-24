@@ -17,20 +17,20 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "linux-events-events-suite.h"
+#ifndef HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
+#define HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
 
-#include "event-suite.h"
-#include "timer-suite.h"
+#include "ip-address.h"
+#include "tcp-endpoint.h"
+
+#include <jf/linuxtools/fd.h>
 
 namespace jf {
 namespace linuxtools {
 
-LinuxEventsEventsSuite::LinuxEventsEventsSuite()
-: jf::unittest::TestSuite("LinuxEventsEventsSuite")
-{
-    add_test(new EventSuite);
-    add_test(new TimerSuite);
-}
+TCPEndpoint tcp_connect(const IPAddress&, uint16_t port);
 
 }
 }
+
+#endif

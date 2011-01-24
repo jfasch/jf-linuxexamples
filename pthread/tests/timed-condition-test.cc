@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2011 Joerg Faschingbauer
+// Copyright (C) 2008-2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,19 +17,27 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "linux-events-events-suite.h"
+#include "timed-condition-test.h"
 
-#include "event-suite.h"
-#include "timer-suite.h"
+#include <jf/linuxtools/mutex.h>
+#include <jf/linuxtools/condition.h>
+#include <jf/linuxtools/timespec.h>
 
 namespace jf {
 namespace linuxtools {
 
-LinuxEventsEventsSuite::LinuxEventsEventsSuite()
-: jf::unittest::TestSuite("LinuxEventsEventsSuite")
+void TimedConditionTest::run()
 {
-    add_test(new EventSuite);
-    add_test(new TimerSuite);
+    jf::linuxtools::Mutex m;
+    jf::linuxtools::Condition c(m);
+
+    jf::linuxtools::TimeSpec now(jf::linuxtools::TimeSpec::now_timeofday());
+    jf::linuxtools::TimeSpec until(now + jf::linuxtools::TimeSpec(0, jf::linuxtools::TimeSpec::one_second/4));
+
+    bool timedout = c.timed_wait(until);
+
+    JFUNIT_ASSERT(timedout);
+    JFUNIT_ASSERT(jf::linuxtools::TimeSpec::now_timeofday().secs() - now.secs() >= 0.25);
 }
 
 }

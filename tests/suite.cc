@@ -19,21 +19,21 @@
 
 #include "suite.h"
 
-#include <jf/linuxtools/tests/common_suite.h>
-#include <jf/linuxtools/tests/pthread_suite.h>
-#include <jf/linuxtools/tests/io_suite.h>
-#include <jf/linuxtools/tests/events_suite.h>
+#include <jf/linuxtools/tests/common-suite.h>
+#include <jf/linuxtools/tests/pthread-suite.h>
+#include <jf/linuxtools/tests/io-suite.h>
+#include <jf/linuxtools/tests/events-suite.h>
 #include <jf/linuxtools/tests/linux-events-suite.h>
-#include <jf/linuxtools/tests/debug_suite.h>
-#include <jf/linuxtools/tests/net_suite.h>
+#include <jf/linuxtools/tests/debug-suite.h>
+#include <jf/linuxtools/tests/net-suite.h>
 
-// CONFIX:REQUIRE_H('jf/linuxtools/tests/common_suite.h', REQUIRED)
-// CONFIX:REQUIRE_H('jf/linuxtools/tests/pthread_suite.h', REQUIRED)
-// CONFIX:REQUIRE_H('jf/linuxtools/tests/io_suite.h', REQUIRED)
-// CONFIX:REQUIRE_H('jf/linuxtools/tests/events_suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jf/linuxtools/tests/common-suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jf/linuxtools/tests/pthread-suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jf/linuxtools/tests/io-suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jf/linuxtools/tests/events-suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/linux-events-suite.h', REQUIRED)
-// CONFIX:REQUIRE_H('jf/linuxtools/tests/debug_suite.h', REQUIRED)
-// CONFIX:REQUIRE_H('jf/linuxtools/tests/net_suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jf/linuxtools/tests/debug-suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jf/linuxtools/tests/net-suite.h', REQUIRED)
 
 namespace jf {
 namespace linuxtools {

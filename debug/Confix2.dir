@@ -19,9 +19,9 @@
 
 h = [
     'indent.h',
-    'stack_history.h',
-    'stack_history_impl.h',
-    'stack_history_print.h',
+    'stack-history.h',
+    'stack-history-impl.h',
+    'stack-history-print.h',
     ]
 
 for f in h:

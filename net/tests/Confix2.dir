@@ -18,15 +18,15 @@
 # USA
 
 h = [
-    'net_suite.h',
+    'net-suite.h',
 
-    'tcp_suite.h',
+    'tcp-suite.h',
     ]
 
 cc = [
-    'net_suite.cc',
+    'net-suite.cc',
 
-    'tcp_suite.cc',
+    'tcp-suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

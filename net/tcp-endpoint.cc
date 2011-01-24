@@ -17,20 +17,10 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "linux-events-events-suite.h"
-
-#include "event-suite.h"
-#include "timer-suite.h"
+#include "tcp-endpoint.h"
 
 namespace jf {
 namespace linuxtools {
-
-LinuxEventsEventsSuite::LinuxEventsEventsSuite()
-: jf::unittest::TestSuite("LinuxEventsEventsSuite")
-{
-    add_test(new EventSuite);
-    add_test(new TimerSuite);
-}
 
 }
 }

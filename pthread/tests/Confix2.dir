@@ -18,19 +18,19 @@
 # USA
 
 h = [
-    'pthread_suite.h',
+    'pthread-suite.h',
 
-    'basic_thread_test.h',
-    'timed_condition_test.h',
-    'tsd_suite.h',
+    'basic-thread-test.h',
+    'timed-condition-test.h',
+    'tsd-suite.h',
     ]
 
 cc = [
-    'pthread_suite.cc',
+    'pthread-suite.cc',
 
-    'basic_thread_test.cc',
-    'timed_condition_test.cc',
-    'tsd_suite.cc',
+    'basic-thread-test.cc',
+    'timed-condition-test.cc',
+    'tsd-suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

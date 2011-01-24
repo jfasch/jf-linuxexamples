@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2011 Joerg Faschingbauer
+// Copyright (C) 2008-2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,20 +17,55 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "linux-events-events-suite.h"
+#include <jf/linuxtools/stack-history.h>
+#include <jf/linuxtools/stack-history-print.h>
 
-#include "event-suite.h"
-#include "timer-suite.h"
+#include <iostream>
 
-namespace jf {
-namespace linuxtools {
+using namespace jf::linuxtools;
 
-LinuxEventsEventsSuite::LinuxEventsEventsSuite()
-: jf::unittest::TestSuite("LinuxEventsEventsSuite")
+void f0();
+void f00();
+void f01();
+void f000();
+void f010();
+
+int main()
 {
-    add_test(new EventSuite);
-    add_test(new TimerSuite);
+    __PRETTY_FUNCTION__StackHistory h;
+    __PRETTY_FUNCTION__StackHistory::set_instance(&h);
+    f0();
+
+    print(std::cout, h);
+
+    return 0;
 }
 
+void f0()
+{
+    JF_STACKTRACE();
+    f00();
+    f01();
 }
+
+void f00()
+{
+    JF_STACKTRACE();
+    f000();
+}
+
+void f01()
+{
+    JF_STACKTRACE();
+    f010();
+}
+
+void f000()
+{
+    JF_STACKTRACE();
+}
+
+void f010()
+{
+    JF_STACKTRACE();
 }

@@ -18,13 +18,13 @@
 # USA
 
 h = [
-    'stack_history_test.h',
-    'debug_suite.h',
+    'stack-history-test.h',
+    'debug-suite.h',
     ]
 
 cc = [
-    'stack_history_test.cc',
-    'debug_suite.cc',
+    'stack-history-test.cc',
+    'debug-suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

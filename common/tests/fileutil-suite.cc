@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2011 Joerg Faschingbauer
+// Copyright (C) 2008-2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,19 +17,27 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "linux-events-events-suite.h"
+#include "fileutil-suite.h"
 
-#include "event-suite.h"
-#include "timer-suite.h"
+#include <jf/unittest/test_case.h>
 
 namespace jf {
 namespace linuxtools {
 
-LinuxEventsEventsSuite::LinuxEventsEventsSuite()
-: jf::unittest::TestSuite("LinuxEventsEventsSuite")
+class FileUtilExistTest : public jf::unittest::TestCase
 {
-    add_test(new EventSuite);
-    add_test(new TimerSuite);
+public:
+    FileUtilExistTest() : jf::unittest::TestCase("Exist") {}
+    virtual void run()
+    {
+        // TBD: write something meaningful here
+    }
+};
+
+FileUtilSuite::FileUtilSuite()
+: jf::unittest::TestSuite("FileUtil")
+{
+    add_test(new FileUtilExistTest);
 }
 
 }

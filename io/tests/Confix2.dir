@@ -18,17 +18,17 @@
 # USA
 
 h = [
-    'io_suite.h',
+    'io-suite.h',
 
-    'fd_test.h',
-    'file_suite.h',
+    'fd-test.h',
+    'file-suite.h',
     ]
 
 cc = [
-    'io_suite.cc',
+    'io-suite.cc',
 
-    'fd_test.cc',
-    'file_suite.cc',
+    'fd-test.cc',
+    'file-suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

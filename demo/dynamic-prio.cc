@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2011 Joerg Faschingbauer
+// Copyright (C) 2008-2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,20 +17,39 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "linux-events-events-suite.h"
+#include <jf/linux/joinable-thread.h>
 
-#include "event-suite.h"
-#include "timer-suite.h"
+#include <unistd.h>
 
-namespace jf {
-namespace linuxtools {
+using namespace jf::linux;
 
-LinuxEventsEventsSuite::LinuxEventsEventsSuite()
-: jf::unittest::TestSuite("LinuxEventsEventsSuite")
+namespace {
+
+class SleeperWorker : public JoinableThreadStarter::Worker
 {
-    add_test(new EventSuite);
-    add_test(new TimerSuite);
-}
+public:
+    virtual void run()
+    {
+        ::pause();
+    }
+};
+
+class SpinnerWorker : public JoinableThreadStarter::Worker
+{
+public:
+    virtual void run()
+    {
+        for (;;);
+    }
+};
 
 }
+
+int main()
+{
+    JoinableThreadStarter sleeper(JoinableThreadStarter::Args().worker(new SleeperWorker));
+    JoinableThreadStarter spinner(JoinableThreadStarter::Args().worker(new SpinnerWorker));
+    sleeper.start();
+    spinner.start();
+    return 0;
 }

@@ -26,15 +26,15 @@ CONFIGURE_AC(
 h = [
     'condition.h',
     'future.h',
-    'joinable_thread.h',
+    'joinable-thread.h',
     'mutex.h',
     'queue.h',
-    'thread_specific.h',
+    'thread-specific.h',
     ]
 
 cc = [
     'condition.cc',
-    'joinable_thread.cc',
+    'joinable-thread.cc',
     'mutex.cc',
     ]
 
