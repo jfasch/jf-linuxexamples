@@ -17,22 +17,28 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_EVENTFD_H
-#define HAVE_JF_LINUXTOOLS_EVENTFD_H
+#ifndef HAVE_JF_LINUXTOOLS_TIMERFD_H
+#define HAVE_JF_LINUXTOOLS_TIMERFD_H
 
-#include "fd.h"
+#include <jf/linuxtools/fd.h>
+#include <jf/linuxtools/timespec.h>
 
-#include <sys/eventfd.h>
+#include <sys/timerfd.h>
+#include <time.h>
+#include <stdint.h>
 
 namespace jf {
 namespace linuxtools {
 
-class EventFD : public FD
+class TimerFD : public FD
 {
 public:
-    EventFD(unsigned int initval=0);
-    void add(uint64_t);
-    uint64_t reset();
+    TimerFD(clockid_t = CLOCK_MONOTONIC);
+    void arm_oneshot(const TimeSpec& initial_expiration);
+    void arm_periodic(const TimeSpec& initial_expiration, const TimeSpec& interval);
+    void disarm();
+    bool is_armed() const;
+    uint64_t wait();
 };
     
 }

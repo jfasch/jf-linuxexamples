@@ -17,29 +17,21 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_TIMERFD_H
-#define HAVE_JF_LINUXTOOLS_TIMERFD_H
+#ifndef HAVE_JF_LINUXTOOLS_SIGNALFD_H
+#define HAVE_JF_LINUXTOOLS_SIGNALFD_H
 
-#include "fd.h"
+#include <jf/linuxtools/fd.h>
 
-#include <jf/linuxtools/timespec.h>
-
-#include <sys/timerfd.h>
-#include <time.h>
-#include <stdint.h>
+#include <sys/signalfd.h>
 
 namespace jf {
 namespace linuxtools {
 
-class TimerFD : public FD
+class SignalFD : public FD
 {
 public:
-    TimerFD(clockid_t = CLOCK_MONOTONIC);
-    void arm_oneshot(const TimeSpec& initial_expiration);
-    void arm_periodic(const TimeSpec& initial_expiration, const TimeSpec& interval);
-    void disarm();
-    bool is_armed() const;
-    uint64_t wait();
+    SignalFD(const sigset_t&);
+    void wait(signalfd_siginfo&);
 };
     
 }

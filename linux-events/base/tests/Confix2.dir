@@ -1,6 +1,6 @@
 # -*- python -*-
 
-# Copyright (C) 2008-2011 Joerg Faschingbauer
+# Copyright (C) 2011 Joerg Faschingbauer
 
 # This library is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -17,13 +17,13 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
-DIRECTORY(['common'])
-DIRECTORY(['pthread'])
-DIRECTORY(['io'])
-DIRECTORY(['events'])
-DIRECTORY(['linux-events'])
-DIRECTORY(['net'])
-DIRECTORY(['externals'])
-DIRECTORY(['debug'])
-DIRECTORY(['tests'])
-DIRECTORY(['demo'])
+h = [
+    'linux-events-base-suite.h',
+
+    ]
+
+cc = [
+    'linux-events-base-suite.cc',
+    ]
+
+LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

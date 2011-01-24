@@ -17,21 +17,22 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_SIGNALFD_H
-#define HAVE_JF_LINUXTOOLS_SIGNALFD_H
+#ifndef HAVE_JF_LINUXTOOLS_EVENTFD_H
+#define HAVE_JF_LINUXTOOLS_EVENTFD_H
 
-#include "fd.h"
+#include <jf/linuxtools/fd.h>
 
-#include <sys/signalfd.h>
+#include <sys/eventfd.h>
 
 namespace jf {
 namespace linuxtools {
 
-class SignalFD : public FD
+class EventFD : public FD
 {
 public:
-    SignalFD(const sigset_t&);
-    void wait(signalfd_siginfo&);
+    EventFD(unsigned int initval=0);
+    void add(uint64_t);
+    uint64_t reset();
 };
     
 }

@@ -22,7 +22,6 @@ h = [
 
     'fd_test.h',
     'file_suite.h',
-    'linux_special_fd_suite.h',
     ]
 
 cc = [
@@ -30,7 +29,6 @@ cc = [
 
     'fd_test.cc',
     'file_suite.cc',
-    'linux_special_fd_suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

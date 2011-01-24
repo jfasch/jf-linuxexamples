@@ -19,8 +19,6 @@
 #include "events_suite.h"
 
 #include "dispatcher_suite.h"
-#include "timer_suite.h"
-#include "event_suite.h"
 
 namespace jf {
 namespace linuxtools {
@@ -29,8 +27,6 @@ EventsSuite::EventsSuite()
 : jf::unittest::TestSuite("Events")
 {
     add_test(new DispatcherSuite);
-    add_test(new TimerSuite);
-    add_test(new EventSuite);
 }
 
 }

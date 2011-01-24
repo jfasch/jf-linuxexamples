@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008-2011 Joerg Faschingbauer
+// Copyright (C) 2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -16,19 +16,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
-#include "io_suite.h"
 
-#include "fd_test.h"
-#include "file_suite.h"
+#include "linux-events-events-suite.h"
+
+#include "event_suite.h"
+#include "timer_suite.h"
 
 namespace jf {
 namespace linuxtools {
 
-IOSuite::IOSuite()
-: jf::unittest::TestSuite("IO")
+LinuxEventsEventsSuite::LinuxEventsEventsSuite()
+: jf::unittest::TestSuite("LinuxEventsEventsSuite")
 {
-    add_test(new FDTest);
-    add_test(new FileSuite);
+    add_test(new EventSuite);
+    add_test(new TimerSuite);
 }
 
 }

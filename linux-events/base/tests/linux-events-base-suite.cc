@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2010-2011 Joerg Faschingbauer
+// Copyright (C) 2011 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,7 +17,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "linux_special_fd_suite.h"
+#include "linux-events-base-suite.h"
 
 #include <jf/linuxtools/eventfd.h>
 #include <jf/linuxtools/timerfd.h>
@@ -139,8 +139,8 @@ private:
 namespace jf {
 namespace linuxtools {
 
-LinuxSpecialFDSuite::LinuxSpecialFDSuite()
-: jf::unittest::TestSuite("LinuxSpecialFD")
+LinuxEventsBaseSuite::LinuxEventsBaseSuite()
+: jf::unittest::TestSuite("LinuxEventsBaseSuite")
 {
     add_test(new EventFDTest);
     add_test(new TimerFDTest);

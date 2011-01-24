@@ -23,6 +23,7 @@
 #include <jf/linuxtools/tests/pthread_suite.h>
 #include <jf/linuxtools/tests/io_suite.h>
 #include <jf/linuxtools/tests/events_suite.h>
+#include <jf/linuxtools/tests/linux-events-suite.h>
 #include <jf/linuxtools/tests/debug_suite.h>
 #include <jf/linuxtools/tests/net_suite.h>
 
@@ -30,6 +31,7 @@
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/pthread_suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/io_suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/events_suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jf/linuxtools/tests/linux-events-suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/debug_suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/net_suite.h', REQUIRED)
 
@@ -43,6 +45,7 @@ Suite::Suite()
     add_test(new PThreadSuite);
     add_test(new IOSuite);
     add_test(new EventsSuite);
+    add_test(new LinuxEventsSuite);
     add_test(new DebugSuite);
     add_test(new NetSuite);
 }
