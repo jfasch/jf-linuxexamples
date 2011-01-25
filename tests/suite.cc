@@ -42,7 +42,7 @@ Suite::Suite()
 : jf::unittest::TestSuite("LinuxTools")
 {
     add_test(new CommonSuite);
-    add_test(new PThreadSuite);
+    add_test(new PthreadSuite);
     add_test(new IOSuite);
     add_test(new EventsSuite);
     add_test(new LinuxEventsSuite);

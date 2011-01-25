@@ -17,23 +17,22 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "pthread-suite.h"
+#ifndef HAVE_JF_LINUXTOOLS_PTHREAD_EVENTS_SUITE_H
+#define HAVE_JF_LINUXTOOLS_PTHREAD_EVENTS_SUITE_H
 
-#include <jf/linuxtools/tests/pthread-base-suite.h>
-#include <jf/linuxtools/tests/pthread-events-suite.h>
-
-// CONFIX:REQUIRE_H('jf/linuxtools/tests/pthread-base-suite.h', REQUIRED)
-// CONFIX:REQUIRE_H('jf/linuxtools/tests/pthread-events-suite.h', REQUIRED)
+// CONFIX:REQUIRE_H("jf/unittest/test_suite.h", REQUIRED)
+#include <jf/unittest/test_suite.h>
 
 namespace jf {
 namespace linuxtools {
 
-PthreadSuite::PthreadSuite()
-: jf::unittest::TestSuite("PthreadSuite")
+class PthreadEventsSuite : public jf::unittest::TestSuite
 {
-    add_test(new PthreadBaseSuite);
-    add_test(new PthreadEventsSuite);
-}
+public:
+    PthreadEventsSuite();
+};
 
 }
 }
+
+#endif

@@ -1,6 +1,6 @@
 # -*- python -*-
 
-# Copyright (C) 2011 Joerg Faschingbauer
+# Copyright (C) 2008-2011 Joerg Faschingbauer
 
 # This library is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -17,6 +17,20 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
-DIRECTORY(['base'])
-DIRECTORY(['events'])
-DIRECTORY(['tests'])
+h = [
+    'pthread-base-suite.h',
+
+    'basic-thread-test.h',
+    'timed-condition-test.h',
+    'tsd-suite.h',
+    ]
+
+cc = [
+    'pthread-base-suite.cc',
+
+    'basic-thread-test.cc',
+    'timed-condition-test.cc',
+    'tsd-suite.cc',
+    ]
+
+LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

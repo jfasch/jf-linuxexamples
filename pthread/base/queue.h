@@ -68,7 +68,7 @@ template<typename T> void Queue<T>::push(const T& elem) {
     notempty_.signal();
 }
 
-template<typename T> void Queue<T>::Pop(T& elem) {
+template<typename T> void Queue<T>::pop(T& elem) {
     {
         Mutex::Guard g(mutex_);
         while (queue_.size() == 0)

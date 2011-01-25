@@ -17,6 +17,12 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
-DIRECTORY(['base'])
-DIRECTORY(['events'])
-DIRECTORY(['tests'])
+h = [
+    'pthread-events-suite.h',
+    ]
+
+cc = [
+    'pthread-events-suite.cc',
+    ]
+
+LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

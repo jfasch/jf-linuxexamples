@@ -1,6 +1,6 @@
 # -*- python -*-
 
-# Copyright (C) 2008-2011 Joerg Faschingbauer
+# Copyright (C) 2011 Joerg Faschingbauer
 
 # This library is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -19,18 +19,10 @@
 
 h = [
     'pthread-suite.h',
-
-    'basic-thread-test.h',
-    'timed-condition-test.h',
-    'tsd-suite.h',
     ]
 
 cc = [
     'pthread-suite.cc',
-
-    'basic-thread-test.cc',
-    'timed-condition-test.cc',
-    'tsd-suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])
