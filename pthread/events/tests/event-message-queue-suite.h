@@ -16,11 +16,21 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+#ifndef HAVE_JF_LINUXTOOLS_EVENT_MESSAGE_QUEUE_SUITE_H
+#define HAVE_JF_LINUXTOOLS_EVENT_MESSAGE_QUEUE_SUITE_H
 
-#include "event-queue.h"
+#include <jf/unittest/test_suite.h>
 
 namespace jf {
 namespace linuxtools {
 
+class EventMessageQueueSuite : public jf::unittest::TestSuite
+{
+public:
+    EventMessageQueueSuite();
+};
+
 }
 }
+
+#endif

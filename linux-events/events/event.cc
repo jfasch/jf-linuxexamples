@@ -45,7 +45,7 @@ void Event::in_ready(int fd)
 {
     assert(eventfd_.fd()==fd);
 
-    handler_->new_events(eventfd_.reset());
+    handler_->new_events(this, eventfd_.reset());
 }
 
 void Event::out_ready(int)

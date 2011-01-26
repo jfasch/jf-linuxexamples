@@ -19,12 +19,15 @@
 
 #include "pthread-events-suite.h"
 
+#include "event-message-queue-suite.h"
+
 namespace jf {
 namespace linuxtools {
 
 PthreadEventsSuite::PthreadEventsSuite()
 : jf::unittest::TestSuite("PthreadEvents")
 {
+    add_test(new EventMessageQueueSuite);
 }
 
 }

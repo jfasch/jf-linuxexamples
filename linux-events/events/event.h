@@ -40,7 +40,7 @@ public:
     {
     public:
         virtual ~Handler() {}
-        virtual void new_events(uint64_t) = 0;
+        virtual void new_events(const Event* from, uint64_t) = 0;
     };
     
 public:

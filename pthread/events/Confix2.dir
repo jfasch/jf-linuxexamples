@@ -18,11 +18,10 @@
 # USA
 
 h = [
-    'event-queue.h',
+    'event-message-queue.h',
     ]
 
 cc = [
-    'event-queue.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools']) for f in h] + [CXX(filename=f) for f in cc])

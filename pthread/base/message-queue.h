@@ -35,11 +35,6 @@ public:
     void push(const T&);
     void pop(T&);
 
-    /** Wait until abstime is reached (or an element arrives, of
-        course). Return true if abstime has been reached, else false
-        (which means that an element was popped form the queue). */
-    bool timed_pop(T&, const TimeSpec& abstime);
-
 private:
     size_t maxelem_;
     std::deque<T> queue_;
@@ -48,8 +43,8 @@ private:
     Condition notempty_;
 
 private:
-    Queue(const Queue&);
-    Queue& operator=(const Queue&);
+    MessageQueue(const MessageQueue&);
+    MessageQueue& operator=(const MessageQueue&);
 };
 
 template<typename T> MessageQueue<T>::MessageQueue(size_t maxelem)
@@ -77,21 +72,6 @@ template<typename T> void MessageQueue<T>::pop(T& elem) {
         queue_.pop_front();
     }
     notfull_.signal();
-}
-
-template<typename T> bool MessageQueue<T>::timed_pop(T& elem, const TimeSpec& abstime) {
-    {
-        Mutex::Guard g(mutex_);
-        while (queue_.size() == 0) {
-            bool timedout = notempty_.timed_wait(abstime);
-            if (timedout)
-                return true;
-        }
-        elem = queue_.front();
-        queue_.pop_front();
-    }
-    notfull_.signal();
-    return false;
 }
 
 }

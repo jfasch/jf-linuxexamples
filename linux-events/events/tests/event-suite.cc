@@ -40,7 +40,7 @@ public:
             MyHandler() : n_events_(0) {}
             bool n_events() const { return n_events_; }
         private:
-            virtual void new_events(uint64_t n) { n_events_ += n; }
+            virtual void new_events(const Event*, uint64_t n) { n_events_ += n; }
             uint64_t n_events_;
         };
         
