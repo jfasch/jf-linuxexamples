@@ -28,9 +28,9 @@
 namespace jf {
 namespace linuxtools {
 
-template<typename T> class Queue {
+template<typename T> class MessageQueue {
 public:
-    Queue(size_t maxelem);
+    MessageQueue(size_t maxelem);
 
     void push(const T&);
     void pop(T&);
@@ -52,13 +52,13 @@ private:
     Queue& operator=(const Queue&);
 };
 
-template<typename T> Queue<T>::Queue(size_t maxelem)
+template<typename T> MessageQueue<T>::MessageQueue(size_t maxelem)
 : maxelem_(maxelem),
   mutex_(),
   notfull_(mutex_),
   notempty_(mutex_) {}
 
-template<typename T> void Queue<T>::push(const T& elem) {
+template<typename T> void MessageQueue<T>::push(const T& elem) {
     {
         Mutex::Guard g(mutex_);
         while (queue_.size() == maxelem_)
@@ -68,7 +68,7 @@ template<typename T> void Queue<T>::push(const T& elem) {
     notempty_.signal();
 }
 
-template<typename T> void Queue<T>::pop(T& elem) {
+template<typename T> void MessageQueue<T>::pop(T& elem) {
     {
         Mutex::Guard g(mutex_);
         while (queue_.size() == 0)
@@ -79,7 +79,7 @@ template<typename T> void Queue<T>::pop(T& elem) {
     notfull_.signal();
 }
 
-template<typename T> bool Queue<T>::timed_pop(T& elem, const TimeSpec& abstime) {
+template<typename T> bool MessageQueue<T>::timed_pop(T& elem, const TimeSpec& abstime) {
     {
         Mutex::Guard g(mutex_);
         while (queue_.size() == 0) {

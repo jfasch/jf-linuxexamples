@@ -28,7 +28,7 @@ h = [
     'future.h',
     'joinable-thread.h',
     'mutex.h',
-    'queue.h',
+    'message-queue.h',
     'thread-specific.h',
     ]
 
