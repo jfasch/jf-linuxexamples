@@ -17,6 +17,14 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
-DIRECTORY(['base'])
-DIRECTORY(['events'])
+h = [
+    'net-events-dummy.h',
+    ]
+
+cc = [
+    'net-events-dummy.cc',
+    ]
+
+LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools']) for f in h] + [CXX(filename=f) for f in cc])
+        
 DIRECTORY(['tests'])

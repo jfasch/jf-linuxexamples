@@ -19,15 +19,20 @@
 
 #include "net-suite.h"
 
-#include "tcp-suite.h"
+#include <jf/linuxtools/tests/net-base-suite.h>
+#include <jf/linuxtools/tests/net-events-suite.h>
+
+// CONFIX:REQUIRE_H('jf/linuxtools/tests/net-base-suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jf/linuxtools/tests/net-events-suite.h', REQUIRED)
 
 namespace jf {
 namespace linuxtools {
 
 NetSuite::NetSuite()
-: jf::unittest::TestSuite("Net")
+: jf::unittest::TestSuite("NetSuite")
 {
-    add_test(new TCPSuite);
+    add_test(new NetBaseSuite);
+    add_test(new NetEventsSuite);
 }
 
 }

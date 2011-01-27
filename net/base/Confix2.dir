@@ -17,6 +17,20 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
-DIRECTORY(['base'])
-DIRECTORY(['events'])
+h = [
+    'ip-address.h',
+    'tcp-connect.h',
+    'tcp-endpoint.h',
+    'tcp-port.h',
+    ]
+
+cc = [
+    'ip-address.cc',
+    'tcp-connect.cc',
+    'tcp-endpoint.cc',
+    'tcp-port.cc',
+    ]
+
+LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools']) for f in h] + [CXX(filename=f) for f in cc])
+        
 DIRECTORY(['tests'])
