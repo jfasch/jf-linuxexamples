@@ -17,22 +17,19 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
-#define HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
+#ifndef HAVE_JF_LINUXTOOLS_NET_BASE_SUITE_H
+#define HAVE_JF_LINUXTOOLS_NET_BASE_SUITE_H
 
-#include "ip-address.h"
-#include "tcp-endpoint.h"
+#include <jf/unittest/test_suite.h>
 
 namespace jf {
 namespace linuxtools {
 
-/** Connect to a TCP port.
-
-    \param address the IP address
-    \param port the port number
-    \throw ErrnoException
-*/
-TCPEndpoint tcp_connect(const IPAddress& address, uint16_t port);
+class NetBaseSuite : public jf::unittest::TestSuite
+{
+public:
+    NetBaseSuite();
+};
 
 }
 }

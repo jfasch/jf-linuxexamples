@@ -17,22 +17,21 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
-#define HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
+#ifndef HAVE_JF_LINUXTOOLS_UNIX_CONNECT_H
+#define HAVE_JF_LINUXTOOLS_UNIX_CONNECT_H
 
-#include "ip-address.h"
-#include "tcp-endpoint.h"
+#include "unix-endpoint.h"
 
 namespace jf {
 namespace linuxtools {
 
-/** Connect to a TCP port.
+/** Connect to a UNIX domain socket.
 
-    \param address the IP address
-    \param port the port number
-    \throw ErrnoException
-*/
-TCPEndpoint tcp_connect(const IPAddress& address, uint16_t port);
+    \param path the path of the socket
+    \throws ErrnoException
+    \throws SockAddrUN::PathTooLong
+*/    
+UNIXEndpoint unix_connect(const char* path);
 
 }
 }

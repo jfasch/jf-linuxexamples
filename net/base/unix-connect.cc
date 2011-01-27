@@ -17,24 +17,27 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
-#define HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
+#include "unix-connect.h"
 
-#include "ip-address.h"
-#include "tcp-endpoint.h"
+#include "unix-address.h"
 
 namespace jf {
 namespace linuxtools {
 
-/** Connect to a TCP port.
+UNIXEndpoint unix_connect(const char* path)
+{
+    int fd = socket(AF_UNIX, SOCK_STREAM, 0);
+    if (fd < 0)
+        throw ErrnoException(errno, "socket(AF_UNIX,SOCK_STREAM,0)");
 
-    \param address the IP address
-    \param port the port number
-    \throw ErrnoException
-*/
-TCPEndpoint tcp_connect(const IPAddress& address, uint16_t port);
+    UNIXEndpoint endpoint(fd);
+    SockAddrUN addr(path);
+
+    if (connect(endpoint.fd(), (struct sockaddr*)&addr, sizeof(addr)) < 0)
+        throw ErrnoException(errno, "connect()");
+
+    return endpoint;
+}
 
 }
 }
-
-#endif

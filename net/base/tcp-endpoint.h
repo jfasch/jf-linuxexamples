@@ -20,8 +20,6 @@
 #ifndef HAVE_JF_LINUXTOOLS_TCP_ENDPOINT_H
 #define HAVE_JF_LINUXTOOLS_TCP_ENDPOINT_H
 
-#include "ip-address.h"
-
 #include <jf/linuxtools/fd.h>
 
 namespace jf {
@@ -31,6 +29,8 @@ class TCPEndpoint : public FD
 {
 public:
     TCPEndpoint(int fd) : FD(fd) {}
+
+    // more things like getpeername() etc to come.
 };
 
 }

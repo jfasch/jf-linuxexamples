@@ -18,29 +18,17 @@
 # USA
 
 h = [
-    'ip-address.h',
-    'tcp-connect.h',
-    'tcp-endpoint.h',
-    'tcp-port.h',
+    'net-base-suite.h',
 
-    'unix-address.h',
-    'unix-connect.h',
-    'unix-endpoint.h',
-    'unix-port.h',
+    'tcp-suite.h',
+    'unix-suite.h',
     ]
 
 cc = [
-    'ip-address.cc',
-    'tcp-connect.cc',
-    'tcp-endpoint.cc',
-    'tcp-port.cc',
+    'net-base-suite.cc',
 
-    'unix-address.cc',
-    'unix-connect.cc',
-    'unix-endpoint.cc',
-    'unix-port.cc',
+    'tcp-suite.cc',
+    'unix-suite.cc',
     ]
 
-LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools']) for f in h] + [CXX(filename=f) for f in cc])
-        
-DIRECTORY(['tests'])
+LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

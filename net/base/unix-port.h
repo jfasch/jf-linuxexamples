@@ -17,22 +17,35 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
-#define HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
+#ifndef HAVE_JF_LINUXTOOLS_UNIX_PORT_H
+#define HAVE_JF_LINUXTOOLS_UNIX_PORT_H
 
-#include "ip-address.h"
-#include "tcp-endpoint.h"
+#include "unix-endpoint.h"
+
+#include <jf/linuxtools/fd.h>
+#include <jf/linuxtools/error.h>
 
 namespace jf {
 namespace linuxtools {
 
-/** Connect to a TCP port.
+class UNIXPort : public FD
+{
+public:
+    UNIXPort(const char* path);
 
-    \param address the IP address
-    \param port the port number
-    \throw ErrnoException
-*/
-TCPEndpoint tcp_connect(const IPAddress& address, uint16_t port);
+    /** Start listening (i.e., watching out for incoming connections).
+
+        @throws ErrnoException
+    */
+    void listen();
+
+    /** Accept one connection.
+
+        @return The accepted connection.
+        @throws ErrnoException
+     */
+    UNIXEndpoint accept();
+};
 
 }
 }

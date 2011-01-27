@@ -17,22 +17,21 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
-#define HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
+#ifndef HAVE_JF_LINUXTOOLS_UNIX_ENDPOINT_H
+#define HAVE_JF_LINUXTOOLS_UNIX_ENDPOINT_H
 
-#include "ip-address.h"
-#include "tcp-endpoint.h"
+#include <jf/linuxtools/fd.h>
 
 namespace jf {
 namespace linuxtools {
 
-/** Connect to a TCP port.
+class UNIXEndpoint : public FD
+{
+public:
+    UNIXEndpoint(int fd) : FD(fd) {}
 
-    \param address the IP address
-    \param port the port number
-    \throw ErrnoException
-*/
-TCPEndpoint tcp_connect(const IPAddress& address, uint16_t port);
+    // more things like getpeername() etc to come.
+};
 
 }
 }

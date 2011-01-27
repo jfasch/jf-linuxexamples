@@ -17,22 +17,28 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
-#define HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
+#ifndef HAVE_JF_LINUXTOOLS_SOCKADDR_UN_H
+#define HAVE_JF_LINUXTOOLS_SOCKADDR_UN_H
 
-#include "ip-address.h"
-#include "tcp-endpoint.h"
+#include <exception>
+#include <sys/socket.h>
+#include <sys/un.h>
 
 namespace jf {
 namespace linuxtools {
 
-/** Connect to a TCP port.
-
-    \param address the IP address
-    \param port the port number
-    \throw ErrnoException
-*/
-TCPEndpoint tcp_connect(const IPAddress& address, uint16_t port);
+class SockAddrUN : public sockaddr_un {
+public:
+    class PathTooLong : public std::exception
+    {
+    public:
+        ~PathTooLong() throw() {}
+        virtual const char* what() const throw() { return "Path too long"; }
+    };
+    
+public:
+    explicit SockAddrUN(const char* path);
+};
 
 }
 }

@@ -17,24 +17,21 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
-#define HAVE_JF_LINUXTOOLS_TCP_CONNECT_H
-
-#include "ip-address.h"
-#include "tcp-endpoint.h"
+#include "unix-address.h"
 
 namespace jf {
 namespace linuxtools {
 
-/** Connect to a TCP port.
-
-    \param address the IP address
-    \param port the port number
-    \throw ErrnoException
-*/
-TCPEndpoint tcp_connect(const IPAddress& address, uint16_t port);
+SockAddrUN::SockAddrUN(const char* path)
+{
+    size_t pathlen = strlen(path);
+    if (pathlen >= sizeof(this->sun_path))
+        throw PathTooLong();
+    
+    memset(this, 0, sizeof(*this));
+    this->sun_family = AF_UNIX;
+    memcpy(this->sun_path, path, pathlen);
+}
 
 }
 }
-
-#endif

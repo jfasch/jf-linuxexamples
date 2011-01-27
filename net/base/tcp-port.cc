@@ -26,31 +26,31 @@ namespace linuxtools {
 
 static int create_socket()
 {
-    int fd = ::socket(AF_INET, SOCK_STREAM, 0);
+    int fd = socket(AF_INET, SOCK_STREAM, 0);
     if (fd < 0)
-        assert(!"error handling");
+        throw ErrnoException(errno, "socket(AF_INET,SOCK_STREAM,0)");
     return fd;
 }
 
 static void bind_port(int fd, const IPAddress& address, uint16_t port)
 {
     struct sockaddr_in addr;
-    ::memset(&addr, 0, sizeof(addr));
+    memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_port = htons(port);
     addr.sin_addr = address;
 
-    if (::bind(fd, (const sockaddr*)&addr, sizeof(addr)) < 0)
-        assert(!"error handling");
+    if (bind(fd, (const sockaddr*)&addr, sizeof(addr)) < 0)
+        throw ErrnoException(errno, "bind()");
 }
 
 static uint16_t local_port_number(int fd)
 {
     sockaddr_in addr;
     size_t size = sizeof(addr);
-    ::memset(&addr, 0, size);
-    if (::getsockname(fd, (sockaddr*)&addr, &size) < 0)
-        assert(!"error handling");
+    memset(&addr, 0, size);
+    if (getsockname(fd, (sockaddr*)&addr, &size) < 0)
+        throw ErrnoException(errno, "getsockname()");
     assert(size==sizeof(sockaddr_in)); // OS paranoia
     return ntohs(addr.sin_port);
 }
@@ -87,7 +87,7 @@ TCPPort::TCPPort(uint16_t port)
 void TCPPort::listen()
 {
     if (::listen(this->fd(), SOMAXCONN) < 0)
-        assert(!"error handling");
+        throw ErrnoException(errno, "listen()");
 }
 
 uint16_t TCPPort::port() const
@@ -99,7 +99,8 @@ uint16_t TCPPort::port() const
 TCPEndpoint TCPPort::accept()
 {
     int newfd = ::accept(this->fd(), NULL, 0);
-    assert(newfd>=0); // error handling
+    if (newfd < 0)
+        throw ErrnoException(errno, "accept()");
     return TCPEndpoint(newfd);
 }
 
