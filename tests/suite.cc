@@ -25,6 +25,7 @@
 #include <jf/linuxtools/tests/events-suite.h>
 #include <jf/linuxtools/tests/linux-events-suite.h>
 #include <jf/linuxtools/tests/net-suite.h>
+#include <jf/linuxtools/tests/posix-ipc-suite.h>
 #include <jf/linuxtools/tests/debug-suite.h>
 
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/common-suite.h', REQUIRED)
@@ -33,6 +34,7 @@
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/events-suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/linux-events-suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/net-suite.h', REQUIRED)
+// CONFIX:REQUIRE_H('jf/linuxtools/tests/posix-ipc-suite.h', REQUIRED)
 // CONFIX:REQUIRE_H('jf/linuxtools/tests/debug-suite.h', REQUIRED)
 
 namespace jf {
@@ -47,6 +49,7 @@ Suite::Suite()
     add_test(new EventsSuite);
     add_test(new LinuxEventsSuite);
     add_test(new NetSuite);
+    add_test(new PosixIPCSuite);
     add_test(new DebugSuite);
 }
 
