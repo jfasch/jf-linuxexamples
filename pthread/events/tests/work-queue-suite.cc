@@ -24,8 +24,6 @@
 
 #include <jf/unittest/test_case.h>
 
-#include <cassert>
-
 namespace {
 
 using namespace jf::linuxtools;

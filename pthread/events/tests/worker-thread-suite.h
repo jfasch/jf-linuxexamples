@@ -17,22 +17,21 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "pthread-events-suite.h"
+#ifndef HAVE_JF_LINUXTOOLS_WORKER_THREAD_SUITE_H
+#define HAVE_JF_LINUXTOOLS_WORKER_THREAD_SUITE_H
 
-#include "event-message-queue-suite.h"
-#include "work-queue-suite.h"
-#include "worker-thread-suite.h"
+#include <jf/unittest/test_suite.h>
 
 namespace jf {
 namespace linuxtools {
 
-PthreadEventsSuite::PthreadEventsSuite()
-: jf::unittest::TestSuite("PthreadEvents")
+class WorkerThreadSuite : public jf::unittest::TestSuite
 {
-    add_test(new EventMessageQueueSuite);
-    add_test(new WorkQueueSuite);
-    add_test(new WorkerThreadSuite);
-}
+public:
+    WorkerThreadSuite();
+};
 
 }
 }
+
+#endif

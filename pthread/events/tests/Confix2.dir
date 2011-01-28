@@ -22,6 +22,7 @@ h = [
 
     'event-message-queue-suite.h',
     'work-queue-suite.h',
+    'worker-thread-suite.h',
     ]
 
 cc = [
@@ -29,6 +30,7 @@ cc = [
 
     'event-message-queue-suite.cc',
     'work-queue-suite.cc',
+    'worker-thread-suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

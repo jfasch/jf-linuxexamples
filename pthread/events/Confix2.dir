@@ -21,10 +21,12 @@ h = [
     'event-message-queue.h',
     'work.h',
     'work-queue.h',
+    'worker-thread.h',
     ]
 
 cc = [
     'work-queue.cc',
+    'worker-thread.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools']) for f in h] + [CXX(filename=f) for f in cc])
