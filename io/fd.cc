@@ -33,7 +33,7 @@ FD& FD::operator=(const FD& fd)
     return *this;
 }
 
-ssize_t FD::read(void* buf, size_t len)
+size_t FD::read(void* buf, size_t len)
 {
     assert(shared_fd_);
     ssize_t nread = ::read(shared_fd_->fd(), buf, len);
@@ -42,7 +42,7 @@ ssize_t FD::read(void* buf, size_t len)
     return nread;
 }
 
-ssize_t FD::pread(void* buf, size_t count, off_t offset)
+size_t FD::pread(void* buf, size_t count, off_t offset)
 {
     assert(shared_fd_);
     ssize_t nread = ::pread(shared_fd_->fd(), buf, count, offset);
@@ -51,7 +51,7 @@ ssize_t FD::pread(void* buf, size_t count, off_t offset)
     return nread;
 }
 
-ssize_t FD::write(const void* buf, size_t len)
+size_t FD::write(const void* buf, size_t len)
 {
     assert(shared_fd_);
     ssize_t nread = ::write(shared_fd_->fd(), buf, len);
@@ -60,7 +60,7 @@ ssize_t FD::write(const void* buf, size_t len)
     return nread;
 }
 
-ssize_t FD::pwrite(const void *buf, size_t count, off_t offset)
+size_t FD::pwrite(const void *buf, size_t count, off_t offset)
 {
     assert(shared_fd_);
     ssize_t nread = ::pwrite(shared_fd_->fd(), buf, count, offset);
@@ -69,7 +69,7 @@ ssize_t FD::pwrite(const void *buf, size_t count, off_t offset)
     return nread;
 }
 
-ssize_t FD::writeall(const void* buf, size_t len)
+void FD::writeall(const void* buf, size_t len)
 {
     assert(shared_fd_);
     const ssize_t retval = len;
@@ -84,7 +84,6 @@ ssize_t FD::writeall(const void* buf, size_t len)
         len -= nwritten;
         the_data += nwritten; 
     }
-    return retval;
 }
 
 int FD::fd() const

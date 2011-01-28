@@ -65,17 +65,17 @@ public:
         is a negative value, only the reference is released. */
     void set_fd(int fd);
     /** A wrapper around the read(2) system call. */
-    ssize_t read(void*, size_t);
+    size_t read(void*, size_t);
     /** A wrapper around the pread(2) system call. */
-    ssize_t pread(void* buf, size_t count, off_t offset);
+    size_t pread(void* buf, size_t count, off_t offset);
     /** A wrapper around the write(2) system call. */
-    ssize_t write(const void*, size_t);
+    size_t write(const void*, size_t);
     /** A wrapper around the pwrite(2) system call. */
-    ssize_t pwrite(const void *buf, size_t count, off_t offset);
+    size_t pwrite(const void *buf, size_t count, off_t offset);
     
     /** Call write(2) in a loop until all bytes are written or an
         error is encountered. */
-    ssize_t writeall(const void*, size_t);
+    void writeall(const void*, size_t);
     /** Close the underlying file descriptor the hard way. This means
         that all copies of this will be useless from here on. */
     void close() { if (shared_fd_) shared_fd_->close(); }
