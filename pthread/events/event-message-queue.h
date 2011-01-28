@@ -16,6 +16,7 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+
 #ifndef HAVE_JF_LINUXTOOLS_EVENT_MESSAGE_QUEUE_H
 #define HAVE_JF_LINUXTOOLS_EVENT_MESSAGE_QUEUE_H
 
@@ -34,10 +35,11 @@ namespace linuxtools {
     notifications when objects arrive at the producer side.
 
     The consumer (EventMessageQueue<T>::Consumer) receives callbacks
-    that carry the number of new messages. Messages are announced only
-    once, so care must be taken to correctly consume exactly the
-    amount of messages that have been announced. Otherwise, deadlocks
-    will happen.
+    that carry the number of new messages. The consumer, after having
+    consumed some of the messages, returns the number of consumed
+    messages.
+
+    The messages that were not consumed will be re-announced.
  */
 template<typename T>
 class EventMessageQueue : public Dispatchee, private Event::Handler
@@ -47,7 +49,7 @@ public:
     {
     public:
         virtual ~Consumer() {}
-        virtual void new_messages(const EventMessageQueue<T>* queue, size_t n_messages) = 0;
+        virtual size_t new_messages(const EventMessageQueue<T>* queue, size_t n_messages) = 0;
     };
     
 public:
@@ -92,7 +94,10 @@ private:
     //@{
     virtual void new_events(const Event*, uint64_t n)
     {
-        consumer_->new_messages(this, n);
+        size_t consumed = consumer_->new_messages(this, n);
+        size_t rest = n - consumed;
+        if (rest > 0)
+            event_.add(rest);
     }
     //@}
 

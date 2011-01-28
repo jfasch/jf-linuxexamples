@@ -30,6 +30,7 @@ namespace {
 
 using namespace jf::linuxtools;
 
+// -------------------------------------------------------------------
 class BasicTest : public jf::unittest::TestCase
 {
 public:
@@ -42,7 +43,11 @@ public:
         public:
             MyConsumer() : n_messages_(0) {}
             size_t n_messages() const { return n_messages_; }
-            virtual void new_messages(const EventMessageQueue<int>*, size_t n) { n_messages_ += n; }
+            virtual size_t new_messages(const EventMessageQueue<int>*, size_t n)
+            {
+                n_messages_ += n;
+                return n;
+            }
         private:
             size_t n_messages_;
         };
@@ -67,10 +72,11 @@ public:
     }
 };
 
+// -------------------------------------------------------------------
 class MultithreadedTestAMillionMessages : public jf::unittest::TestCase
 {
 public:
-    MultithreadedTestAMillionMessages() : jf::unittest::TestCase("Basic") {}
+    MultithreadedTestAMillionMessages() : jf::unittest::TestCase("MultithreadedTestAMillionMessages") {}
 
     virtual void run()
     {
@@ -93,15 +99,18 @@ public:
 
                     size_t total_messages() const { return total_messages_; }
                     
-                    virtual void new_messages(const EventMessageQueue<int>* queue, size_t n_messages)
+                    virtual size_t new_messages(const EventMessageQueue<int>* queue, size_t n_messages)
                     {
                         assert(queue == queue_);
 
+                        size_t rv = n_messages;
                         total_messages_ += n_messages;
                         while (n_messages--) {
                             int i;
                             queue_->pop(i);
                         }
+
+                        return rv;
                     }
                     
                 private:
@@ -152,6 +161,47 @@ public:
     }
 };
 
+// -------------------------------------------------------------------
+class Reannounce : public jf::unittest::TestCase
+{
+public:
+    Reannounce() : jf::unittest::TestCase("Reannounce") {}
+
+    virtual void run()
+    {
+        // consumes only one message on each call, and lets the rest
+        // (whatever that may be) for reannouncement.
+        class MyConsumer : public EventMessageQueue<int>::Consumer
+        {
+        public:
+            MyConsumer() : n_messages_(0) {}
+            size_t n_messages() const { return n_messages_; }
+            virtual size_t new_messages(const EventMessageQueue<int>*, size_t n)
+            {
+                n_messages_++;
+                return 1;
+            }
+        private:
+            size_t n_messages_;
+        };
+        
+        EventMessageQueue<int> mq(1000);
+
+        MyConsumer consumer;
+        mq.set_consumer(&consumer);
+        
+        Dispatcher dispatcher;
+        mq.activate_object(&dispatcher);
+
+        for (int i=0; i<1000; i++)
+            mq.push(i);
+        while (consumer.n_messages() != 1000)
+            dispatcher.dispatch();
+
+        mq.deactivate_object(&dispatcher);
+    }
+};
+
 }
 
 namespace jf {
@@ -162,6 +212,7 @@ EventMessageQueueSuite::EventMessageQueueSuite()
 {
     add_test(new BasicTest);
     add_test(new MultithreadedTestAMillionMessages);
+    add_test(new Reannounce);
 }
 
 }

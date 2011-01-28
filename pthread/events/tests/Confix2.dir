@@ -21,12 +21,14 @@ h = [
     'pthread-events-suite.h',
 
     'event-message-queue-suite.h',
+    'work-queue-suite.h',
     ]
 
 cc = [
     'pthread-events-suite.cc',
 
     'event-message-queue-suite.cc',
+    'work-queue-suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])
