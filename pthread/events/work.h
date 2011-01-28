@@ -17,20 +17,20 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "pthread-events-suite.h"
-
-#include "event-message-queue-suite.h"
-#include "work-queue-suite.h"
+#ifndef HAVE_JF_LINUXTOOLS_WORK_H
+#define HAVE_JF_LINUXTOOLS_WORK_H
 
 namespace jf {
 namespace linuxtools {
 
-PthreadEventsSuite::PthreadEventsSuite()
-: jf::unittest::TestSuite("PthreadEvents")
+class Work
 {
-    add_test(new EventMessageQueueSuite);
-    add_test(new WorkQueueSuite);
-}
+public:
+    virtual ~Work() {}
+    virtual void execute() = 0;
+};
 
 }
 }
+
+#endif

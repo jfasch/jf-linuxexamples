@@ -17,19 +17,57 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "pthread-events-suite.h"
-
-#include "event-message-queue-suite.h"
-#include "work-queue-suite.h"
+#include "work-queue.h"
 
 namespace jf {
 namespace linuxtools {
 
-PthreadEventsSuite::PthreadEventsSuite()
-: jf::unittest::TestSuite("PthreadEvents")
+WorkQueue::WorkQueue(size_t maxelem)
+: queue_(maxelem)
 {
-    add_test(new EventMessageQueueSuite);
-    add_test(new WorkQueueSuite);
+    queue_.set_consumer(this);
+}
+
+void
+WorkQueue::execute_work_async(
+    std::auto_ptr<Work> work)
+{
+    queue_.push(_QueueData(work));
+}
+
+void
+WorkQueue::execute_work_sync(
+    Work& work)
+{
+    Future<bool> sync;
+    queue_.push(_QueueData(&work, &sync));
+}
+
+void
+WorkQueue::activate_object(
+    Dispatcher* dispatcher)
+{
+    queue_.activate_object(dispatcher);
+}
+
+void
+WorkQueue::deactivate_object(
+    const Dispatcher* dispatcher)
+{
+    queue_.deactivate_object(dispatcher);
+}
+
+size_t
+WorkQueue::new_messages(
+    const EventMessageQueue<_QueueData>* queue,
+    size_t n_messages)
+{
+    _QueueData data;
+    queue_.pop(data);
+    data.work()->execute();
+    if (data.sync())
+        data.sync()->set(true);
+    return 1;
 }
 
 }

@@ -16,21 +16,21 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
+#ifndef HAVE_JF_LINUXTOOLS_WORK_QUEUE_SUITE_H
+#define HAVE_JF_LINUXTOOLS_WORK_QUEUE_SUITE_H
 
-#include "pthread-events-suite.h"
-
-#include "event-message-queue-suite.h"
-#include "work-queue-suite.h"
+#include <jf/unittest/test_suite.h>
 
 namespace jf {
 namespace linuxtools {
 
-PthreadEventsSuite::PthreadEventsSuite()
-: jf::unittest::TestSuite("PthreadEvents")
+class WorkQueueSuite : public jf::unittest::TestSuite
 {
-    add_test(new EventMessageQueueSuite);
-    add_test(new WorkQueueSuite);
-}
+public:
+    WorkQueueSuite();
+};
 
 }
 }
+
+#endif
