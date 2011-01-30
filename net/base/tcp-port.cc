@@ -47,8 +47,8 @@ static void bind_port(int fd, const IPAddress& address, uint16_t port)
 static uint16_t local_port_number(int fd)
 {
     sockaddr_in addr;
-    size_t size = sizeof(addr);
-    memset(&addr, 0, size);
+    memset(&addr, 0, sizeof(addr));
+    socklen_t size = sizeof(addr);
     if (getsockname(fd, (sockaddr*)&addr, &size) < 0)
         throw ErrnoException(errno, "getsockname()");
     assert(size==sizeof(sockaddr_in)); // OS paranoia

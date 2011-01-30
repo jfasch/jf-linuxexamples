@@ -20,6 +20,7 @@
 #include "error.h"
 
 #include <string.h>
+#include <stdio.h>
 
 namespace jf {
 namespace linuxtools {
