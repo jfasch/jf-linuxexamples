@@ -41,6 +41,8 @@ WorkQueue::execute_work_sync(
 {
     Future<bool> sync;
     queue_.push(_QueueData(&work, &sync));
+    // synchronize with work execution.
+    sync.get();
 }
 
 void
