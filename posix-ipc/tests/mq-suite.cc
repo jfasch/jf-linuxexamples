@@ -23,9 +23,11 @@
 
 #include <jf/unittest/test_case.h>
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <mqueue.h>
+#include <sys/wait.h>
 
 namespace {
 
@@ -42,6 +44,7 @@ static RandomInit randominit;
 
 using namespace jf::linuxtools;
 
+// ------------------------------------------------------------
 class BasicTest : public jf::unittest::TestCase
 {
 public:
@@ -72,6 +75,50 @@ private:
     std::string mqname_;
 };
 
+// ------------------------------------------------------------
+class UnrelatedProcessesUsingSameMQ : public jf::unittest::TestCase
+{
+public:
+    UnrelatedProcessesUsingSameMQ() : jf::unittest::TestCase("UnrelatedProcessesUsingSameMQ") {}
+    virtual void teardown()
+    {
+        mq_unlink(mqname_.c_str());
+    }
+    virtual void run()
+    {
+        char tmp[128];
+        sprintf(tmp, "/MQSuite-Basic-%ld", random());
+        mqname_ = tmp;
+        
+        MQ::create(mqname_.c_str(), O_RDWR, 0600, MQ::Attr().set_maxmsg(5).set_msgsize(1));
+
+        pid_t producer = fork();
+        if (producer == 0) { // child
+            MQ mq_produce = MQ::open(mqname_.c_str(), O_WRONLY);
+            const char c = 'a'; 
+            mq_produce.send(&c, 1, 0);
+            exit(0);
+        }
+        pid_t consumer = fork();
+        if (consumer == 0) { // child
+            MQ mq_consume = MQ::open(mqname_.c_str(), O_RDONLY);
+            char c;
+            size_t nread = mq_consume.receive(&c, 1);
+            if (nread != 1)
+                exit(1);
+            if (c != 'a')
+                exit(1);
+            exit(0);
+        }
+
+        JFUNIT_ASSERT(waitpid(producer, NULL, 0) == producer);
+        JFUNIT_ASSERT(waitpid(consumer, NULL, 0) == consumer);
+    }
+
+private:
+    std::string mqname_;
+};
+
 }
 
 namespace jf {
@@ -81,6 +128,7 @@ MQSuite::MQSuite()
 : jf::unittest::TestSuite("MQ")
 {
     add_test(new BasicTest);
+    add_test(new UnrelatedProcessesUsingSameMQ);
 }
 
 }
