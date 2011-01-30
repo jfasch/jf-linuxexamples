@@ -46,10 +46,10 @@ public:
         sprintf(prefix, "UNIXDomain-BasicTest-%d", getpid());
         socketname_ = tempnam("/tmp", prefix);
         
-        UNIXPort port(socketname_.c_str());
+        UNIXPort port(socketname_);
         port.listen();
 
-        UNIXEndpoint client_connection = unix_connect(socketname_.c_str());
+        UNIXEndpoint client_connection = unix_connect(socketname_);
         UNIXEndpoint server_connection = port.accept();
 
         JFUNIT_ASSERT(client_connection.write("", 1) == 1);

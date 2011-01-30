@@ -22,6 +22,8 @@
 
 #include "unix-endpoint.h"
 
+#include <string>
+
 namespace jf {
 namespace linuxtools {
 
@@ -32,6 +34,17 @@ namespace linuxtools {
     \throws SockAddrUN::PathTooLong
 */    
 UNIXEndpoint unix_connect(const char* path);
+
+/** Connect to a UNIX domain socket.
+
+    \param path the path of the socket
+    \throws ErrnoException
+    \throws SockAddrUN::PathTooLong
+*/    
+inline UNIXEndpoint unix_connect(const std::string& path)
+{
+    return unix_connect(path.c_str());
+}
 
 }
 }

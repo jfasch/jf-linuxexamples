@@ -48,8 +48,8 @@ public:
     SemaphoreTest() : jf::unittest::TestCase("Semaphore") {}
     virtual void teardown()
     {
-        SEM::unlink(sem_kickright_name_.c_str());
-        SEM::unlink(sem_kickleft_name_.c_str());
+        SEM::unlink(sem_kickright_name_);
+        SEM::unlink(sem_kickleft_name_);
     }
     virtual void run()
     {
@@ -63,15 +63,15 @@ public:
         // create two semaphores, and close them immediately
         // afterwards. they're only for the two children's use.
         {
-            SEM sem_kickright = SEM::create(sem_kickright_name_.c_str(), O_RDWR, 0600, 0);
-            SEM sem_kickleft = SEM::create(sem_kickleft_name_.c_str(), O_RDWR, 0600, 0);
+            SEM sem_kickright = SEM::create(sem_kickright_name_, O_RDWR, 0600, 0);
+            SEM sem_kickleft = SEM::create(sem_kickleft_name_, O_RDWR, 0600, 0);
         }
 
         // child "left" kicks right, and then waits to be kicked.
         pid_t left = fork();
         if (left == 0) { // child
-            SEM sem_kickright = SEM::open(sem_kickright_name_.c_str(), O_RDWR);
-            SEM sem_kickleft = SEM::open(sem_kickleft_name_.c_str(), O_RDONLY /* we only wait */);
+            SEM sem_kickright = SEM::open(sem_kickright_name_, O_RDWR);
+            SEM sem_kickleft = SEM::open(sem_kickleft_name_, O_RDONLY /* we only wait */);
             sem_kickright.post();
             sem_kickleft.wait();
             exit(0);
@@ -80,8 +80,8 @@ public:
         // child "right" waits to be kicked, and then kicks left.
         pid_t right = fork();
         if (right == 0) { // child
-            SEM sem_kickright = SEM::open(sem_kickright_name_.c_str(), O_RDONLY /* we only wait */);
-            SEM sem_kickleft = SEM::open(sem_kickleft_name_.c_str(), O_RDWR);
+            SEM sem_kickright = SEM::open(sem_kickright_name_, O_RDONLY /* we only wait */);
+            SEM sem_kickleft = SEM::open(sem_kickleft_name_, O_RDWR);
             sem_kickright.wait();
             sem_kickleft.post();
             exit(0);

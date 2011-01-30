@@ -42,6 +42,11 @@ MQ MQ::create(const char* path, int oflag, mode_t mode, const Attr& attr)
     return ret;
 }
 
+MQ MQ::create(const std::string& path, int oflag, mode_t mode, const Attr& attr)
+{
+    return create(path.c_str(), oflag, mode, attr);
+}
+
 MQ MQ::open(const char* path, int oflag)
 {
     assert(!(oflag&O_CREAT));
@@ -54,10 +59,20 @@ MQ MQ::open(const char* path, int oflag)
     return ret;
 }
 
+MQ MQ::open(const std::string& path, int oflag)
+{
+    return open(path.c_str(), oflag);
+}
+
 void MQ::unlink(const char* path)
 {
     if (mq_unlink(path) < 0)
         throw ErrnoException(errno, "mq_unlink()");
+}
+
+void MQ::unlink(const std::string& path)
+{
+    unlink(path.c_str());
 }
 
 void MQ::send(const char* msg, size_t msg_len, unsigned priority)

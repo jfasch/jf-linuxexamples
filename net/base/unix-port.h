@@ -25,6 +25,8 @@
 #include <jf/linuxtools/fd.h>
 #include <jf/linuxtools/error.h>
 
+#include <string>
+
 namespace jf {
 namespace linuxtools {
 
@@ -32,6 +34,7 @@ class UNIXPort : public FD
 {
 public:
     UNIXPort(const char* path);
+    UNIXPort(const std::string& path);
 
     /** Start listening (i.e., watching out for incoming connections).
 

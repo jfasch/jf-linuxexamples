@@ -22,6 +22,7 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include <string>
 #include <semaphore.h>
 #include <fcntl.h>           /* For O_* constants */
 #include <sys/stat.h>        /* For mode constants */
@@ -35,8 +36,13 @@ class SEM
 {
 public:
     static SEM create(const char* path, int oflag, mode_t, unsigned int value);
+    static SEM create(const std::string& path, int oflag, mode_t, unsigned int value);
+
     static SEM open(const char* path, int oflag);
+    static SEM open(const std::string& path, int oflag);
+
     static void unlink(const char* path);
+    static void unlink(const std::string& path);
 
     void post();
     void wait();

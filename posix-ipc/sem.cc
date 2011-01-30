@@ -40,6 +40,11 @@ SEM SEM::create(const char* path, int oflag, mode_t mode, unsigned int value)
     return SEM(sem);
 }
 
+SEM SEM::create(const std::string& path, int oflag, mode_t mode, unsigned int value)
+{
+    return create(path.c_str(), oflag, mode, value);
+}
+
 SEM SEM::open(const char* path, int oflag)
 {
     assert(!(oflag&O_CREAT));
@@ -51,10 +56,20 @@ SEM SEM::open(const char* path, int oflag)
     return SEM(sem);
 }
 
+SEM SEM::open(const std::string& path, int oflag)
+{
+    return open(path.c_str(), oflag);
+}
+
 void SEM::unlink(const char* path)
 {
     if (sem_unlink(path) < 0)
         throw ErrnoException(errno, "sem_unlink()");
+}
+
+void SEM::unlink(const std::string& path)
+{
+    unlink(path.c_str());
 }
 
 void SEM::post()

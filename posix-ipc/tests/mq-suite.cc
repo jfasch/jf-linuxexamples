@@ -51,7 +51,7 @@ public:
     BasicTest() : jf::unittest::TestCase("Basic") {}
     virtual void teardown()
     {
-        MQ::unlink(mq_name_.c_str());
+        MQ::unlink(mq_name_);
     }
     virtual void run()
     {
@@ -59,8 +59,8 @@ public:
         sprintf(tmp, "/MQSuite-Basic-%ld", random());
         mq_name_ = tmp;
         
-        MQ mq_produce = MQ::create(mq_name_.c_str(), O_WRONLY, 0600, MQ::Attr().set_maxmsg(5).set_msgsize(1));
-        MQ mq_consume = MQ::open(mq_name_.c_str(), O_RDONLY);
+        MQ mq_produce = MQ::create(mq_name_, O_WRONLY, 0600, MQ::Attr().set_maxmsg(5).set_msgsize(1));
+        MQ mq_consume = MQ::open(mq_name_, O_RDONLY);
 
         char msg_sent = 'a';
         mq_produce.send(&msg_sent, 1, 0);
@@ -82,7 +82,7 @@ public:
     UnrelatedProcessesUsingSameMQ() : jf::unittest::TestCase("UnrelatedProcessesUsingSameMQ") {}
     virtual void teardown()
     {
-        MQ::unlink(mq_name_.c_str());
+        MQ::unlink(mq_name_);
     }
     virtual void run()
     {
@@ -90,18 +90,18 @@ public:
         sprintf(tmp, "/MQSuite-Basic-%ld", random());
         mq_name_ = tmp;
         
-        MQ::create(mq_name_.c_str(), O_RDWR, 0600, MQ::Attr().set_maxmsg(5).set_msgsize(1));
+        MQ::create(mq_name_, O_RDWR, 0600, MQ::Attr().set_maxmsg(5).set_msgsize(1));
 
         pid_t producer = fork();
         if (producer == 0) { // child
-            MQ mq_produce = MQ::open(mq_name_.c_str(), O_WRONLY);
+            MQ mq_produce = MQ::open(mq_name_, O_WRONLY);
             const char c = 'a'; 
             mq_produce.send(&c, 1, 0);
             exit(0);
         }
         pid_t consumer = fork();
         if (consumer == 0) { // child
-            MQ mq_consume = MQ::open(mq_name_.c_str(), O_RDONLY);
+            MQ mq_consume = MQ::open(mq_name_, O_RDONLY);
             char c = 0; // valgrind does not know about mq_receive()
             size_t nread = mq_consume.receive(&c, 1);
             if (nread != 1)

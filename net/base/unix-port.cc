@@ -28,18 +28,31 @@
 namespace jf {
 namespace linuxtools {
 
-UNIXPort::UNIXPort(const char* path)
+static int make_socket()
 {
     int fd = ::socket(AF_UNIX, SOCK_STREAM, 0);
     if (fd < 0)
         throw ErrnoException(errno, "socket(AF_UNIX,SOCK_STREAM,0)");
+    return fd;
+}
 
-    // eat fd early for proper cleanup if need be.
-    this->set_fd(fd);
-
+static void bind_socket(int fd, const char* path)
+{
     SockAddrUN addr(path);
     if (bind(fd, (const sockaddr*)&addr, sizeof(addr)) < 0)
         throw ErrnoException(errno, "bind()");
+}
+
+UNIXPort::UNIXPort(const char* path)
+{
+    this->set_fd(make_socket());
+    bind_socket(this->fd(), path);
+}
+
+UNIXPort::UNIXPort(const std::string& path)
+{
+    this->set_fd(make_socket());
+    bind_socket(this->fd(), path.c_str());
 }
 
 void UNIXPort::listen()

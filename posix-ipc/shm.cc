@@ -39,6 +39,11 @@ SHM SHM::create(const char* path, int oflag, mode_t mode, off_t size)
     return ret;
 }
 
+SHM SHM::create(const std::string& path, int oflag, mode_t mode, off_t size)
+{
+    return create(path.c_str(), oflag, mode, size);
+}
+
 SHM SHM::open(const char* path, int oflag)
 {
     assert(!(oflag&O_CREAT));
@@ -51,10 +56,20 @@ SHM SHM::open(const char* path, int oflag)
     return ret;
 }
 
+SHM SHM::open(const std::string& path, int oflag)
+{
+    return open(path.c_str(), oflag);
+}
+
 void SHM::unlink(const char* path)
 {
     if (shm_unlink(path) < 0)
         throw ErrnoException(errno, "shm_unlink()");
+}
+
+void SHM::unlink(const std::string& path)
+{
+    unlink(path.c_str());
 }
 
 void* SHM::map(size_t length, int prot, int flags, off_t offset)

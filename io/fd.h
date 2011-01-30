@@ -57,6 +57,7 @@ public:
     FD& operator=(const FD&);
     //@}
 
+
     /** Get the file descriptor. If the FD object is invalid, -1 is
         returned. */
     int fd() const;

@@ -22,6 +22,7 @@
 
 #include <jf/linuxtools/fd.h>
 
+#include <string>
 #include <mqueue.h>
 #include <fcntl.h>           /* For O_* constants */
 #include <sys/stat.h>        /* For mode constants */
@@ -45,8 +46,13 @@ public:
     };
 
     static MQ create(const char* path, int oflag, mode_t, const Attr&);
+    static MQ create(const std::string& path, int oflag, mode_t, const Attr&);
+
     static MQ open(const char* path, int oflag);
+    static MQ open(const std::string& path, int oflag);
+
     static void unlink(const char* path);
+    static void unlink(const std::string& path);
 
 public:
     MQ() : max_msgsize_(-1) {}

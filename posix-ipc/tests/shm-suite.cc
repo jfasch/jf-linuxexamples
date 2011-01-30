@@ -48,7 +48,7 @@ public:
     BasicTest() : jf::unittest::TestCase("Basic") {}
     virtual void teardown()
     {
-        SHM::unlink(shm_name_.c_str());
+        SHM::unlink(shm_name_);
     }
     virtual void run()
     {
@@ -56,10 +56,10 @@ public:
         sprintf(tmp, "/SHMSuite-Basic-%ld", random());
         shm_name_ = tmp;
 
-        SHM shm1 = SHM::create(shm_name_.c_str(), O_RDWR, 0600, 1024);
+        SHM shm1 = SHM::create(shm_name_, O_RDWR, 0600, 1024);
         void* shm_region_1 = shm1.map(1024, PROT_WRITE|PROT_READ, MAP_SHARED, 0);
 
-        SHM shm2 = SHM::open(shm_name_.c_str(), O_RDONLY);
+        SHM shm2 = SHM::open(shm_name_, O_RDONLY);
         void* shm_region_2 = shm2.map(1024, PROT_READ, MAP_SHARED, 0);
 
         *(((char*)shm_region_1)+2) = 'a';
@@ -77,7 +77,7 @@ public:
     UnrelatedProcessesUsingSameSHM() : jf::unittest::TestCase("UnrelatedProcessesUsingSameSHM") {}
     virtual void teardown()
     {
-        SHM::unlink(shm_name_.c_str());
+        SHM::unlink(shm_name_);
     }
     virtual void run()
     {
@@ -85,12 +85,12 @@ public:
         sprintf(tmp, "/SHMSuite-Basic-%ld", random());
         shm_name_ = tmp;
 
-        SHM shm = SHM::create(shm_name_.c_str(), O_RDWR, 0600, 1024);
+        SHM shm = SHM::create(shm_name_, O_RDWR, 0600, 1024);
         shm = SHM();
 
         pid_t setter = fork();
         if (setter == 0) { // child
-            SHM set_shm = SHM::open(shm_name_.c_str(), O_RDWR);
+            SHM set_shm = SHM::open(shm_name_, O_RDWR);
             void* memory;
             try { memory = set_shm.map(1024, PROT_WRITE, MAP_SHARED, 0); }
             catch (const std::exception&) { exit(1); }
@@ -105,7 +105,7 @@ public:
 
         pid_t getter = fork();
         if (getter == 0) { // child
-            SHM get_shm = SHM::open(shm_name_.c_str(), O_RDONLY);
+            SHM get_shm = SHM::open(shm_name_, O_RDONLY);
             void* memory;
             try { memory = get_shm.map(1024, PROT_READ, MAP_SHARED, 0); }
             catch (const std::exception&) { exit(1); }
