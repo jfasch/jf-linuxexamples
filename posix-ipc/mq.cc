@@ -54,6 +54,12 @@ MQ MQ::open(const char* path, int oflag)
     return ret;
 }
 
+void MQ::unlink(const char* path)
+{
+    if (mq_unlink(path) < 0)
+        throw ErrnoException(errno, "mq_unlink()");
+}
+
 void MQ::send(const char* msg, size_t msg_len, unsigned priority)
 {
     if (mq_send(this->fd(), msg, msg_len, priority) < 0)

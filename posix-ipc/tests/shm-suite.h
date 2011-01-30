@@ -17,20 +17,21 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "posix-ipc-suite.h"
+#ifndef HAVE_JF_LINUXTOOLS_SHM_SUITE_SUITE_H
+#define HAVE_JF_LINUXTOOLS_SHM_SUITE_SUITE_H
 
-#include "mq-suite.h"
-#include "shm-suite.h"
+#include <jf/unittest/test_suite.h>
 
 namespace jf {
 namespace linuxtools {
 
-PosixIPCSuite::PosixIPCSuite()
-: jf::unittest::TestSuite("PosixIPC")
+class SHMSuite : public jf::unittest::TestSuite
 {
-    add_test(new MQSuite);
-    add_test(new SHMSuite);
-}
+public:
+    SHMSuite();
+};
 
 }
 }
+
+#endif

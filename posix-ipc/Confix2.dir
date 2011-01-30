@@ -17,12 +17,17 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
+# POSIX message queues need -lrt
+REQUIRE_SYMBOL('jf.linuxtools.externals.rt', REQUIRED)
+
 h = [
     'mq.h',
+    'shm.h',
     ]
 
 cc = [
     'mq.cc',
+    'shm.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools']) for f in h] + [CXX(filename=f) for f in cc])
