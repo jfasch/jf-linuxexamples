@@ -17,8 +17,8 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_SHM_SUITE_SUITE_H
-#define HAVE_JF_LINUXTOOLS_SHM_SUITE_SUITE_H
+#ifndef HAVE_JF_LINUXTOOLS_SHM_SUITE_H
+#define HAVE_JF_LINUXTOOLS_SHM_SUITE_H
 
 #include <jf/unittest/test_suite.h>
 

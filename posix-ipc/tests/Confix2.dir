@@ -22,6 +22,7 @@ h = [
 
     'mq-suite.h',
     'shm-suite.h',
+    'sem-suite.h',
     ]
 
 cc = [
@@ -29,6 +30,7 @@ cc = [
 
     'mq-suite.cc',
     'shm-suite.cc',
+    'sem-suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

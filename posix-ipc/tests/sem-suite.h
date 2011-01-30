@@ -17,18 +17,18 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_MQ_SUITE_H
-#define HAVE_JF_LINUXTOOLS_MQ_SUITE_H
+#ifndef HAVE_JF_LINUXTOOLS_SEM_SUITE_H
+#define HAVE_JF_LINUXTOOLS_SEM_SUITE_H
 
 #include <jf/unittest/test_suite.h>
 
 namespace jf {
 namespace linuxtools {
 
-class MQSuite : public jf::unittest::TestSuite
+class SEMSuite : public jf::unittest::TestSuite
 {
 public:
-    MQSuite();
+    SEMSuite();
 };
 
 }

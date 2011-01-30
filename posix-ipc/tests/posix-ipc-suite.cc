@@ -21,6 +21,7 @@
 
 #include "mq-suite.h"
 #include "shm-suite.h"
+#include "sem-suite.h"
 
 namespace jf {
 namespace linuxtools {
@@ -30,6 +31,7 @@ PosixIPCSuite::PosixIPCSuite()
 {
     add_test(new MQSuite);
     add_test(new SHMSuite);
+    add_test(new SEMSuite);
 }
 
 }

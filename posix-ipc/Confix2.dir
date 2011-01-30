@@ -23,11 +23,13 @@ REQUIRE_SYMBOL('jf.linuxtools.externals.rt', REQUIRED)
 h = [
     'mq.h',
     'shm.h',
+    'sem.h',
     ]
 
 cc = [
     'mq.cc',
     'shm.cc',
+    'sem.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools']) for f in h] + [CXX(filename=f) for f in cc])
