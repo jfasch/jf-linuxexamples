@@ -17,19 +17,18 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#ifndef HAVE_JF_LINUXTOOLS_BASIC_THREAD_TEST_H
-#define HAVE_JF_LINUXTOOLS_BASIC_THREAD_TEST_H
+#ifndef HAVE_JF_LINUXTOOLS_BASIC_THREAD_SUITE_H
+#define HAVE_JF_LINUXTOOLS_BASIC_THREAD_SUITE_H
 
-#include <jf/unittest/test_case.h>
+#include <jf/unittest/test_suite.h>
 
 namespace jf {
 namespace linuxtools {
 
-class BasicThreadTest : public jf::unittest::TestCase
+class BasicThreadSuite : public jf::unittest::TestSuite
 {
 public:
-    BasicThreadTest() : jf::unittest::TestCase("Basic") {}
-    virtual void run();
+    BasicThreadSuite();
 };
 
 }

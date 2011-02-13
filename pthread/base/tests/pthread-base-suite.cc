@@ -19,7 +19,7 @@
 
 #include "pthread-base-suite.h"
 
-#include "basic-thread-test.h"
+#include "basic-thread-suite.h"
 #include "timed-condition-test.h"
 #include "tsd-suite.h"
 
@@ -29,7 +29,7 @@ namespace linuxtools {
 PthreadBaseSuite::PthreadBaseSuite()
 : jf::unittest::TestSuite("PthreadBase")
 {
-    add_test(new BasicThreadTest);
+    add_test(new BasicThreadSuite);
     add_test(new TimedConditionTest);
     add_test(new ThreadSpecificDataSuite);
 }

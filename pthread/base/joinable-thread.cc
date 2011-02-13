@@ -27,21 +27,40 @@ namespace jf {
 namespace linuxtools {
 
 JoinableThreadStarter::JoinableThreadStarter(Worker* w)
-: joined_(false)
+: state_(S_INIT)
 {
     args_.worker(w);
     ::memset(&thread_, 0, sizeof(thread_));
 }
 
 JoinableThreadStarter::JoinableThreadStarter(const Args& a)
-: args_(a) {}
+: state_(S_INIT),
+  args_(a) {}
 
 JoinableThreadStarter::~JoinableThreadStarter() {
-    if (!joined_)
-        join();
+    switch (state_) {
+        case S_INIT:
+            break;
+        case S_STARTED:
+            join();
+            break;
+        case S_JOINED:
+            break;
+    }
 }
 
 bool JoinableThreadStarter::start() {
+    switch (state_) {
+        case S_INIT:
+            break;
+        case S_STARTED:
+            assert(!"already started");
+            break;
+        case S_JOINED:
+            assert(!"already joined");
+            break;
+    }
+    
     pthread_attr_t attr;
     pthread_attr_t* pattr;
     int err;
@@ -90,7 +109,9 @@ bool JoinableThreadStarter::start() {
             }
         };
     }
-                
+
+    state_ = S_STARTED;
+
     err = ::pthread_create(&thread_, pattr, start_, this);
     if (err) {
         // hmm. need error handling badly. confix-style exceptions
@@ -102,13 +123,26 @@ bool JoinableThreadStarter::start() {
     return true;
 }
 
-void JoinableThreadStarter::join() {
-    joined_ = true;
-    int err = ::pthread_join(thread_, NULL);
-    assert(!err);
+void JoinableThreadStarter::join()
+{
+    switch (state_) {
+        case S_INIT:
+            assert(!"not yet started");
+            break;
+        case S_STARTED: {
+            int err = ::pthread_join(thread_, NULL);
+            assert(!err);
+            state_ = S_JOINED;
+            break;
+        }
+        case S_JOINED:
+            assert(!"already joined");
+            break;
+    }
 }
 
-void* JoinableThreadStarter::start_(void* obj) {
+void* JoinableThreadStarter::start_(void* obj)
+{
     JoinableThreadStarter* t = static_cast<JoinableThreadStarter*>(obj);
 
     t->args_.worker()->run();

@@ -102,9 +102,16 @@ public:
 private:
     static void* start_(void*);
 
+public:
+    enum State {
+      S_INIT,
+      S_STARTED,
+      S_JOINED
+    };
+    
 private:
+    State state_;
     pthread_t thread_;
-    bool joined_;
     Args args_;
 };
 

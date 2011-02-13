@@ -20,7 +20,7 @@
 h = [
     'pthread-base-suite.h',
 
-    'basic-thread-test.h',
+    'basic-thread-suite.h',
     'timed-condition-test.h',
     'tsd-suite.h',
     ]
@@ -28,7 +28,7 @@ h = [
 cc = [
     'pthread-base-suite.cc',
 
-    'basic-thread-test.cc',
+    'basic-thread-suite.cc',
     'timed-condition-test.cc',
     'tsd-suite.cc',
     ]
