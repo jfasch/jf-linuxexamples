@@ -20,10 +20,45 @@
 #include "suite.h"
 
 #include <jf/unittest/tree_test_runner.h>
+#include <jf/unittest/find.h>
 
-int main()
+#include <iostream>
+#include <cassert>
+#include <unistd.h>
+#include <stdlib.h>
+
+using namespace std;
+
+int main(int argc, char** argv)
 {
-    jf::linuxtools::Suite suite;
-    jf::unittest::TreeTestRunner runner;
-    return runner.run(&suite)? 0: 1;
+    bool print_path = false;
+    char opt;
+    while ((opt = getopt(argc, argv, "p")) != -1) {
+        switch (opt) {
+            case 'p':
+                print_path = true;
+                break;
+            default:
+                assert(false);
+                exit(1);
+                break;
+        }
+    }
+
+    const char* path = (optind < argc)? argv[optind]: NULL;
+
+    jf::unittest::TestSuite search_root("search_root");
+    jf::unittest::TestSuite* suite = new jf::linuxtools::Suite;
+    search_root.add_test(suite);
+
+    jf::unittest::Test* run_test = suite;
+    if (path != NULL) {
+        run_test = jf::unittest::find(&search_root, path);
+        if (run_test == NULL) {
+            std::cerr << "Path not found: " << path << std::endl;
+            return 1;
+        }
+    }
+    jf::unittest::TreeTestRunner runner(print_path);
+    return runner.run(run_test)? 0: 1;
 }
