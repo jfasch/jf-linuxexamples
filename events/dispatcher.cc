@@ -100,17 +100,22 @@ void Dispatcher::dispatch()
     }
     assert(retval>0); // we don't pass a timeout
 
+    // call back notified fd-handlers. take care that, although an fd
+    // is notified, its handler might get unregistered by others
+    // during the callback phase.
     for (int fd=0; fd<=max_fd; fd++)
         if (FD_ISSET(fd, &in_fds)) {
             HandlerSet::const_iterator found = saved_in_handlers.find(fd);
             assert(found!=saved_in_handlers.end());
-            found->second->in_ready(fd);
+            if (in_handlers_.find(fd) != in_handlers_.end())
+                found->second->in_ready(fd);
         }
     for (int fd=0; fd<=max_fd; fd++)
         if (FD_ISSET(fd, &out_fds)) {
             HandlerSet::const_iterator found = saved_out_handlers.find(fd);
             assert(found!=saved_out_handlers.end());
-            found->second->out_ready(fd);
+            if (out_handlers_.find(fd) != out_handlers_.end())
+                found->second->out_ready(fd);
         }
 }
 

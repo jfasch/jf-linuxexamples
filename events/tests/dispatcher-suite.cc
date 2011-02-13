@@ -29,10 +29,11 @@ namespace {
 
 using namespace jf::linuxtools;
 
-class DispatcherBasicTest : public jf::unittest::TestCase
+// --------------------------------------------------------------
+class Basic : public jf::unittest::TestCase
 {
 public:
-    DispatcherBasicTest() : jf::unittest::TestCase("Basic") {}
+    Basic() : jf::unittest::TestCase("Basic") {}
 
     virtual void setup() { handler_.activate_object(&dispatcher_); }
     virtual void teardown() { handler_.deactivate_object(&dispatcher_); }
@@ -79,6 +80,62 @@ private:
     MyHandler handler_;
 };
 
+// --------------------------------------------------------------
+class UnregisterSelfWhileInCallback : public jf::unittest::TestCase
+{
+public:
+    UnregisterSelfWhileInCallback()
+    : jf::unittest::TestCase("UnregisterSelfWhileInCallback"),
+      seen_(false) {}
+    
+    virtual void setup()
+    {
+        handler_ = new MyHandler(&seen_);
+        handler_->activate_object(&dispatcher_);
+    }
+    virtual void run()
+    {
+        while (!seen_)
+            dispatcher_.dispatch();
+    }
+
+private:
+    class MyHandler : private Dispatcher::Handler
+    {
+    public:
+        MyHandler(bool* seen) : dispatcher_(NULL), seen_(seen) {}
+        void activate_object(Dispatcher* d) {
+            assert(dispatcher_==NULL);
+            dispatcher_ = d;
+            d->watch_in(channel_.left().fd(), this);
+            d->watch_out(channel_.right().fd(), this);
+        }
+        virtual void out_ready(int fd) {
+            const char x = 1;
+            channel_.right().write(&x, 1);
+        }
+        virtual void in_ready(int fd) {
+            char x;
+            channel_.left().read(&x, 1);
+            
+            dispatcher_->unwatch_in(channel_.left().fd(), this);
+            dispatcher_->unwatch_out(channel_.right().fd(), this);
+            
+            // set the chef's quit flag, and delete self.
+            *seen_ = true;
+            delete this;
+        }
+    private:
+        Dispatcher* dispatcher_;
+        SocketPair channel_;
+        bool* seen_; 
+    };
+
+    Dispatcher dispatcher_;
+    bool seen_;
+    MyHandler* handler_;
+};
+
 }
 
 namespace jf {
@@ -87,7 +144,8 @@ namespace linuxtools {
 DispatcherSuite::DispatcherSuite()
 : jf::unittest::TestSuite("Dispatcher")
 {
-    add_test(new DispatcherBasicTest);
+    add_test(new Basic);
+    add_test(new UnregisterSelfWhileInCallback);
 }
 
 }
