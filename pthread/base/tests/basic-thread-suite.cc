@@ -81,8 +81,8 @@ namespace linuxtools {
 BasicThreadSuite::BasicThreadSuite()
 : jf::unittest::TestSuite("Basic")
 {
-    add_test(new BasicThreadTest);
-    add_test(new DeleteWithoutStart);
+    add_test(std::auto_ptr<Test>(new BasicThreadTest));
+    add_test(std::auto_ptr<Test>(new DeleteWithoutStart));
 }
 
 }

@@ -28,8 +28,8 @@ namespace linuxtools {
 CommonSuite::CommonSuite()
 : jf::unittest::TestSuite("Common")
 {
-    add_test(new FileUtilSuite);
-    add_test(new TimeSpecSuite);
+    add_test(std::auto_ptr<Test>(new FileUtilSuite));
+    add_test(std::auto_ptr<Test>(new TimeSpecSuite));
 }
 
 }

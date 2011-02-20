@@ -129,8 +129,8 @@ public:
 ThreadSpecificDataSuite::ThreadSpecificDataSuite()
 : jf::unittest::TestSuite("ThreadSpecificData")
 {
-    add_test(new SeparateValuesTest);
-    add_test(new DestructorTest);
+    add_test(std::auto_ptr<Test>(new SeparateValuesTest));
+    add_test(std::auto_ptr<Test>(new DestructorTest));
 }
 
 }

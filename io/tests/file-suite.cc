@@ -84,7 +84,7 @@ namespace linuxtools {
 FileSuite::FileSuite()
 : jf::unittest::TestSuite("File")
 {
-    add_test(new FileCreateOpenTest);
+    add_test(std::auto_ptr<Test>(new FileCreateOpenTest));
 }
 
 }

@@ -210,9 +210,9 @@ namespace linuxtools {
 EventMessageQueueSuite::EventMessageQueueSuite()
 : jf::unittest::TestSuite("EventMessageQueue")
 {
-    add_test(new BasicTest);
-    add_test(new MultithreadedTestAMillionMessages);
-    add_test(new Reannounce);
+    add_test(std::auto_ptr<Test>(new BasicTest));
+    add_test(std::auto_ptr<Test>(new MultithreadedTestAMillionMessages));
+    add_test(std::auto_ptr<Test>(new Reannounce));
 }
 
 }

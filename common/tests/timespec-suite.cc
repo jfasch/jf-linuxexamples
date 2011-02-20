@@ -112,9 +112,9 @@ public:
 TimeSpecSuite::TimeSpecSuite()
 : jf::unittest::TestSuite("TimeSpec")
 {
-    add_test(new Arithmetic);
-    add_test(new Underflow);
-    add_test(new Monotonic);
+    add_test(std::auto_ptr<Test>(new Arithmetic));
+    add_test(std::auto_ptr<Test>(new Underflow));
+    add_test(std::auto_ptr<Test>(new Monotonic));
 }
 
 }

@@ -142,9 +142,9 @@ namespace linuxtools {
 LinuxEventsBaseSuite::LinuxEventsBaseSuite()
 : jf::unittest::TestSuite("LinuxEventsBaseSuite")
 {
-    add_test(new EventFDTest);
-    add_test(new TimerFDTest);
-    add_test(new SignalFDTest);
+    add_test(std::auto_ptr<Test>(new EventFDTest));
+    add_test(std::auto_ptr<Test>(new TimerFDTest));
+    add_test(std::auto_ptr<Test>(new SignalFDTest));
 }
 
 }

@@ -28,8 +28,8 @@ namespace linuxtools {
 NetBaseSuite::NetBaseSuite()
 : jf::unittest::TestSuite("NetBase")
 {
-    add_test(new UNIXSuite);
-    add_test(new TCPSuite);
+    add_test(std::auto_ptr<Test>(new UNIXSuite));
+    add_test(std::auto_ptr<Test>(new TCPSuite));
 }
 
 }

@@ -27,6 +27,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+using namespace jf::unittest;
 using namespace std;
 
 int main(int argc, char** argv)
@@ -47,13 +48,13 @@ int main(int argc, char** argv)
 
     const char* path = (optind < argc)? argv[optind]: NULL;
 
-    jf::unittest::TestSuite search_root("search_root");
-    jf::unittest::TestSuite* suite = new jf::linuxtools::Suite;
-    search_root.add_test(suite);
+    TestSuite root;
+    TestSuite* suite = new Suite;
+    root.add_test(std::auto_ptr<Test>(suite));
 
-    jf::unittest::Test* run_test = suite;
+    Test* run_test = suite;
     if (path != NULL) {
-        run_test = jf::unittest::find(&search_root, path);
+        run_test = find(&root, path);
         if (run_test == NULL) {
             std::cerr << "Path not found: " << path << std::endl;
             return 1;

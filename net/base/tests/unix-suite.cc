@@ -96,9 +96,9 @@ namespace linuxtools {
 UNIXSuite::UNIXSuite()
 : jf::unittest::TestSuite("UNIX-Domain")
 {
-    add_test(new BasicTest);
-    add_test(new BadPathTest);
-    add_test(new PathTooLongTest);
+    add_test(std::auto_ptr<Test>(new BasicTest));
+    add_test(std::auto_ptr<Test>(new BadPathTest));
+    add_test(std::auto_ptr<Test>(new PathTooLongTest));
 }
 
 }

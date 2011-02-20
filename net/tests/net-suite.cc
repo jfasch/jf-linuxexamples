@@ -31,8 +31,8 @@ namespace linuxtools {
 NetSuite::NetSuite()
 : jf::unittest::TestSuite("NetSuite")
 {
-    add_test(new NetBaseSuite);
-    add_test(new NetEventsSuite);
+    add_test(std::auto_ptr<Test>(new NetBaseSuite));
+    add_test(std::auto_ptr<Test>(new NetEventsSuite));
 }
 
 }

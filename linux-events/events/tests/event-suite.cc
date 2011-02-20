@@ -63,7 +63,7 @@ namespace linuxtools {
 EventSuite::EventSuite()
 : jf::unittest::TestSuite("Event")
 {
-    add_test(new Basic);
+    add_test(std::auto_ptr<Test>(new Basic));
 }
 
 }

@@ -144,8 +144,8 @@ namespace linuxtools {
 DispatcherSuite::DispatcherSuite()
 : jf::unittest::TestSuite("Dispatcher")
 {
-    add_test(new Basic);
-    add_test(new UnregisterSelfWhileInCallback);
+    add_test(std::auto_ptr<Test>(new Basic));
+    add_test(std::auto_ptr<Test>(new UnregisterSelfWhileInCallback));
 }
 
 }

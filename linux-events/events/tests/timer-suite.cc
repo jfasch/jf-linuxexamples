@@ -108,9 +108,9 @@ namespace linuxtools {
 TimerSuite::TimerSuite()
 : jf::unittest::TestSuite("Timer")
 {
-    add_test(new OneShotOneTime);
-    add_test(new OneShotMultipleTimes);
-    add_test(new PeriodicMultipleTimes);
+    add_test(std::auto_ptr<Test>(new OneShotOneTime));
+    add_test(std::auto_ptr<Test>(new OneShotMultipleTimes));
+    add_test(std::auto_ptr<Test>(new PeriodicMultipleTimes));
 }
 
 }

@@ -116,9 +116,9 @@ namespace linuxtools {
 TCPSuite::TCPSuite()
 : jf::unittest::TestSuite("TCPSuite")
 {
-    add_test(new PortLocalAddressDynamicPort);
-    add_test(new PortAnyAddressDynamicPort);
-    add_test(new PortAnyAddressFixedPort);
+    add_test(std::auto_ptr<Test>(new PortLocalAddressDynamicPort));
+    add_test(std::auto_ptr<Test>(new PortAnyAddressDynamicPort));
+    add_test(std::auto_ptr<Test>(new PortAnyAddressFixedPort));
 }
 
 }

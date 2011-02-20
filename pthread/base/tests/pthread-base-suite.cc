@@ -29,9 +29,9 @@ namespace linuxtools {
 PthreadBaseSuite::PthreadBaseSuite()
 : jf::unittest::TestSuite("PthreadBase")
 {
-    add_test(new BasicThreadSuite);
-    add_test(new TimedConditionTest);
-    add_test(new ThreadSpecificDataSuite);
+    add_test(std::auto_ptr<Test>(new BasicThreadSuite));
+    add_test(std::auto_ptr<Test>(new TimedConditionTest));
+    add_test(std::auto_ptr<Test>(new ThreadSpecificDataSuite));
 }
 
 }

@@ -31,8 +31,8 @@ namespace linuxtools {
 PthreadSuite::PthreadSuite()
 : jf::unittest::TestSuite("PthreadSuite")
 {
-    add_test(new PthreadBaseSuite);
-    add_test(new PthreadEventsSuite);
+    add_test(std::auto_ptr<Test>(new PthreadBaseSuite));
+    add_test(std::auto_ptr<Test>(new PthreadEventsSuite));
 }
 
 }

@@ -26,7 +26,7 @@ namespace linuxtools {
 EventsSuite::EventsSuite()
 : jf::unittest::TestSuite("Events")
 {
-    add_test(new DispatcherSuite);
+    add_test(std::auto_ptr<Test>(new DispatcherSuite));
 }
 
 }

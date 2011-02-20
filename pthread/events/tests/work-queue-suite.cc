@@ -146,8 +146,8 @@ namespace linuxtools {
 WorkQueueSuite::WorkQueueSuite()
 : jf::unittest::TestSuite("WorkQueue")
 {
-    add_test(new ExecuteAsyncTest);
-    add_test(new ExecuteSyncTest);
+    add_test(std::auto_ptr<Test>(new ExecuteAsyncTest));
+    add_test(std::auto_ptr<Test>(new ExecuteSyncTest));
 }
 
 }

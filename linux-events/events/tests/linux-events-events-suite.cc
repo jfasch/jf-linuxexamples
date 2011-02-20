@@ -28,8 +28,8 @@ namespace linuxtools {
 LinuxEventsEventsSuite::LinuxEventsEventsSuite()
 : jf::unittest::TestSuite("LinuxEventsEventsSuite")
 {
-    add_test(new EventSuite);
-    add_test(new TimerSuite);
+    add_test(std::auto_ptr<Test>(new EventSuite));
+    add_test(std::auto_ptr<Test>(new TimerSuite));
 }
 
 }

@@ -27,8 +27,8 @@ namespace linuxtools {
 IOSuite::IOSuite()
 : jf::unittest::TestSuite("IO")
 {
-    add_test(new FDTest);
-    add_test(new FileSuite);
+    add_test(std::auto_ptr<Test>(new FDTest));
+    add_test(std::auto_ptr<Test>(new FileSuite));
 }
 
 }

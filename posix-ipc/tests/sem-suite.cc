@@ -111,7 +111,7 @@ namespace linuxtools {
 SEMSuite::SEMSuite()
 : jf::unittest::TestSuite("Semaphore")
 {
-    add_test(new SemaphoreTest);
+    add_test(std::auto_ptr<Test>(new SemaphoreTest));
 }
 
 }

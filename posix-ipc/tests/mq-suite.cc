@@ -127,8 +127,8 @@ namespace linuxtools {
 MQSuite::MQSuite()
 : jf::unittest::TestSuite("MQ")
 {
-    add_test(new BasicTest);
-    add_test(new UnrelatedProcessesUsingSameMQ);
+    add_test(std::auto_ptr<Test>(new BasicTest));
+    add_test(std::auto_ptr<Test>(new UnrelatedProcessesUsingSameMQ));
 }
 
 }

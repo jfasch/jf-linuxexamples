@@ -31,8 +31,8 @@ namespace linuxtools {
 LinuxEventsSuite::LinuxEventsSuite()
 : jf::unittest::TestSuite("LinuxEventsSuite")
 {
-    add_test(new LinuxEventsBaseSuite);
-    add_test(new LinuxEventsEventsSuite);
+    add_test(std::auto_ptr<Test>(new LinuxEventsBaseSuite));
+    add_test(std::auto_ptr<Test>(new LinuxEventsEventsSuite));
 }
 
 }

@@ -27,7 +27,7 @@ namespace linuxtools {
 DebugSuite::DebugSuite()
 : jf::unittest::TestSuite("Debug")
 {
-    add_test(new StackHistoryTest);
+    add_test(std::auto_ptr<Test>(new StackHistoryTest));
 }
 
 }

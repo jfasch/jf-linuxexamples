@@ -29,9 +29,9 @@ namespace linuxtools {
 PthreadEventsSuite::PthreadEventsSuite()
 : jf::unittest::TestSuite("PthreadEvents")
 {
-    add_test(new EventMessageQueueSuite);
-    add_test(new WorkQueueSuite);
-    add_test(new WorkerThreadSuite);
+    add_test(std::auto_ptr<Test>(new EventMessageQueueSuite));
+    add_test(std::auto_ptr<Test>(new WorkQueueSuite));
+    add_test(std::auto_ptr<Test>(new WorkerThreadSuite));
 }
 
 }

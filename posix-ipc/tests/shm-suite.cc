@@ -133,8 +133,8 @@ namespace linuxtools {
 SHMSuite::SHMSuite()
 : jf::unittest::TestSuite("SHM")
 {
-    add_test(new BasicTest);
-    add_test(new UnrelatedProcessesUsingSameSHM);
+    add_test(std::auto_ptr<Test>(new BasicTest));
+    add_test(std::auto_ptr<Test>(new UnrelatedProcessesUsingSameSHM));
 }
 
 }

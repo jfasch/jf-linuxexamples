@@ -29,9 +29,9 @@ namespace linuxtools {
 PosixIPCSuite::PosixIPCSuite()
 : jf::unittest::TestSuite("PosixIPC")
 {
-    add_test(new MQSuite);
-    add_test(new SHMSuite);
-    add_test(new SEMSuite);
+    add_test(std::auto_ptr<Test>(new MQSuite));
+    add_test(std::auto_ptr<Test>(new SHMSuite));
+    add_test(std::auto_ptr<Test>(new SEMSuite));
 }
 
 }

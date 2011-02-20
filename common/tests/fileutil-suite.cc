@@ -37,7 +37,7 @@ public:
 FileUtilSuite::FileUtilSuite()
 : jf::unittest::TestSuite("FileUtil")
 {
-    add_test(new FileUtilExistTest);
+    add_test(std::auto_ptr<Test>(new FileUtilExistTest));
 }
 
 }
