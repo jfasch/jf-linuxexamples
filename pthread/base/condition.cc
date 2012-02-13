@@ -25,9 +25,14 @@
 namespace jf {
 namespace linuxtools {
 
-Condition::Condition(Mutex& m)
-: mutex_(m) {
-    int err = ::pthread_cond_init(&cond_, NULL);
+Condition::Condition()
+{
+    pthread_condattr_t attr;
+    pthread_condattr_init(&attr);
+    pthread_condattr_setclock(&attr, CLOCK_MONOTONIC);
+    int err = ::pthread_cond_init(&cond_, &attr);
+    assert(!err);
+    err = pthread_condattr_destroy(&attr);
     assert(!err);
 }
 
@@ -36,19 +41,24 @@ Condition::~Condition() {
     assert(!err);
 }
 
-void Condition::wait() {
-    int err = ::pthread_cond_wait(&cond_, &mutex_.mutex_);
+void Condition::wait(Mutex& m) {
+    int err = ::pthread_cond_wait(&cond_, &m.mutex_);
     assert(!err);
 }
 
-bool Condition::timed_wait(const TimeSpec& abstime) {
-    int err = ::pthread_cond_timedwait(&cond_, &mutex_.mutex_, &abstime);
+bool Condition::timed_wait_absolute(Mutex& m, const TimeSpec& wait_time) {
+    int err = ::pthread_cond_timedwait(&cond_, &m.mutex_, &wait_time);
     if (err) {
         if (err == ETIMEDOUT)
             return true;
         assert(false);
     }
     return false;
+}
+
+bool Condition::timed_wait_relative(Mutex& m, const TimeSpec& wait_time) {
+    jf::linuxtools::TimeSpec then(jf::linuxtools::TimeSpec::now_monotonic() + wait_time);
+    return timed_wait_absolute(m, then);
 }
 
 void Condition::signal() {

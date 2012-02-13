@@ -33,16 +33,18 @@ namespace linuxtools {
 class Condition : public boost::noncopyable
 {
 public:
-    Condition(Mutex& m);
+    Condition();
     ~Condition();
 
-    void wait();
-    bool timed_wait(const TimeSpec& abstime);
+    void wait(Mutex&);
+    /** Returns true if timed out */
+    bool timed_wait_absolute(Mutex&, const TimeSpec&);
+    /** Returns true if timed out */
+    bool timed_wait_relative(Mutex&, const TimeSpec&);
     void signal();
 
 private:
     pthread_cond_t cond_;
-    Mutex& mutex_;
 };
 
 }

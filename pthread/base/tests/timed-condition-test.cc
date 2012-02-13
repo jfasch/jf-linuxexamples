@@ -28,16 +28,32 @@ namespace linuxtools {
 
 void TimedConditionTest::run()
 {
-    jf::linuxtools::Mutex m;
-    jf::linuxtools::Condition c(m);
+    // absolute timeout value
+    { 
+        jf::linuxtools::Mutex m;
+        jf::linuxtools::Condition c;
 
-    jf::linuxtools::TimeSpec now(jf::linuxtools::TimeSpec::now_timeofday());
-    jf::linuxtools::TimeSpec until(now + jf::linuxtools::TimeSpec(0, jf::linuxtools::TimeSpec::one_second/4));
+        jf::linuxtools::TimeSpec before(jf::linuxtools::TimeSpec::now_monotonic());
+        bool timedout = c.timed_wait_absolute(m, before + jf::linuxtools::TimeSpec(0, jf::linuxtools::TimeSpec::one_second/4));
+        JFUNIT_ASSERT(timedout);
+    
+        jf::linuxtools::TimeSpec after(jf::linuxtools::TimeSpec::now_monotonic());
+        JFUNIT_ASSERT(after.secs() - before.secs() >= 0.25);
+    }
 
-    bool timedout = c.timed_wait(until);
+    // relative timeout value
+    {
+        jf::linuxtools::Mutex m;
+        jf::linuxtools::Condition c;
 
-    JFUNIT_ASSERT(timedout);
-    JFUNIT_ASSERT(jf::linuxtools::TimeSpec::now_timeofday().secs() - now.secs() >= 0.25);
+        jf::linuxtools::TimeSpec before(jf::linuxtools::TimeSpec::now_monotonic());
+
+        bool timedout = c.timed_wait_relative(m, jf::linuxtools::TimeSpec(0, jf::linuxtools::TimeSpec::one_second/4));
+        JFUNIT_ASSERT(timedout);
+        
+        jf::linuxtools::TimeSpec after(jf::linuxtools::TimeSpec::now_monotonic());
+        JFUNIT_ASSERT(after.secs() - before.secs() >= 0.25);
+    }
 }
 
 }

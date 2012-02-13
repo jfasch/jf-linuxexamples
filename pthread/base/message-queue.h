@@ -48,16 +48,13 @@ private:
 };
 
 template<typename T> MessageQueue<T>::MessageQueue(size_t maxelem)
-: maxelem_(maxelem),
-  mutex_(),
-  notfull_(mutex_),
-  notempty_(mutex_) {}
+: maxelem_(maxelem) {}
 
 template<typename T> void MessageQueue<T>::push(const T& elem) {
     {
         Mutex::Guard g(mutex_);
         while (queue_.size() == maxelem_)
-            notfull_.wait();
+            notfull_.wait(mutex_);
         queue_.push_back(elem);
     }
     notempty_.signal();
@@ -67,7 +64,7 @@ template<typename T> void MessageQueue<T>::pop(T& elem) {
     {
         Mutex::Guard g(mutex_);
         while (queue_.size() == 0)
-            notempty_.wait();
+            notempty_.wait(mutex_);
         elem = queue_.front();
         queue_.pop_front();
     }

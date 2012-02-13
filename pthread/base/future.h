@@ -34,14 +34,14 @@ namespace linuxtools {
 template <typename DATA> class Future : public boost::noncopyable
 {
 public:
-    Future() : result_valid_(false), result_ready_(lock_) {}
+    Future() : result_valid_(false) {}
 
     /** Wait for the result to become valid. */
     const DATA& get()
     {
         Mutex::Guard g(lock_);
         while (!result_valid_)
-            result_ready_.wait();
+            result_ready_.wait(lock_);
         return result_;
     }
 

@@ -81,21 +81,6 @@ TimeSpec TimeSpec::now_monotonic() {
     return TimeSpec(ts.tv_sec, ts.tv_nsec);
 }
 
-// TimeSpec operator+(const TimeSpec& t1, const TimeSpec& t2) {
-//     TimeSpec sum;
-//     sum.tv_sec = t1.tv_sec + t2.tv_sec;
-//     sum.tv_nsec = t1.tv_nsec + t2.tv_nsec;
-//     if (sum.tv_nsec >= TimeSpec::one_second) {
-//         sum.tv_nsec -= TimeSpec::one_second;
-//         sum.tv_sec++;
-//     }
-//     else if (sum.tv_sec >= 1 && sum.tv_nsec < 0) {
-//         sum.tv_nsec += TimeSpec::one_second;
-//         sum.tv_sec--;
-//     }
-//     return sum;   
-// }
-
 TimeSpec operator+(const TimeSpec& lhs, const TimeSpec& rhs)
 {
     TimeSpec ret;
@@ -106,21 +91,6 @@ TimeSpec operator+(const TimeSpec& lhs, const TimeSpec& rhs)
     ret.tv_nsec = ret.tv_nsec % TimeSpec::one_second;
     return ret;
 }
-
-// TimeSpec operator-(const TimeSpec& t1, const TimeSpec& t2) {
-//     TimeSpec delta;
-//     delta.tv_sec = t1.tv_sec - t2.tv_sec;
-//     delta.tv_nsec = t1.tv_nsec - t2.tv_nsec;
-//     if (delta.tv_nsec < 0) {
-//         delta.tv_nsec += TimeSpec::one_second;
-//         delta.tv_sec--;
-//     }
-//     else if (delta.tv_nsec >= TimeSpec::one_second) {
-//         delta.tv_nsec -= TimeSpec::one_second;
-//         delta.tv_sec++;
-//     }
-//     return delta;
-// }
 
 TimeSpec operator-(const TimeSpec& lhs, const TimeSpec& rhs)
 {
