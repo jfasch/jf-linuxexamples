@@ -43,14 +43,14 @@ namespace linuxtools {
 Suite::Suite()
 : jf::unittest::TestSuite("LinuxTools")
 {
-    add_test(new CommonSuite);
-    add_test(new PthreadSuite);
-    add_test(new IOSuite);
-    add_test(new EventsSuite);
-    add_test(new LinuxEventsSuite);
-    add_test(new NetSuite);
-    add_test(new PosixIPCSuite);
-    add_test(new DebugSuite);
+    add_test(std::auto_ptr<Test>(new CommonSuite));
+    add_test(std::auto_ptr<Test>(new PthreadSuite));
+    add_test(std::auto_ptr<Test>(new IOSuite));
+    add_test(std::auto_ptr<Test>(new EventsSuite));
+    add_test(std::auto_ptr<Test>(new LinuxEventsSuite));
+    add_test(std::auto_ptr<Test>(new NetSuite));
+    add_test(std::auto_ptr<Test>(new PosixIPCSuite));
+    add_test(std::auto_ptr<Test>(new DebugSuite));
 }
 
 }

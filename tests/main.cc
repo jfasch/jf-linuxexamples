@@ -49,7 +49,7 @@ int main(int argc, char** argv)
     const char* path = (optind < argc)? argv[optind]: NULL;
 
     TestSuite root;
-    TestSuite* suite = new Suite;
+    TestSuite* suite = new jf::linuxtools::Suite;
     root.add_test(std::auto_ptr<Test>(suite));
 
     Test* run_test = suite;
