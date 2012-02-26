@@ -34,7 +34,10 @@ void TimedConditionTest::run()
         jf::linuxtools::Condition c;
 
         jf::linuxtools::TimeSpec before(jf::linuxtools::TimeSpec::now_monotonic());
-        bool timedout = c.timed_wait_absolute(m, before + jf::linuxtools::TimeSpec(0, jf::linuxtools::TimeSpec::one_second/4));
+        bool timedout = c.timed_wait_absolute(
+            m,
+            before + jf::linuxtools::TimeSpec(0, jf::linuxtools::TimeSpec::one_second/4));
+
         JFUNIT_ASSERT(timedout);
     
         jf::linuxtools::TimeSpec after(jf::linuxtools::TimeSpec::now_monotonic());
@@ -48,7 +51,10 @@ void TimedConditionTest::run()
 
         jf::linuxtools::TimeSpec before(jf::linuxtools::TimeSpec::now_monotonic());
 
-        bool timedout = c.timed_wait_relative(m, jf::linuxtools::TimeSpec(0, jf::linuxtools::TimeSpec::one_second/4));
+        bool timedout = c.timed_wait_relative(
+            m,
+            jf::linuxtools::TimeSpec(0, jf::linuxtools::TimeSpec::one_second/4));
+
         JFUNIT_ASSERT(timedout);
         
         jf::linuxtools::TimeSpec after(jf::linuxtools::TimeSpec::now_monotonic());

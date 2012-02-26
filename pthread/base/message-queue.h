@@ -50,7 +50,8 @@ private:
 template<typename T> MessageQueue<T>::MessageQueue(size_t maxelem)
 : maxelem_(maxelem) {}
 
-template<typename T> void MessageQueue<T>::push(const T& elem) {
+template<typename T> void MessageQueue<T>::push(const T& elem)
+{
     {
         Mutex::Guard g(mutex_);
         while (queue_.size() == maxelem_)
@@ -60,7 +61,8 @@ template<typename T> void MessageQueue<T>::push(const T& elem) {
     notempty_.signal();
 }
 
-template<typename T> void MessageQueue<T>::pop(T& elem) {
+template<typename T> void MessageQueue<T>::pop(T& elem)
+{
     {
         Mutex::Guard g(mutex_);
         while (queue_.size() == 0)
