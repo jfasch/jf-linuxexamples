@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008-2011 Joerg Faschingbauer
+// Copyright (C) 2008-2012 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -20,7 +20,7 @@
 #ifndef HAVE_JF_LINUXTOOLS_IO_SUITE_H
 #define HAVE_JF_LINUXTOOLS_IO_SUITE_H
 
-#include <jf/unittest/test_suite.h>
+#include <jf/unittest/suite.h>
 
 namespace jf {
 namespace linuxtools {

@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008-2011 Joerg Faschingbauer
+// Copyright (C) 2008-2012 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -19,7 +19,7 @@
 
 #include "suite.h"
 
-#include <jf/unittest/tree_test_runner.h>
+#include <jf/unittest/tree.h>
 #include <jf/unittest/find.h>
 
 #include <iostream>
@@ -27,8 +27,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#include <iostream>
+
 using namespace jf::unittest;
-using namespace std;
 
 int main(int argc, char** argv)
 {
@@ -60,6 +61,6 @@ int main(int argc, char** argv)
             return 1;
         }
     }
-    jf::unittest::TreeTestRunner runner(print_path);
-    return runner.run(run_test)? 0: 1;
+    jf::unittest::TreeWalk tree_walk(std::cout, print_path);
+    return tree_walk.do_it(*run_test)? 0: 1;
 }

@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008-2011 Joerg Faschingbauer
+// Copyright (C) 2008-2012 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -19,7 +19,7 @@
 
 #include "fileutil-suite.h"
 
-#include <jf/unittest/test_case.h>
+#include <jf/unittest/case.h>
 
 namespace jf {
 namespace linuxtools {

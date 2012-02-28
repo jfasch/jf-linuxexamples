@@ -1,6 +1,6 @@
 // -*- C++ -*-
 
-// Copyright (C) 2008-2011 Joerg Faschingbauer
+// Copyright (C) 2008-2012 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -20,7 +20,7 @@
 #ifndef HAVE_JF_LINUXTOOLS_STACKHISTORY_TEST_H
 #define HAVE_JF_LINUXTOOLS_STACKHISTORY_TEST_H
 
-#include <jf/unittest/test_case.h>
+#include <jf/unittest/case.h>
 
 namespace jf {
 namespace linuxtools {

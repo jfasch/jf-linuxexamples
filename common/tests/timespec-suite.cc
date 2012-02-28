@@ -21,7 +21,7 @@
 
 #include <jf/linuxtools/timespec.h>
 
-#include <jf/unittest/test_case.h>
+#include <jf/unittest/case.h>
 
 namespace jf {
 namespace linuxtools {

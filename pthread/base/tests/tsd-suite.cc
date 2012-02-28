@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008-2011 Joerg Faschingbauer
+// Copyright (C) 2008-2012 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -23,7 +23,7 @@
 #include <jf/linuxtools/joinable-thread.h>
 #include <jf/linuxtools/future.h>
 
-#include <jf/unittest/test_case.h>
+#include <jf/unittest/case.h>
 
 namespace {
 

@@ -22,7 +22,7 @@
 #include <jf/linuxtools/event-message-queue.h>
 #include <jf/linuxtools/joinable-thread.h>
 
-#include <jf/unittest/test_case.h>
+#include <jf/unittest/case.h>
 
 #include <cassert>
 
