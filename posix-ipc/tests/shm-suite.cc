@@ -93,9 +93,9 @@ public:
             SHM set_shm = SHM::open(shm_name_, O_RDWR);
             void* memory;
             try { memory = set_shm.map(1024, PROT_WRITE, MAP_SHARED, 0); }
-            catch (const std::exception&) { exit(1); }
+            catch (const std::exception&) { _exit(1); }
             *(((char*)memory)+2) = 'a';
-            exit(0);
+            _exit(0);
         }
 
         int setter_status;
@@ -108,11 +108,11 @@ public:
             SHM get_shm = SHM::open(shm_name_, O_RDONLY);
             void* memory;
             try { memory = get_shm.map(1024, PROT_READ, MAP_SHARED, 0); }
-            catch (const std::exception&) { exit(1); }
+            catch (const std::exception&) { _exit(1); }
             if (*(((char*)memory)+2) == 'a')
-                exit(0);
+                _exit(0);
             else
-                exit(1);
+                _exit(1);
         }
 
         int getter_status;

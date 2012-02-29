@@ -97,7 +97,7 @@ public:
             MQ mq_produce = MQ::open(mq_name_, O_WRONLY);
             const char c = 'a'; 
             mq_produce.send(&c, 1, 0);
-            exit(0);
+            _exit(0);
         }
         pid_t consumer = fork();
         if (consumer == 0) { // child
@@ -105,10 +105,10 @@ public:
             char c = 0; // valgrind does not know about mq_receive()
             size_t nread = mq_consume.receive(&c, 1);
             if (nread != 1)
-                exit(1);
+                _exit(1);
             if (c != 'a')
-                exit(1);
-            exit(0);
+                _exit(1);
+            _exit(0);
         }
 
         JFUNIT_ASSERT(waitpid(producer, NULL, 0) == producer);

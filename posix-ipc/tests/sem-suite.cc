@@ -74,7 +74,7 @@ public:
             SEM sem_kickleft = SEM::open(sem_kickleft_name_, O_RDONLY /* we only wait */);
             sem_kickright.post();
             sem_kickleft.wait();
-            exit(0);
+            _exit(0);
         }
 
         // child "right" waits to be kicked, and then kicks left.
@@ -84,7 +84,7 @@ public:
             SEM sem_kickleft = SEM::open(sem_kickleft_name_, O_RDWR);
             sem_kickright.wait();
             sem_kickleft.post();
-            exit(0);
+            _exit(0);
         }
 
         int left_status;
