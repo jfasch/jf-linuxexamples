@@ -61,6 +61,10 @@ int main(int argc, char** argv)
             return 1;
         }
     }
-    jf::unittest::TreeWalk tree_walk(std::cout, print_path);
-    return tree_walk.do_it(*run_test)? 0: 1;
+    jf::unittest::TreeWalk tree_walk(std::cout);
+    tree_walk.print_path(print_path).use_fork(true);
+    if (tree_walk.do_it(*run_test))
+        return 0;
+    else
+        return 1;
 }
