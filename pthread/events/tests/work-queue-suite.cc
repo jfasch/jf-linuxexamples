@@ -39,16 +39,17 @@ class ExecuteAsyncTest : public jf::unittest::TestCase
 {
 public:
     ExecuteAsyncTest()
-    : jf::unittest::TestCase("ExecuteAsync"),
-      queue_(5) {}
+    : jf::unittest::TestCase("ExecuteAsync") {}
 
     virtual void setup()
     {
-        queue_.activate_object(&dispatcher_);
+        queue_.reset(new WorkQueue(5));
+        queue_->activate_object(&dispatcher_);
     }
     virtual void teardown()
     {
-        queue_.deactivate_object(&dispatcher_);
+        queue_->deactivate_object(&dispatcher_);
+        queue_.reset();
     }
     virtual void run()
     {
@@ -62,14 +63,14 @@ public:
         };
         
         bool done = false;
-        queue_.execute_work_async(std::auto_ptr<Work>(new SetDone(&done)));
+        queue_->execute_work_async(std::auto_ptr<Work>(new SetDone(&done)));
         while (!done)
             dispatcher_.dispatch();
     }
 
 private:
     Dispatcher dispatcher_;
-    WorkQueue queue_;
+    std::auto_ptr<WorkQueue> queue_;
 };
 
 /** Execute work synchronously.

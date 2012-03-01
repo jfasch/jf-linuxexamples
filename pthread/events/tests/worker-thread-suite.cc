@@ -69,16 +69,17 @@ class ExecuteSyncTest : public jf::unittest::TestCase
 {
 public:
     ExecuteSyncTest()
-    : jf::unittest::TestCase("ExecuteSync"),
-      thread_(5) {}
+    : jf::unittest::TestCase("ExecuteSync") {}
 
     virtual void setup()
     {
-        thread_.start();
+        thread_.reset(new WorkerThread(5));
+        thread_->start();
     }
     virtual void teardown()
     {
-        thread_.stop();
+        thread_->stop();
+        thread_.reset();
     }
     virtual void run()
     {
@@ -95,12 +96,12 @@ public:
 
         MyWork work;
         JFUNIT_ASSERT(!work.done());
-        thread_.execute_work_sync(work);
+        thread_->execute_work_sync(work);
         JFUNIT_ASSERT(work.done());
     }
     
 private:
-    WorkerThread thread_;
+    std::auto_ptr<WorkerThread> thread_;
 };
 
 }
