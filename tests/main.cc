@@ -19,52 +19,9 @@
 
 #include "suite.h"
 
-#include <jf/unittest/tree.h>
-#include <jf/unittest/find.h>
-
-#include <iostream>
-#include <cassert>
-#include <unistd.h>
-#include <stdlib.h>
-
-#include <iostream>
-
-using namespace jf::unittest;
+#include <jf/unittest/main.h>
 
 int main(int argc, char** argv)
 {
-    bool print_path = false;
-    char opt;
-    while ((opt = getopt(argc, argv, "p")) != -1) {
-        switch (opt) {
-            case 'p':
-                print_path = true;
-                break;
-            default:
-                assert(false);
-                exit(1);
-                break;
-        }
-    }
-
-    const char* path = (optind < argc)? argv[optind]: NULL;
-
-    TestSuite root;
-    TestSuite* suite = new jf::linuxtools::Suite;
-    root.add_test(std::auto_ptr<Test>(suite));
-
-    Test* run_test = suite;
-    if (path != NULL) {
-        run_test = find(&root, path);
-        if (run_test == NULL) {
-            std::cerr << "Path not found: " << path << std::endl;
-            return 1;
-        }
-    }
-    jf::unittest::TreeWalk tree_walk(std::cout);
-    tree_walk.print_path(print_path).use_fork(true);
-    if (tree_walk.do_it(*run_test))
-        return 0;
-    else
-        return 1;
+    return jf::unittest::main(argc, argv, std::auto_ptr<jf::unittest::Test>(new jf::linuxtools::Suite));
 }
