@@ -48,7 +48,9 @@ void TimerFD::arm_oneshot(const TimeSpec& initial_expiration)
         throw ErrnoException(errno, "timerfd_settime()");
 }
 
-void TimerFD::arm_periodic(const TimeSpec& initial_expiration, const TimeSpec& interval)
+void TimerFD::arm_periodic(
+    const TimeSpec& initial_expiration, 
+    const TimeSpec& interval)
 {
     assert(this->fd()>=0);
 
@@ -56,6 +58,7 @@ void TimerFD::arm_periodic(const TimeSpec& initial_expiration, const TimeSpec& i
     // semantics of timerfd_settime()
     assert(initial_expiration!=TimeSpec(0,0));
     // this would be a tight loop, kernel-wise.
+
     assert(interval!=TimeSpec(0,0));
 
     itimerspec new_value, old_value;
