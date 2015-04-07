@@ -17,14 +17,24 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
-REQUIRE_SYMBOL('jf.linuxexamples.externals.rt', REQUIRED)
+h = [
+    'channel.h',
+    'channel_group.h',
+    'value.h',
+    'producer.h',
+    'timebase.h',
+]
+
+cc = [
+    'channel.cc',
+    'channel_group.cc',
+    'value.cc',
+    'producer.cc',
+    'timebase.cc',
+]
 
 EXECUTABLE(
-    center=CXX('stack-history.cc'),
-    exename='jf-stack-history')
-
-EXECUTABLE(
-    center=CXX('clock-nanosleep.cc'),
-    exename='jf-clock-nanosleep')
-
-DIRECTORY(['condvar-math'])
+    exename='mathdemo',
+    center=CXX('mathdemo.cc'),
+    members=[H(f) for f in h] + [CXX(f) for f in cc],
+)

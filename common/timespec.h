@@ -44,7 +44,7 @@ public:
     /** Initialize timespec structure with seconds and nanoseconds */
     TimeSpec(long sec, long nsec);
     /** Initialize from a timespec structure that the user might have
-     * gotten from somewhere */
+        gotten from somewhere */
     TimeSpec(const timespec& t) { tv_sec = t.tv_sec; tv_nsec = t.tv_nsec; }
     
     long sec() const { return tv_sec; }
