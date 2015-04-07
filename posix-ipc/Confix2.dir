@@ -18,7 +18,7 @@
 # USA
 
 # POSIX message queues need -lrt
-REQUIRE_SYMBOL('jf.linuxtools.externals.rt', REQUIRED)
+REQUIRE_SYMBOL('jf.linuxexamples.externals.rt', REQUIRED)
 
 h = [
     'mq.h',

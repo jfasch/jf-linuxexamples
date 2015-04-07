@@ -18,7 +18,10 @@
 # USA
 
 # clock_gettime() needs -lrt
-REQUIRE_SYMBOL('jf.linuxtools.externals.rt', REQUIRED)
+REQUIRE_SYMBOL('jf.linuxexamples.externals.rt', REQUIRED)
+
+# everyone needs pthread
+REQUIRE_SYMBOL('jf.linuxexamples.externals.pthread', REQUIRED)
 
 h = [
     'condition.h',

@@ -19,3 +19,4 @@
 
 DIRECTORY(['rt'])
 DIRECTORY(['boost'])
+DIRECTORY(['pthread'])

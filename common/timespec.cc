@@ -17,7 +17,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-// CONFIX:REQUIRE_SYMBOL('jf.linuxtools.externals.rt', REQUIRED)
+// CONFIX:REQUIRE_SYMBOL('jf.linuxexamples.externals.rt', REQUIRED)
 
 #include "timespec.h"
 

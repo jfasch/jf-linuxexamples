@@ -91,9 +91,8 @@ public:
             }
 
             port->listen();
-            uint16_t port_number = port->port();
 
-            TCPEndpoint client_connection = tcp_connect(IPAddress("127.0.0.1"), port_number);
+            TCPEndpoint client_connection = tcp_connect(IPAddress("127.0.0.1"), port->port());
             TCPEndpoint server_connection = port->accept();
 
             JFUNIT_ASSERT(client_connection.write("", 1) == 1);

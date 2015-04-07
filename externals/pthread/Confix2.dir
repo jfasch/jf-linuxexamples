@@ -1,0 +1,63 @@
+# -*- python -*-
+
+""" When you are programming POSIX threads stuff, you have to link in
+the appropriate librar{y,ies}, define the the correct macros
+(preferably from the command line), and whatnot.
+
+Here we provide the necessary items to use. All one has to do is to
+draw an edge in the dependency graph to this node here, by saying
+REQUIRE_SYMBOL('jf.externals.pthread').
+
+"""
+
+# provide a hook for others to say,
+# REQUIRE_SYMBOL('jf.linuxexamples.externals.pthread', REQUIRED)
+
+PROVIDE_SYMBOL('jf.linuxexamples.externals.pthread')
+
+# automake version
+if True:
+
+    if False:
+        # ACX_PTHREAD comes with Confix, with the imported autoconf macro
+        # archive. Currently (Jun 13, 2007), ACX_PTHREAD can be found in
+        # $(prefix)/share/confix/autoconf-archive/m4src/acx_pthread.m4
+        # (or, to be correct in automake terms,
+        # $(datadir)/confix/autoconf-archive/m4src/acx_pthread.m4 :-)
+    
+        # Anyway:
+    
+        # 1. Take care that the using package "calls" ACX_PTHREAD in its
+        #    configure.ac file.
+    
+        CONFIGURE_AC(
+            lines=['ACX_PTHREAD'],
+            order=AC_LIBRARIES)
+    
+        # 2. Take care that the various items that are found out set by
+        #    ACX_PTHREAD take their place on the repective comand lines
+        #    ({c,cxx}flags for the compiler, and libs for the linker)
+    
+        EXTERNAL_LIBRARY(
+            cflags=['$(PTHREAD_CFLAGS)'],
+            cxxflags=['$(PTHREAD_CFLAGS)'],
+            libs=['$(PTHREAD_LIBS)']
+            )
+    else:
+        EXTERNAL_LIBRARY(
+            cflags=['-pthread'],
+            cxxflags=['-pthread'],
+        )
+
+    pass
+
+# CMake version
+if True:
+    # I am not quite sure if CMake's FindThreads.cmake crap will work
+    # out right in all cases. it sets the variable
+    # CMAKE_THREAD_LIBS_INIT to -lpthread on linux - and nothing
+    # else. other OSes might require -D_REENTRANT I fear. I'm not even
+    # sure about Linux/glibc.
+    CMAKE_CMAKELISTS_ADD_FIND_CALL('FIND_PACKAGE(Threads)', CMAKE_BUILDINFO_PROPAGATE)
+    CMAKE_EXTERNAL_LIBRARY(libs=['${CMAKE_THREAD_LIBS_INIT}'])
+    pass

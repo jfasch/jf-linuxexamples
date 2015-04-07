@@ -2,7 +2,7 @@
 
 """ On Linux, using glibc, clock_gettime(2) needs -lrt. """
 
-PROVIDE_SYMBOL('jf.linuxtools.externals.rt')
+PROVIDE_SYMBOL('jf.linuxexamples.externals.rt')
 
 # Automake
 if True:
