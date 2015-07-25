@@ -23,6 +23,7 @@ h = [
     'basic-thread-suite.h',
     'timed-condition-test.h',
     'tsd-suite.h',
+    'threadpool-suite.h',
     ]
 
 cc = [
@@ -31,6 +32,7 @@ cc = [
     'basic-thread-suite.cc',
     'timed-condition-test.cc',
     'tsd-suite.cc',
+    'threadpool-suite.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools', 'tests']) for f in h] + [CXX(filename=f) for f in cc])

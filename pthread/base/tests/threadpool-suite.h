@@ -1,6 +1,6 @@
 // -*- mode: C++; c-basic-offset: 4 -*-
 
-// Copyright (C) 2008-2011 Joerg Faschingbauer
+// Copyright (C) 2008-2012 Joerg Faschingbauer
 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public License
@@ -17,24 +17,21 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
 
-#include "pthread-base-suite.h"
+#ifndef HAVE_JF_LINUXTOOLS_THREADPOOL_TEST_H
+#define HAVE_JF_LINUXTOOLS_THREADPOOL_TEST_H
 
-#include "basic-thread-suite.h"
-#include "timed-condition-test.h"
-#include "tsd-suite.h"
-#include "threadpool-suite.h"
+#include <jf/unittest/suite.h>
 
 namespace jf {
 namespace linuxtools {
 
-PthreadBaseSuite::PthreadBaseSuite()
-: jf::unittest::TestSuite("PthreadBase")
+class ThreadPoolSuite : public jf::unittest::TestSuite
 {
-    add_test(std::auto_ptr<Test>(new BasicThreadSuite));
-    add_test(std::auto_ptr<Test>(new TimedConditionTest));
-    add_test(std::auto_ptr<Test>(new ThreadSpecificDataSuite));
-    add_test(std::auto_ptr<Test>(new ThreadPoolSuite));
-}
+public:
+    ThreadPoolSuite();
+};
 
 }
 }
+
+#endif

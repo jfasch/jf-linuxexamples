@@ -30,12 +30,14 @@ h = [
     'mutex.h',
     'message-queue.h',
     'thread-specific.h',
+    'threadpool.h',
     ]
 
 cc = [
     'condition.cc',
     'joinable-thread.cc',
     'mutex.cc',
+    'threadpool.cc',
     ]
 
 LIBRARY(members=[H(filename=f, install=['jf', 'linuxtools']) for f in h] + [CXX(filename=f) for f in cc])
