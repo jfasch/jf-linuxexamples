@@ -27,4 +27,8 @@ EXECUTABLE(
     center=CXX('clock-nanosleep.cc'),
     exename='jf-clock-nanosleep')
 
+EXECUTABLE(
+    center=CXX('gpio-interrupt.cc'),
+    exename='jf-gpio-interrupt')
+
 DIRECTORY(['condvar-math'])
